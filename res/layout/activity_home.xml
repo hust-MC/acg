@@ -1,0 +1,78 @@
+<com.cf.acg.SlidingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/slidingLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="160dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/navigation_top_bar_background"
+        android:visibility="invisible" >
+
+        <ListView
+            android:id="@+id/menu_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:divider="#ff555555"
+            android:dividerHeight="1.3dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        tools:context=".Home" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <fragment
+                android:id="@+id/fragment_home"
+                android:name="com.cf.acg.FragmentHome"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <fragment
+                android:id="@+id/fragment_activity"
+                android:name="com.cf.acg.FragmentActivity"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <fragment
+                android:id="@+id/fragment_mate"
+                android:name="com.cf.acg.FragmentMate"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <fragment
+                android:id="@+id/fragment_record"
+                android:name="com.cf.acg.FragmentRecord"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <fragment
+                android:id="@+id/fragment_article"
+                android:name="com.cf.acg.FragmentArticle"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <fragment
+                android:id="@+id/fragment_mine"
+                android:name="com.cf.acg.FragmentMine"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</com.cf.acg.SlidingLayout>
