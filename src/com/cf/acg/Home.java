@@ -1,14 +1,14 @@
 package com.cf.acg;
 
-import java.util.zip.Inflater;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -20,7 +20,7 @@ public class Home extends Activity
 	TextView textView;
 	ListView menuList;
 
-	Class resClass; 			// 定义用于反射的类
+	Class<String> resClass; 			// 定义用于反射的类
 
 	private FragmentManager fragmentManager;
 	private Fragment[] fragments;
@@ -30,15 +30,33 @@ public class Home extends Activity
 
 	private void init_widget()
 	{
+		/*
+		 * 控件初始化
+		 */
 		menuList = (ListView) findViewById(R.id.menu_list);
 		slidingLayout = (SlidingLayout) findViewById(R.id.slidingLayout);
 
+		/*
+		 * 处理滑动菜单
+		 */
 		slidingLayout
 				.setScrollEvent((RelativeLayout) findViewById(R.id.content));
 
+		/*
+		 * 处理ListView
+		 */
 		menuList.setAdapter(new ArrayAdapter<String>(this,
 				R.layout.menu_list_item, getResources().getStringArray(
 						R.array.menu_array)));
+		menuList.setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id)
+			{
+				
+			}
+		});
 	}
 
 	private void getResClass()
@@ -101,6 +119,7 @@ public class Home extends Activity
 		}
 		fragmentTransaction.show(fragments[id]).commit();
 	}
+
 	private void handleFragment()
 	{
 		init_fragment();
@@ -123,7 +142,6 @@ public class Home extends Activity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.home, menu);
 		return true;
 	}
