@@ -54,7 +54,8 @@ public class Home extends Activity
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id)
 			{
-				
+				slidingLayout.scrollToRightLayout();
+				showFragment(position);
 			}
 		});
 	}

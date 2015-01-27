@@ -34,42 +34,42 @@
 
             <fragment
                 android:id="@+id/fragment_home"
-                android:name="com.cf.acg.FragmentHome"
+                android:name="com.cf.acg.fragment.FragmentHome"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <fragment
                 android:id="@+id/fragment_activity"
-                android:name="com.cf.acg.FragmentActivity"
+                android:name="com.cf.acg.fragment.FragmentActivityt"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <fragment
                 android:id="@+id/fragment_mate"
-                android:name="com.cf.acg.FragmentMate"
+                android:name="com.cf.acg.fragment.FragmentMategmentMate"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <fragment
                 android:id="@+id/fragment_record"
-                android:name="com.cf.acg.FragmentRecord"
+                android:name="com.cf.acg.fragment.FragmentRecordacg.FragmentRecord"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <fragment
                 android:id="@+id/fragment_article"
-                android:name="com.cf.acg.FragmentArticle"
+                android:name="com.cf.acg.fragment.FragmentArticle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <fragment
                 android:id="@+id/fragment_mine"
-                android:name="com.cf.acg.FragmentMine"
+                android:name="com.cf.acg.fragment.FragmentMine"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />

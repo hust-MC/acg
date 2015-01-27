@@ -4,9 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
+    <ListView
+        android:id="@+id/list_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="activity" />
+        android:background="@android:color/holo_blue_bright"
+        android:divider="#555"
+        android:dividerHeight="1.3dp" />
 
 </LinearLayout>

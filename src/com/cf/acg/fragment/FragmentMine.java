@@ -1,4 +1,7 @@
-package com.cf.acg;
+package com.cf.acg.fragment;
+
+import com.cf.acg.R;
+import com.cf.acg.R.layout;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -6,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentRecord extends Fragment
+public class FragmentMine extends Fragment
 {
 
 	@Override
@@ -14,7 +17,7 @@ public class FragmentRecord extends Fragment
 			Bundle savedInstanceState)
 	{
 		// TODO Auto-generated method stub
-		return inflater.inflate(R.layout.fragment_record, null);
+		return inflater.inflate(R.layout.fragment_mine, null);
 	}
 
 	@Override

@@ -1,4 +1,7 @@
-package com.cf.acg;
+package com.cf.acg.fragment;
+
+import com.cf.acg.R;
+import com.cf.acg.R.layout;
 
 import android.app.Fragment;
 import android.os.Bundle;
