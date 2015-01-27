@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class Home extends Activity
 {
-	SlidingLayout slidingLayout;
+	private static SlidingLayout slidingLayout;
 	TextView textView;
 	ListView menuList;
 
@@ -39,8 +39,7 @@ public class Home extends Activity
 		/*
 		 * 处理滑动菜单
 		 */
-		slidingLayout
-				.setScrollEvent((RelativeLayout) findViewById(R.id.content));
+		setScrollEvent(findViewById(R.id.content));
 
 		/*
 		 * 处理ListView
@@ -127,6 +126,10 @@ public class Home extends Activity
 		showFragment(0);
 	}
 
+	public static void setScrollEvent(View v)
+	{
+		slidingLayout.setScrollEvent(v);
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{

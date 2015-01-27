@@ -2,6 +2,7 @@ package com.cf.acg.fragment;
 
 import java.util.List;
 
+import com.cf.acg.Home;
 import com.cf.acg.R;
 import com.cf.acg.adapter.ContentAdaper;
 
@@ -44,11 +45,25 @@ public class FragmentActivity extends Fragment implements ContentInterface
 		listView = (ListView) activity.findViewById(R.id.list_activity);
 
 		listView.setAdapter(adapter);
+
+		Home.setScrollEvent(listView);				// 设置滑动监听事件
 	}
 
 	private void getDate()
 	{
-		content = new Content("01-27", "06:00", "星期二", "场地维护", "513", "正在进行");
+		adapter.addContent(this, new Content("01-27", "06:00", "星期二", "场地维护",
+				"513", "正在进行"));
+		adapter.addContent(this, new Content("01-27", "12:00", "星期二", "场地维护",
+				"513", "正在进行"));
+		adapter.addContent(this, new Content("02-01", "19:00", "星期日", "自助中心勤工助学部寒假培训",
+				"513", "正在进行"));
+		adapter.addContent(this, new Content("03-07", "19:00", "星期六", "瑞声科技（常州）有限公司",
+				"513", "正在进行"));
+		adapter.addContent(this, new Content("03-08", "19:00", "星期日", "普联技术有限公司",
+				"513", "正在进行"));
+		adapter.addContent(this, new Content("03-09", "09:30", "星期一", "大连大控股",
+				"513", "正在进行"));
+
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
@@ -56,8 +71,6 @@ public class FragmentActivity extends Fragment implements ContentInterface
 		init_widget();
 
 		getDate();
-
-//		adapter.addContent(this, content);
 
 		super.onActivityCreated(savedInstanceState);
 	}
@@ -77,7 +90,7 @@ public class FragmentActivity extends Fragment implements ContentInterface
 				.setText(c.time);
 		((TextView) linearLayout.findViewById(R.id.activity_week))
 				.setText(c.week);
-		
+
 		adapter.setLinearLayout(linearLayout);
 	}
 

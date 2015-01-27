@@ -2,14 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="15dp" >
 
     <ListView
         android:id="@+id/list_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_blue_bright"
-        android:divider="#555"
-        android:dividerHeight="1.3dp" />
+        android:divider="@null" />
 
 </LinearLayout>
