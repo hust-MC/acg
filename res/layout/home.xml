@@ -41,21 +41,21 @@
 
             <fragment
                 android:id="@+id/fragment_activity"
-                android:name="com.cf.acg.fragment.FragmentActivityt"
+                android:name="com.cf.acg.fragment.FragmentActivity"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <fragment
                 android:id="@+id/fragment_mate"
-                android:name="com.cf.acg.fragment.FragmentMategmentMate"
+                android:name="com.cf.acg.fragment.FragmentMate"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <fragment
                 android:id="@+id/fragment_record"
-                android:name="com.cf.acg.fragment.FragmentRecordacg.FragmentRecord"
+                android:name="com.cf.acg.fragment.FragmentRecord"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />

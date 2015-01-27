@@ -5,9 +5,7 @@ import java.util.List;
 
 public interface ContentInterface
 {
-	public List<Object> list = new ArrayList<Object>();
-
-	public void addObj();
+	public void addObj(List contentList,int position);
 	public void removeObj();
 	public void clear();
 	
