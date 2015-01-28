@@ -27,9 +27,9 @@ public class FragmentHome extends Fragment
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
-		listView = (ListView)activity.findViewById(R.id.list_home);
-		
-		Home.setScrollEvent(listView);
+//		listView = (ListView)activity.findViewById(R.id.list_home);
+//		
+//		Home.setScrollEvent(listView);
 		
 		super.onActivityCreated(savedInstanceState);
 	}

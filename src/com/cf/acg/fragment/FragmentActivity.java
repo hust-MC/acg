@@ -4,17 +4,14 @@ import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
-import com.cf.acg.adapter.ContentAdaper;
+import com.cf.acg.adapter.ContentAdapter;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,9 +20,8 @@ public class FragmentActivity extends Fragment implements ContentInterface
 {
 	private Activity activity;
 	private ListView listView;
-	private TextView textDate, textTime, textWeek, textEvent;
 
-	private ContentAdaper adapter = new ContentAdaper();
+	private ContentAdapter adapter = new ContentAdapter();
 
 	Content[] contents = new Content[6];
 	Content content;
@@ -88,7 +84,7 @@ public class FragmentActivity extends Fragment implements ContentInterface
 	{
 		Content c = (Content) contentList.get(position);
 		LinearLayout linearLayout = (LinearLayout) activity.getLayoutInflater()
-				.inflate(R.layout.activity_list, null);
+				.inflate(R.layout.list_activity, null);
 
 		((TextView) linearLayout.findViewById(R.id.activity_date))
 				.setText(c.date);

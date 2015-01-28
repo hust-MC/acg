@@ -48,46 +48,58 @@ public final class R {
         public static final int navigation_top_bar_background=0x7f02000b;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0018;
-        public static final int activity_date=0x7f0a0000;
-        public static final int activity_event=0x7f0a0003;
-        public static final int activity_place=0x7f0a0004;
-        public static final int activity_state=0x7f0a0005;
-        public static final int activity_time=0x7f0a0001;
-        public static final int activity_week=0x7f0a0002;
-        public static final int content=0x7f0a000d;
-        public static final int fragment_activity=0x7f0a000f;
-        public static final int fragment_article=0x7f0a0012;
-        public static final int fragment_home=0x7f0a000e;
-        public static final int fragment_mate=0x7f0a0010;
-        public static final int fragment_mine=0x7f0a0013;
-        public static final int fragment_record=0x7f0a0011;
-        public static final int list_activity=0x7f0a0006;
-        public static final int list_article=0x7f0a0007;
-        public static final int list_home=0x7f0a0008;
-        public static final int list_mate=0x7f0a0009;
-        public static final int list_mine=0x7f0a000a;
-        public static final int login_message=0x7f0a0014;
-        public static final int menu_list=0x7f0a000c;
-        public static final int name=0x7f0a0015;
-        public static final int pwd=0x7f0a0016;
-        public static final int rem_me=0x7f0a0017;
-        public static final int slidingLayout=0x7f0a000b;
-        public static final int surfaceview=0x7f0a0019;
+        public static final int action_settings=0x7f0a0022;
+        public static final int activity_date=0x7f0a000f;
+        public static final int activity_event=0x7f0a0012;
+        public static final int activity_place=0x7f0a0013;
+        public static final int activity_state=0x7f0a0014;
+        public static final int activity_time=0x7f0a0010;
+        public static final int activity_week=0x7f0a0011;
+        public static final int article_category=0x7f0a0015;
+        public static final int article_title=0x7f0a0016;
+        public static final int content=0x7f0a0008;
+        public static final int fragment_activity=0x7f0a000a;
+        public static final int fragment_article=0x7f0a000d;
+        public static final int fragment_home=0x7f0a0009;
+        public static final int fragment_mate=0x7f0a000b;
+        public static final int fragment_mine=0x7f0a000e;
+        public static final int fragment_record=0x7f0a000c;
+        public static final int linearLayoutMenu=0x7f0a0002;
+        public static final int list_activity=0x7f0a0000;
+        public static final int list_article=0x7f0a0001;
+        public static final int list_mate=0x7f0a0003;
+        public static final int list_mine=0x7f0a0004;
+        public static final int list_record=0x7f0a0005;
+        public static final int login_message=0x7f0a001e;
+        public static final int mate_cornet=0x7f0a0019;
+        public static final int mate_major=0x7f0a0018;
+        public static final int mate_name=0x7f0a0017;
+        public static final int mate_phone=0x7f0a001a;
+        public static final int menu_list=0x7f0a0007;
+        public static final int name=0x7f0a001f;
+        public static final int pwd=0x7f0a0020;
+        public static final int record_event=0x7f0a001d;
+        public static final int record_place=0x7f0a001c;
+        public static final int record_time=0x7f0a001b;
+        public static final int rem_me=0x7f0a0021;
+        public static final int slidingLayout=0x7f0a0006;
+        public static final int surfaceview=0x7f0a0023;
     }
     public static final class layout {
-        public static final int activity_list=0x7f030000;
-        public static final int article_list=0x7f030001;
-        public static final int fragment_activity=0x7f030002;
-        public static final int fragment_article=0x7f030003;
-        public static final int fragment_home=0x7f030004;
-        public static final int fragment_mate=0x7f030005;
-        public static final int fragment_mine=0x7f030006;
-        public static final int fragment_record=0x7f030007;
-        public static final int home=0x7f030008;
-        public static final int home_list=0x7f030009;
-        public static final int login=0x7f03000a;
-        public static final int menu_list_item=0x7f03000b;
+        public static final int fragment_activity=0x7f030000;
+        public static final int fragment_article=0x7f030001;
+        public static final int fragment_home=0x7f030002;
+        public static final int fragment_mate=0x7f030003;
+        public static final int fragment_mine=0x7f030004;
+        public static final int fragment_record=0x7f030005;
+        public static final int home=0x7f030006;
+        public static final int list_activity=0x7f030007;
+        public static final int list_article=0x7f030008;
+        public static final int list_home=0x7f030009;
+        public static final int list_mate=0x7f03000a;
+        public static final int list_record=0x7f03000b;
+        public static final int login=0x7f03000c;
+        public static final int menu_list_item=0x7f03000d;
     }
     public static final class menu {
         public static final int home=0x7f090000;
@@ -128,6 +140,7 @@ public final class R {
          */
         public static final int AppTheme=0x7f080001;
         public static final int edittext_style=0x7f080003;
+        public static final int list_record=0x7f080004;
         public static final int textview_style=0x7f080002;
     }
 }

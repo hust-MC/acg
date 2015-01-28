@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
-public class ContentAdaper extends BaseAdapter
+public class ContentAdapter extends BaseAdapter
 {
-	List<Object> contentList;
+	private List<Object> contentList;
 	ContentInterface content;
 
 	private LinearLayout linearLayout;				// 返回用于显示的View对象
@@ -27,7 +27,7 @@ public class ContentAdaper extends BaseAdapter
 		this.linearLayout = linearLayout;
 	}
 
-	public ContentAdaper()
+	public ContentAdapter()
 	{
 		contentList = new ArrayList();
 	}

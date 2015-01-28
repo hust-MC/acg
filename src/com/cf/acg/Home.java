@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,11 +38,6 @@ public class Home extends Activity
 		slidingLayout = (SlidingLayout) findViewById(R.id.slidingLayout);
 
 		/*
-		 * 处理滑动菜单
-		 */
-		setScrollEvent(findViewById(R.id.content));
-
-		/*
 		 * 处理ListView
 		 */
 		menuList.setAdapter(new ArrayAdapter<String>(this,
@@ -54,6 +50,8 @@ public class Home extends Activity
 					int position, long id)
 			{
 				slidingLayout.scrollToRightLayout();
+				SlidingLayout.leftLayout.setVisibility(View.GONE);
+				slidingLayout.setLeftLayoutVisible(false);
 				showFragment(position);
 			}
 		});
@@ -149,5 +147,4 @@ public class Home extends Activity
 		getMenuInflater().inflate(R.menu.home, menu);
 		return true;
 	}
-
 }

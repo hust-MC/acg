@@ -77,7 +77,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 	/**
 	 * 声明两侧布局对象。
 	 */
-	private static View leftLayout, rightLayout;
+	static View leftLayout, rightLayout;
 
 	/**
 	 * 用于监听侧滑事件的View。
@@ -170,6 +170,10 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 	public boolean isLeftLayoutVisible()
 	{
 		return isLeftLayoutVisible;
+	}
+	public void setLeftLayoutVisible(boolean isLeftLayoutVisible)
+	{
+		this.isLeftLayoutVisible = isLeftLayoutVisible;
 	}
 
 	/**
@@ -438,6 +442,13 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 		@Override
 		protected void onPostExecute(Integer rightMargin)
 		{
+			/*
+			 * 隐藏左侧菜单，因为Textview挡不住后面的菜单，容易点击错误（不知道为何）
+			 */
+			if (!isLeftLayoutVisible)
+			{
+				leftLayout.setVisibility(GONE);
+			}
 			rightLayoutParams.rightMargin = rightMargin;
 			rightLayout.setLayoutParams(rightLayoutParams);
 		}
