@@ -10,7 +10,9 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.webkit.WebView.FindListener;
 import android.widget.LinearLayout;
@@ -55,14 +57,20 @@ public class FragmentActivity extends Fragment implements ContentInterface
 				"513", "正在进行"));
 		adapter.addContent(this, new Content("01-27", "12:00", "星期二", "场地维护",
 				"513", "正在进行"));
-		adapter.addContent(this, new Content("02-01", "19:00", "星期日", "自助中心勤工助学部寒假培训",
+		adapter.addContent(this, new Content("01-28", "12:00", "星期三", "场地维护",
 				"513", "正在进行"));
-		adapter.addContent(this, new Content("03-07", "19:00", "星期六", "瑞声科技（常州）有限公司",
-				"513", "正在进行"));
-		adapter.addContent(this, new Content("03-08", "19:00", "星期日", "普联技术有限公司",
-				"513", "正在进行"));
+		adapter.addContent(this, new Content("02-01", "19:00", "星期日",
+				"自助中心勤工助学部寒假培训", "305", "正在进行"));
+		adapter.addContent(this, new Content("03-07", "19:00", "星期六",
+				"瑞声科技（常州）有限公司", "305", "排班中"));
+		adapter.addContent(this, new Content("03-08", "19:00", "星期日",
+				"普联技术有限公司", "305", "排班中"));
 		adapter.addContent(this, new Content("03-09", "09:30", "星期一", "大连大控股",
-				"513", "正在进行"));
+				"513", "排班中"));
+		adapter.addContent(this, new Content("03-09", "19:00", "星期一", "上海汉德",
+				"305", "排班中"));
+		adapter.addContent(this, new Content("03-10", "14:30", "星期二",
+				"武汉群硕软件开发有限公司", "305", "排班中"));
 
 	}
 	@Override
@@ -76,7 +84,7 @@ public class FragmentActivity extends Fragment implements ContentInterface
 	}
 
 	@Override
-	public void addObj(List contentList, int position)
+	public void addObj(List<Object> contentList, int position)
 	{
 		Content c = (Content) contentList.get(position);
 		LinearLayout linearLayout = (LinearLayout) activity.getLayoutInflater()
@@ -90,6 +98,14 @@ public class FragmentActivity extends Fragment implements ContentInterface
 				.setText(c.time);
 		((TextView) linearLayout.findViewById(R.id.activity_week))
 				.setText(c.week);
+		((TextView) linearLayout.findViewById(R.id.activity_place))
+				.setText(c.place);
+		TextView textState = ((TextView) linearLayout
+				.findViewById(R.id.activity_state));
+		textState.setText(c.state);
+		textState
+				.setBackgroundResource(c.state.equals("正在进行") ? R.drawable.activity_state_doing_back
+						: R.drawable.activity_state_todo_back);
 
 		adapter.setLinearLayout(linearLayout);
 	}
@@ -128,5 +144,4 @@ public class FragmentActivity extends Fragment implements ContentInterface
 			this.state = state;
 		}
 	}
-
 }

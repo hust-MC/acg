@@ -3,6 +3,7 @@ package com.cf.acg;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -275,6 +276,24 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 			recycleVelocityTracker();
 			break;
 		}
+
+		if (v.isEnabled())
+		{
+			if (isSliding)
+			{
+				unFocusBindView();
+				Log.d("MC", "siSliding");
+				return true;
+			}
+			if (isLeftLayoutVisible)
+			{
+				Log.d("MC", "isLeft");
+				return true;
+			}
+			Log.d("MC", "False");
+			return false;
+		}
+		Log.d("MC", "True");
 		return true;
 	}
 

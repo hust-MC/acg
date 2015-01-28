@@ -47,16 +47,39 @@
         <TextView
             android:id="@+id/activity_event"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginLeft="15dp"
+            android:layout_weight="1"
             android:textColor="#0F8FCF" />
 
-        <TextView
-            android:id="@+id/activity_place"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="#B94A48"
-            android:textColor="#fff" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/activity_place"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/activity_place_back"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/activity_state"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/activity_state_doing_back"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="#FFF" />
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

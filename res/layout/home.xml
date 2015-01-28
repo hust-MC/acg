@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="160dp"
         android:layout_height="match_parent"
-        android:background="@drawable/navigation_top_bar_background"
+        android:background="@drawable/menu_bg"
         android:visibility="invisible" >
 
         <ListView
