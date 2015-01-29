@@ -1,33 +1,34 @@
 package com.cf.acg.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.cf.acg.Home;
 import com.cf.acg.R;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.RadioButton;
 
 public class FragmentHome extends Fragment
 {
+
 	private Activity activity;
-	private ListView listView;
 
-	private ViewPager viewPager;
+	Class<String> resClass; 			// 定义用于反射的类
 
-	private List<String> titleList = new ArrayList<String>();
+	private FragmentManager fragmentManager;
+	private Fragment[] fragments;
+	private String[] fragmentNames =
+	{ "1", "2", "3", "4", };
+	private final int fragmentNum = fragmentNames.length;
 
-	private List<View> viewList = new ArrayList<View>();
-	private View view1, view2, view3;
+	private Button bt1, bt2, bt3, bt4;				// 底部导航栏四个按钮
+	private ButtonListener buttonListener;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,78 +38,118 @@ public class FragmentHome extends Fragment
 		return inflater.inflate(R.layout.fragment_home, null);
 	}
 
-	private void init_pages()
-	{
-		titleList.add("123");
-		titleList.add("234");
-		titleList.add("345");
-
-		LayoutInflater lf = activity.getLayoutInflater();
-		view1 = lf.inflate(R.layout.home_pager1, null);
-		view2 = lf.inflate(R.layout.home_pager2, null);
-		view3 = lf.inflate(R.layout.home_pager3, null);
-
-		viewList = new ArrayList<View>();// 将要分页显示的View装入数组中
-		viewList.add(view1);
-		viewList.add(view2);
-		viewList.add(view3);
-	}
-
 	private void init_widget()
 	{
-		viewPager = (ViewPager) activity.findViewById(R.id.view_pager);
+		buttonListener = new ButtonListener();
+		((Button) activity.findViewById(R.id.home_bt1))
+				.setOnClickListener(buttonListener);
+		((Button) activity.findViewById(R.id.home_bt2))
+				.setOnClickListener(buttonListener);
+		((Button) activity.findViewById(R.id.home_bt3))
+				.setOnClickListener(buttonListener);
+		((Button) activity.findViewById(R.id.home_bt4))
+				.setOnClickListener(buttonListener);
+	}
+	private void getResClass()
+	{
+		Class[] resourceClasses = R.class.getClasses();
 
-		viewPager.setAdapter(new MyViewPagerAdapter(viewList));
+		for (Class resource : resourceClasses)
+		{
+			try
+			{
+				resource.getField("fragment_home_page" + fragmentNames[0]);
+				if (resource.getName().equals("com.cf.acg.R$id"))
+				{
+					resClass = resource;
+				}
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	private int getResourceID(String name)
+	{
+		try
+		{
+			return resClass.getField(name).getInt(null);
+		} catch (IllegalArgumentException e)
+		{
+			e.printStackTrace();
+		} catch (IllegalAccessException e)
+		{
+			e.printStackTrace();
+		} catch (NoSuchFieldException e)
+		{
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	private void init_fragment()
+	{
+		fragments = new Fragment[fragmentNum];
+		fragmentManager = getFragmentManager();
+
+		for (int i = 0; i < fragmentNum; i++)
+		{
+			fragments[i] = (Fragment) fragmentManager
+					.findFragmentById(getResourceID("fragment_home_page"
+							+ fragmentNames[i]));
+		}
+	}
+
+	private void showFragment(int id)
+	{
+		FragmentTransaction fragmentTransaction = fragmentManager
+				.beginTransaction();
+		for (Fragment fragment : fragments)
+		{
+			fragmentTransaction.hide(fragment);
+		}
+		fragmentTransaction.show(fragments[id]).commit();
+	}
+
+	private void handleFragment()
+	{
+		init_fragment();
+		showFragment(0);
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
-		init_pages();
 		init_widget();
+
+		getResClass();
+
+		handleFragment();
 
 		super.onActivityCreated(savedInstanceState);
 	}
 
-	class MyViewPagerAdapter extends PagerAdapter
+	class ButtonListener implements OnClickListener
 	{
-		private List<View> mListViews;
-
-		public MyViewPagerAdapter(List<View> mListViews)
-		{
-			this.mListViews = mListViews;// 构造方法，参数是我们的页卡，这样比较方便。
-		}
-
 		@Override
-		public CharSequence getPageTitle(int position)
+		public void onClick(View v)
 		{
-
-			return titleList.get(position);// 直接用适配器来完成标题的显示，所以从上面可以看到，我们没有使用PagerTitleStrip。当然你可以使用。
-
-		}
-
-		@Override
-		public void destroyItem(ViewGroup container, int position, Object object)
-		{
-			container.removeView(mListViews.get(position));// 删除页卡
-		}
-
-		@Override
-		public Object instantiateItem(ViewGroup container, int position)
-		{	// 这个方法用来实例化页卡
-			container.addView(mListViews.get(position));// 添加页卡
-			return mListViews.get(position);
-		}
-
-		@Override
-		public int getCount()
-		{
-			return mListViews.size();// 返回页卡的数量
-		}
-
-		@Override
-		public boolean isViewFromObject(View arg0, Object arg1)
-		{
-			return arg0 == arg1;// 官方提示这样写
+			int index = 0;
+			switch (v.getId())
+			{
+			case R.id.home_bt1:
+				index = 0;
+				break;
+			case R.id.home_bt2:
+				index = 1;
+				break;
+			case R.id.home_bt3:
+				index = 2;
+				break;
+			case R.id.home_bt4:
+				index = 3;
+				break;
+			}
+			showFragment(index);
 		}
 	}
 }

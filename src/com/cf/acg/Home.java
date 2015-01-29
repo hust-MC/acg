@@ -121,7 +121,7 @@ public class Home extends Activity
 	private void handleFragment()
 	{
 		init_fragment();
-		showFragment(0);
+		showFragment(1);			
 	}
 
 	public static void setScrollEvent(View v)

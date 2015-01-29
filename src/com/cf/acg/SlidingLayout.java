@@ -203,10 +203,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 	public boolean onTouch(View v, MotionEvent event)
 	{
 		createVelocityTracker(event);
-		if (leftLayout.getVisibility() != View.VISIBLE)
-		{
-			leftLayout.setVisibility(View.VISIBLE);
-		}
+
 		switch (event.getAction())
 		{
 		case MotionEvent.ACTION_DOWN:
@@ -224,6 +221,10 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 			if (!isLeftLayoutVisible && distanceX >= touchSlop
 					&& (isSliding || Math.abs(distanceY) <= touchSlop))
 			{
+				if (leftLayout.getVisibility() != View.VISIBLE)
+				{
+					leftLayout.setVisibility(View.VISIBLE);
+				}
 				isSliding = true;
 				rightLayoutParams.rightMargin = -distanceX;
 				if (rightLayoutParams.rightMargin < rightEdge)

@@ -1,18 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical" >
 
-        <android.support.v4.view.PagerTabStrip
-            android:id="@+id/pagertab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top" />
-    </android.support.v4.view.ViewPager>
+        <fragment
+            android:id="@+id/fragment_home_page1"
+            android:name="com.cf.acg.fragment.FragmentHomePage1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-</RelativeLayout>
+        <fragment
+            android:id="@+id/fragment_home_page2"
+            android:name="com.cf.acg.fragment.FragmentHomePage2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <fragment
+            android:id="@+id/fragment_home_page3"
+            android:name="com.cf.acg.fragment.FragmentHomePage3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <fragment
+            android:id="@+id/fragment_home_page4"
+            android:name="com.cf.acg.fragment.FragmentHomePage4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#8DC8FB"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/home_bt1"
+            style="@style/home_bottom"
+            android:text="最新\n文章" />
+
+        <Button
+            android:id="@+id/home_bt2"
+            style="@style/home_bottom"
+            android:text="值班\n排名" />
+
+        <Button
+            android:id="@+id/home_bt3"
+            style="@style/home_bottom"
+            android:text="我的\n活动" />
+
+        <Button
+            android:id="@+id/home_bt4"
+            style="@style/home_bottom"
+            android:text="近期\n活动" />
+    </LinearLayout>
+
+</LinearLayout>
