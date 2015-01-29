@@ -1,5 +1,6 @@
 package com.cf.acg.fragment;
 
+import com.cf.acg.Home;
 import com.cf.acg.R;
 
 import android.app.Activity;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 public class FragmentHome extends Fragment
@@ -41,6 +43,12 @@ public class FragmentHome extends Fragment
 	private void init_widget()
 	{
 		buttonListener = new ButtonListener();
+
+		Home.setScrollEvent(activity.findViewById(R.id.home_page1_text));
+		Home.setScrollEvent(activity.findViewById(R.id.home_page2_text));
+		Home.setScrollEvent(activity.findViewById(R.id.home_page3_text));
+		Home.setScrollEvent(activity.findViewById(R.id.home_page4_text));
+
 		((Button) activity.findViewById(R.id.home_bt1))
 				.setOnClickListener(buttonListener);
 		((Button) activity.findViewById(R.id.home_bt2))

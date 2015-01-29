@@ -11,6 +11,7 @@ import android.view.ViewConfiguration;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class SlidingLayout extends RelativeLayout implements OnTouchListener
 {
@@ -293,6 +294,11 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 			if (isLeftLayoutVisible)
 			{
 				Log.d("MC", "isLeft");
+				return true;
+			}
+			if (v instanceof TextView)
+			{
+				Log.d("MC","TextView");
 				return true;
 			}
 			Log.d("MC", "False");

@@ -5,8 +5,10 @@
     android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/home_page2_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="text2" />
+        android:gravity="center"
+        android:text="本月值班排名" />
 
 </LinearLayout>

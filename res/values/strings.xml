@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">音频组管理系统</string>
+    <string name="app_name">音控组管理系统</string>
     <string name="enter_login">请填写登陆信息：</string>
     <string name="action_settings">Settings</string>
 

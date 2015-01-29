@@ -4,12 +4,6 @@
     <item>
         <shape android:shape="rectangle" >
             <solid android:color="#FFEC7600" />
-
-            <corners
-                android:bottomLeftRadius="5dip"
-                android:bottomRightRadius="5dip"
-                android:topLeftRadius="5dip"
-                android:topRightRadius="5dip" />
         </shape>
     </item>
     <item
@@ -25,12 +19,6 @@
                 android:endColor="#FFFED69E"
                 android:startColor="#FFEC7600"
                 android:type="linear" />
-
-            <corners
-                android:bottomLeftRadius="5dip"
-                android:bottomRightRadius="5dip"
-                android:topLeftRadius="5dip"
-                android:topRightRadius="5dip" />
         </shape>
     </item>
 

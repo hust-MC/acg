@@ -26,5 +26,4 @@ public class FragmentMine extends Fragment
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 	}
-
 }
