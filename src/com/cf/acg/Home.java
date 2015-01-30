@@ -1,19 +1,22 @@
 package com.cf.acg;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.cf.acg.fragment.*;
+import com.cf.acg.thread.HttpThread;
 
 public class Home extends Activity
 {
@@ -28,6 +31,15 @@ public class Home extends Activity
 	private String[] fragmentNames =
 	{ "home", "activity", "mate", "record", "article", "mine" };
 	private final int fragmentNum = fragmentNames.length;
+
+	Handler handler = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg)
+		{
+			((FragmentAbstract) msg.obj).setData();
+		}
+	};
 
 	private void init_widget()
 	{
@@ -50,11 +62,12 @@ public class Home extends Activity
 					int position, long id)
 			{
 				slidingLayout.scrollToRightLayout();
-				SlidingLayout.leftLayout.setVisibility(View.GONE);
 				slidingLayout.setLeftLayoutVisible(false);
 				showFragment(position);
 			}
 		});
+
+		Home.setScrollEvent(findViewById(R.id.content));
 	}
 
 	private void getResClass()
@@ -105,10 +118,12 @@ public class Home extends Activity
 					.findFragmentById(getResourceID("fragment_"
 							+ fragmentNames[i]));
 		}
+
 	}
 
 	private void showFragment(int id)
 	{
+
 		FragmentTransaction fragmentTransaction = fragmentManager
 				.beginTransaction();
 		for (Fragment fragment : fragments)
@@ -116,12 +131,18 @@ public class Home extends Activity
 			fragmentTransaction.hide(fragment);
 		}
 		fragmentTransaction.show(fragments[id]).commit();
+
+		if (!((FragmentAbstract) fragments[id]).hasDownload)
+		{
+			new HttpThread((FragmentAbstract) fragments[id], handler).start();
+			((FragmentAbstract) fragments[id]).hasDownload = true;
+		}
 	}
 
 	private void handleFragment()
 	{
 		init_fragment();
-		showFragment(1);			
+		showFragment(1);
 	}
 
 	public static void setScrollEvent(View v)

@@ -2,9 +2,8 @@ package com.cf.acg.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
-import com.cf.acg.fragment.ContentInterface;
+import com.cf.acg.fragment.FragmentAbstract;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import android.widget.LinearLayout;
 public class ContentAdapter extends BaseAdapter
 {
 	private List<Object> contentList;
-	ContentInterface content;
+	FragmentAbstract content;
 
 	private LinearLayout linearLayout;				// 返回用于显示的View对象
 
@@ -56,7 +55,7 @@ public class ContentAdapter extends BaseAdapter
 		return 0;
 	}
 
-	public void addContent(ContentInterface content, Object object)
+	public void addContent(FragmentAbstract content, Object object)
 	{
 		contentList.add(object);
 		this.content = content;

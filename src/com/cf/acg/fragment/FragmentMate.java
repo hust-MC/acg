@@ -12,16 +12,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class FragmentMate extends Fragment implements ContentInterface
+public class FragmentMate extends FragmentAbstract
 {
-	private Activity activity;
 	private ListView listView;
-	private ContentAdapter adapter = new ContentAdapter();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,16 +36,15 @@ public class FragmentMate extends Fragment implements ContentInterface
 		Home.setScrollEvent(listView);
 	}
 
-	public void getData()
+	@Override
+	public void download()
 	{
-		adapter.addContent(this, new Content("蔡建伟", "材料", "616303",
-				"18271396303"));
-		adapter.addContent(this, new Content("陈丰", "光电", "61369", "15271810369"));
-		adapter.addContent(this, new Content("陈佳伟", "机械制造", "", "18688748544"));
-		adapter.addContent(this,
-				new Content("陈章", "道桥", "620700", "15245784112"));
-		adapter.addContent(this, new Content("陈媛筠", "财政学", "", "15271487969"));
-		adapter.addContent(this, new Content("初婷婷", "光电", "", "15575450369"));
+		list.add(new Content("蔡建伟", "材料", "616303", "18271396303"));
+		list.add(new Content("陈丰", "光电", "61369", "15271810369"));
+		list.add(new Content("陈佳伟", "机械制造", "", "18688748544"));
+		list.add(new Content("陈章", "道桥", "620700", "15245784112"));
+		list.add(new Content("陈媛筠", "财政学", "", "15271487969"));
+		list.add(new Content("初婷婷", "光电", "", "15575450369"));
 	}
 
 	@Override
@@ -56,7 +52,6 @@ public class FragmentMate extends Fragment implements ContentInterface
 	{
 		init_widget();
 
-		getData();
 		super.onActivityCreated(savedInstanceState);
 	}
 
@@ -73,7 +68,7 @@ public class FragmentMate extends Fragment implements ContentInterface
 				.setText(c.cornet);
 		((TextView) linearLayout.findViewById(R.id.mate_phone))
 				.setText(c.phone);
-		
+
 		adapter.setLinearLayout(linearLayout);
 	}
 	@Override
@@ -104,4 +99,5 @@ public class FragmentMate extends Fragment implements ContentInterface
 			this.phone = phone;
 		}
 	}
+
 }

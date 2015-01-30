@@ -16,12 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class FragmentArticle extends Fragment implements ContentInterface
+public class FragmentArticle extends FragmentAbstract
 {
-	private Activity activity;
 	private ListView listView;
-
-	private ContentAdapter adaper = new ContentAdapter();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,31 +34,30 @@ public class FragmentArticle extends Fragment implements ContentInterface
 		 * 初始化变量
 		 */
 		listView = (ListView) activity.findViewById(R.id.list_article);
-		listView.setAdapter(adaper);
+		listView.setAdapter(adapter);
 
 		Home.setScrollEvent(listView);
 	}
 
-	private void getData()
+	@Override
+	public void download()
 	{
-		adaper.addContent(this, new Content("新闻通知", "音控管理系统新增统计功能"));
-		adaper.addContent(this, new Content("新闻通知", "关于提醒短信的说明"));
-		adaper.addContent(this, new Content("新闻通知", "新学期开始啦（2014年第一学期）"));
-		adaper.addContent(this, new Content("新闻通知", "音控组管理系统使用说明"));
-		adaper.addContent(this, new Content("会议记录", "音控组例会20140608"));
-		adaper.addContent(this, new Content("技术文档", "2014招新培训资料"));
-		adaper.addContent(this, new Content("技术文档", "设备说明书文档"));
-		adaper.addContent(this, new Content("技术文档", "话筒使用八忌"));
-		adaper.addContent(this, new Content("规章制度", "华中科技大学音控组管理细则"));
-		adaper.addContent(this, new Content("技术文档", "本系统采用的技术"));
-
+		list.add(new Content("新闻通知", "音控管理系统新增统计功能"));
+		list.add(new Content("新闻通知", "关于提醒短信的说明"));
+		list.add(new Content("新闻通知", "新学期开始啦（2014年第一学期）"));
+		list.add(new Content("新闻通知", "音控组管理系统使用说明"));
+		list.add(new Content("会议记录", "音控组例会20140608"));
+		list.add(new Content("技术文档", "2014招新培训资料"));
+		list.add(new Content("技术文档", "设备说明书文档"));
+		list.add(new Content("技术文档", "话筒使用八忌"));
+		list.add(new Content("规章制度", "华中科技大学音控组管理细则"));
+		list.add(new Content("技术文档", "本系统采用的技术"));
 	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
 		init_widget();
-
-		getData();
 
 		super.onActivityCreated(savedInstanceState);
 	}
@@ -79,8 +75,8 @@ public class FragmentArticle extends Fragment implements ContentInterface
 				.setText(c.category);
 		((TextView) linearLayout.findViewById(R.id.article_title))
 				.setText(c.title);
-		
-		adaper.setLinearLayout(linearLayout);
+
+		adapter.setLinearLayout(linearLayout);
 
 	}
 
@@ -109,4 +105,5 @@ public class FragmentArticle extends Fragment implements ContentInterface
 			this.title = title;
 		}
 	}
+
 }

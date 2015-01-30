@@ -9,6 +9,7 @@ import com.cf.acg.adapter.ContentAdapter;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class FragmentRecord extends Fragment implements ContentInterface
+public class FragmentRecord extends FragmentAbstract
 {
-	private Activity activity;
 	private ListView listView;
-	private ContentAdapter adapter = new ContentAdapter();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,24 +37,21 @@ public class FragmentRecord extends Fragment implements ContentInterface
 		Home.setScrollEvent(listView);
 	}
 
-	public void getData()
+	@Override
+	public void download()
 	{
-		adapter.addContent(this, new Content("2015年01月23日  星期五  13:00-18:00",
-				"513", "辅导员职业能力大赛"));
-		adapter.addContent(this, new Content("2015年01月23日  星期五  09:00-12:30",
-				"513", "辅导员职业能力大赛"));
-		adapter.addContent(this, new Content("2015年01月22日  星期四  13:00-18:00",
-				"513", "爱的力量"));
-		adapter.addContent(this, new Content("2015年01月21日  星期三  18:00-22:00",
-				"513", "爱的力量"));
+		list.add(new Content("2015年01月23日  星期五  13:00-18:00", "513",
+				"辅导员职业能力大赛"));
+		list.add(new Content("2015年01月23日  星期五  09:00-12:30", "513",
+				"辅导员职业能力大赛"));
+		list.add(new Content("2015年01月22日  星期四  13:00-18:00", "513", "爱的力量"));
+		list.add(new Content("2015年01月21日  星期三  18:00-22:00", "513", "爱的力量"));
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
 		init_widget();
-
-		getData();
 
 		super.onActivityCreated(savedInstanceState);
 	}

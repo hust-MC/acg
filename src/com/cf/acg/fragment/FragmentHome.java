@@ -1,5 +1,7 @@
 package com.cf.acg.fragment;
 
+import java.util.List;
+
 import com.cf.acg.Home;
 import com.cf.acg.R;
 
@@ -16,10 +18,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
-public class FragmentHome extends Fragment
+public class FragmentHome extends FragmentAbstract
 {
 
-	private Activity activity;
 
 	Class<String> resClass; 			// 定义用于反射的类
 
@@ -159,5 +160,33 @@ public class FragmentHome extends Fragment
 			}
 			showFragment(index);
 		}
+	}
+
+	@Override
+	public void addObj(List<Object> contentList, int position)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeObj()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clear()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void download()
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }

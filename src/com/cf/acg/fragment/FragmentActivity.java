@@ -4,10 +4,7 @@ import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
-import com.cf.acg.adapter.ContentAdapter;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class FragmentActivity extends Fragment implements ContentInterface
+public class FragmentActivity extends FragmentAbstract
 {
-	private Activity activity;
 	private ListView listView;
-
-	private ContentAdapter adapter = new ContentAdapter();
-
-	Content[] contents = new Content[6];
-	Content content;
+	FragmentActivity fragmentActivity = this;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,34 +39,27 @@ public class FragmentActivity extends Fragment implements ContentInterface
 		Home.setScrollEvent(listView);				// 设置滑动监听事件
 	}
 
-	private void getDate()
+	@Override
+	public void download()
 	{
-		adapter.addContent(this, new Content("01-27", "06:00", "星期二", "场地维护",
-				"513", "正在进行"));
-		adapter.addContent(this, new Content("01-27", "12:00", "星期二", "场地维护",
-				"513", "正在进行"));
-		adapter.addContent(this, new Content("01-28", "12:00", "星期三", "场地维护",
-				"513", "正在进行"));
-		adapter.addContent(this, new Content("02-01", "19:00", "星期日",
-				"自助中心勤工助学部寒假培训", "305", "正在进行"));
-		adapter.addContent(this, new Content("03-07", "19:00", "星期六",
-				"瑞声科技（常州）有限公司", "305", "排班中"));
-		adapter.addContent(this, new Content("03-08", "19:00", "星期日",
-				"普联技术有限公司", "305", "排班中"));
-		adapter.addContent(this, new Content("03-09", "09:30", "星期一", "大连大控股",
-				"513", "排班中"));
-		adapter.addContent(this, new Content("03-09", "19:00", "星期一", "上海汉德",
-				"305", "排班中"));
-		adapter.addContent(this, new Content("03-10", "14:30", "星期二",
-				"武汉群硕软件开发有限公司", "305", "排班中"));
-
+		list.add(new Content("01-27", "06:00", "星期二", "场地维护", "513", "正在进行"));
+		list.add(new Content("01-27", "12:00", "星期二", "场地维护", "513", "正在进行"));
+		list.add(new Content("01-28", "12:00", "星期三", "场地维护", "513", "正在进行"));
+		list.add(new Content("02-01", "19:00", "星期日", "自助中心勤工助学部寒假培训", "305",
+				"正在进行"));
+		list.add(new Content("03-07", "19:00", "星期六", "瑞声科技（常州）有限公司", "305",
+				"排班中"));
+		list.add(new Content("03-08", "19:00", "星期日", "普联技术有限公司", "305", "排班中"));
+		list.add(new Content("03-09", "09:30", "星期一", "大连大控股", "513", "排班中"));
+		list.add(new Content("03-09", "19:00", "星期一", "上海汉德", "305", "排班中"));
+		list.add(new Content("03-10", "14:30", "星期二", "武汉群硕软件开发有限公司", "305",
+				"排班中"));
 	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
 		init_widget();
-
-		getDate();
 
 		super.onActivityCreated(savedInstanceState);
 	}
@@ -120,7 +105,7 @@ public class FragmentActivity extends Fragment implements ContentInterface
 
 	}
 
-	class Content
+	static class Content
 	{
 		String date;
 		String time;
@@ -140,4 +125,5 @@ public class FragmentActivity extends Fragment implements ContentInterface
 			this.state = state;
 		}
 	}
+
 }
