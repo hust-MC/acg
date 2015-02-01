@@ -18,7 +18,7 @@ public class MainActivity extends Activity
 
 	public void onClick_login(View view)
 	{
-		startActivity(new Intent(this,Home.class));
+		startActivity(new Intent(this,Home.class));		//登陆成功
 	}
 
 	@Override
