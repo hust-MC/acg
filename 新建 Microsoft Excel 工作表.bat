@@ -5,7 +5,7 @@ set /p val=ÇëÊäÈë°æ±¾±¸×¢
 
 git commit -m '%val%'
 
+echo hust=MC | git push
 
 
-hust-MC
 pause
