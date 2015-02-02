@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FragmentActivity extends FragmentAbstract
 {
@@ -42,6 +43,13 @@ public class FragmentActivity extends FragmentAbstract
 	@Override
 	public void download()
 	{
+		getHttpConnection(fActivity);
+		
+		if(downloadException)
+		{
+			Toast.makeText(activity, "下载错误", Toast.LENGTH_SHORT).show();
+		}
+		
 		list.add(new Content("01-27", "06:00", "星期二", "场地维护", "513", "正在进行"));
 		list.add(new Content("01-27", "12:00", "星期二", "场地维护", "513", "正在进行"));
 		list.add(new Content("01-28", "12:00", "星期三", "场地维护", "513", "正在进行"));
