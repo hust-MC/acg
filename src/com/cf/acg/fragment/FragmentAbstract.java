@@ -18,6 +18,9 @@ import android.os.Environment;
 
 public abstract class FragmentAbstract extends Fragment
 {
+	static File fileDir = new File(Environment.getExternalStorageDirectory()
+			+ "/ACG/temp/");
+
 	protected final int fActivity = 1;
 	protected final int fMate = 2;
 	protected final int fRecord = 3;
@@ -31,8 +34,6 @@ public abstract class FragmentAbstract extends Fragment
 	protected ContentAdapter adapter = new ContentAdapter();
 	protected List<Object> list = new ArrayList<Object>();
 
-	int abc = 1;
-
 	public abstract void addObj(List<Object> contentList, int position);
 	public abstract void removeObj();
 	public abstract void clear();
@@ -41,11 +42,27 @@ public abstract class FragmentAbstract extends Fragment
 	public void getHttpConnection(int fObj)
 	{
 		String urlAddress = null;
+		File file = null;
+
 		switch (fObj)
 		{
 		case fActivity:
 		{
-			urlAddress = "http://acg.husteye.cn/api/activitylist";
+			urlAddress = "http://acg.husteye.cn/api/activitylist?access_token=9926841641313132";
+			file = FragmentActivity.file;
+
+			if (!file.exists())
+			{
+				fileDir.mkdirs();
+				try
+				{
+					file.createNewFile();
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+
 			break;
 		}
 		}
@@ -59,14 +76,6 @@ public abstract class FragmentAbstract extends Fragment
 			httpURLConnection.setRequestProperty("Charset", "UTF-8");
 			InputStream is = httpURLConnection.getInputStream();
 
-			File file = new File(Environment.getExternalStorageDirectory()
-					+ "/ACG/activity.txt");
-			if (!file.exists())
-			{
-				new File(Environment.getExternalStorageDirectory() + "/ACG/")
-						.mkdir();
-				file.createNewFile();
-			}
 			FileOutputStream fos = new FileOutputStream(file);
 
 			byte[] buf = new byte[4 * 1024];
@@ -86,19 +95,12 @@ public abstract class FragmentAbstract extends Fragment
 			downloadException = true;
 		}
 	}
+
 	public void setData()
 	{
 		for (Object o : list)
 		{
 			adapter.addContent(this, o);
-		}
-	}
-
-	class ContentAbstract
-	{
-		public ContentAbstract()
-		{
-			// TODO Auto-generated constructor stub
 		}
 	}
 }

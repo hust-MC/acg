@@ -37,7 +37,7 @@ public class Home extends Activity
 		@Override
 		public void handleMessage(Message msg)
 		{
-			((FragmentAbstract) msg.obj).setData();
+			((FragmentAbstract) msg.obj).setData();				//设置相应类的数据
 		}
 	};
 
