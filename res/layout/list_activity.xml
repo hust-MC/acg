@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:paddingBottom="20dp" >
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp" >
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_weight="1"
         android:orientation="vertical" >
 
@@ -40,7 +41,7 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
         android:layout_weight="4.5"
         android:orientation="vertical" >
 
@@ -61,7 +62,7 @@
             <TextView
                 android:id="@+id/activity_place"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="25dp"
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/activity_place_back"
                 android:gravity="center"
@@ -72,7 +73,7 @@
             <TextView
                 android:id="@+id/activity_state"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="25dp"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/activity_state_doing_back"
                 android:gravity="center"

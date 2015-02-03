@@ -1,10 +1,11 @@
+@echo off
 
 git add -A
 
-set /p val=\n请输入版本备注
+set /p val=请输入版本备注
 
 git commit -m '%val%'
 
 git push
 
-hust-MC
+pause

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
@@ -34,6 +35,13 @@ public class FragmentActivity extends FragmentAbstract
 	FragmentActivity fragmentActivity = this;
 
 	static File file = new File(fileDir, "activity.txt");
+
+	private String[] venueName =
+	{ "未知", "305", "513", "东四" };
+	private String[] activityStatusName =
+	{ "未知", "排班中", "正在进行", "已结束", "已取消" };
+	private String[] weekNum =
+	{ "日", "一", "二", "三", "四", "五", "六" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,8 +96,8 @@ public class FragmentActivity extends FragmentAbstract
 		String id = null;
 		String title = null;
 		String start_time = null;
-		String venue = null;
-		String status = null;
+		int venue = 0;
+		int status = 0;
 
 		reader.beginObject();
 		while (reader.hasNext())
@@ -109,11 +117,11 @@ public class FragmentActivity extends FragmentAbstract
 			}
 			else if (field.equals("venue"))
 			{
-				venue = reader.nextString();
+				venue = reader.nextInt();
 			}
 			else if (field.equals("status"))
 			{
-				status = reader.nextString();
+				status = reader.nextInt();
 			}
 			else
 			{
@@ -139,7 +147,6 @@ public class FragmentActivity extends FragmentAbstract
 					+ "/ACG/activity.txt");
 		} catch (FileNotFoundException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -148,27 +155,8 @@ public class FragmentActivity extends FragmentAbstract
 			list = readJsonStream(fis);
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// list.add(new Content("01-27", "06:00", "星期二", "场地维护", "513",
-		// "正在进行"));
-		// list.add(new Content("01-27", "12:00", "星期二", "场地维护", "513",
-		// "正在进行"));
-		// list.add(new Content("01-28", "12:00", "星期三", "场地维护", "513",
-		// "正在进行"));
-		// list.add(new Content("02-01", "19:00", "星期日", "自助中心勤工助学部寒假培训", "305",
-		// "正在进行"));
-		// list.add(new Content("03-07", "19:00", "星期六", "瑞声科技（常州）有限公司", "305",
-		// "排班中"));
-		// list.add(new Content("03-08", "19:00", "星期日", "普联技术有限公司", "305",
-		// "排班中"));
-		// list.add(new Content("03-09", "09:30", "星期一", "大连大控股", "513",
-		// "排班中"));
-		// list.add(new Content("03-09", "19:00", "星期一", "上海汉德", "305", "排班中"));
-		// list.add(new Content("03-10", "14:30", "星期二", "武汉群硕软件开发有限公司", "305",
-		// "排班中"));
 	}
 
 	@Override
@@ -188,24 +176,27 @@ public class FragmentActivity extends FragmentAbstract
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis((long) Integer.parseInt(c.start_time) * 1000);
-		SimpleDateFormat date = new SimpleDateFormat("MM-dd");
-		SimpleDateFormat time = new SimpleDateFormat("HH:mm");
-		SimpleDateFormat week = new SimpleDateFormat("EEEE");
+		calendar.roll(Calendar.HOUR_OF_DAY, 8);
+
+		SimpleDateFormat sdf_date = new SimpleDateFormat("MM-dd");
+		SimpleDateFormat sdf_time = new SimpleDateFormat("HH:mm");
 
 		((TextView) linearLayout.findViewById(R.id.activity_event))
 				.setText(c.title);
+
 		((TextView) linearLayout.findViewById(R.id.activity_date))
-				.setText(calendar.get(Calendar.MONTH) + "-"
-						+ calendar.get(Calendar.DAY_OF_MONTH) + "");
+				.setText(sdf_date.format(calendar.getTime()));
 		((TextView) linearLayout.findViewById(R.id.activity_time))
-				.setText(calendar.get(Calendar.HOUR_OF_DAY) + 8 + "");
-		((TextView) linearLayout.findViewById(R.id.activity_week))
-				.setText(Calendar.DAY_OF_WEEK + "");
+				.setText(sdf_time.format(calendar.getTime()) + "");
+		((TextView) linearLayout.findViewById(R.id.activity_week)).setText("星期"
+				+ weekNum[calendar.get(Calendar.DAY_OF_WEEK) - 1]);
+
 		((TextView) linearLayout.findViewById(R.id.activity_place))
-				.setText(c.venue);
+				.setText(venueName[c.venue]);
+
 		TextView textState = ((TextView) linearLayout
 				.findViewById(R.id.activity_state));
-		textState.setText(c.status);
+		textState.setText(activityStatusName[c.status]);
 		// textState
 		// .setBackgroundResource(c.state.equals("正在进行") ?
 		// R.drawable.activity_state_doing_back
@@ -217,15 +208,11 @@ public class FragmentActivity extends FragmentAbstract
 	@Override
 	public void removeObj()
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void clear()
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	static class Content
@@ -235,8 +222,8 @@ public class FragmentActivity extends FragmentAbstract
 		String work_start_time;
 		String start_time;
 		String end_time;
-		String venue;
-		String status;
+		int venue;
+		int status;
 		String type;
 		Duties duties;
 
@@ -247,8 +234,8 @@ public class FragmentActivity extends FragmentAbstract
 			String status;
 		}
 
-		public Content(String id, String title, String start_time,
-				String venue, String status)
+		public Content(String id, String title, String start_time, int venue,
+				int status)
 		{
 			super();
 			this.id = id;
