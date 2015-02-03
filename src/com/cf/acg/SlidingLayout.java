@@ -288,23 +288,18 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 			if (isSliding)
 			{
 				unFocusBindView();
-				Log.d("MC", "siSliding");
 				return true;
 			}
 			if (isLeftLayoutVisible)
 			{
-				Log.d("MC", "isLeft");
 				return true;
 			}
 			if (v instanceof TextView)
 			{
-				Log.d("MC","TextView");
 				return true;
 			}
-			Log.d("MC", "False");
 			return false;
 		}
-		Log.d("MC", "True");
 		return true;
 	}
 

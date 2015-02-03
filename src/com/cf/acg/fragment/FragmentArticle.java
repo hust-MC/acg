@@ -1,24 +1,32 @@
 package com.cf.acg.fragment;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
-import com.cf.acg.adapter.ContentAdapter;
+import com.cf.acg.fragment.FragmentActivity.Content;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FragmentArticle extends FragmentAbstract
 {
 	private ListView listView;
+	public static File file = new File(fileDir, "/article.txt");
+
+	private String[] article_category =
+	{ "未知", "新闻通知", "经验分享", "会议记录", "规章制度", "技术文档", "其他文章" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,18 +48,57 @@ public class FragmentArticle extends FragmentAbstract
 	}
 
 	@Override
+	public Content readContent(JsonReader reader) throws IOException
+	{
+		String title = null;
+		String category = null;
+
+		reader.beginObject();
+		while (reader.hasNext())
+		{
+			String field = reader.nextName();
+			if (field.equals("title"))
+			{
+				title = reader.nextString();
+			}
+			else if (field.equals("cate_id"))
+			{
+				category = article_category[reader.nextInt()];
+			}
+			else
+			{
+				reader.skipValue();
+			}
+		}
+		reader.endObject();
+		return new Content(category, title);
+	}
+
+	@Override
 	public void download()
 	{
-		list.add(new Content("新闻通知", "音控管理系统新增统计功能"));
-		list.add(new Content("新闻通知", "关于提醒短信的说明"));
-		list.add(new Content("新闻通知", "新学期开始啦（2014年第一学期）"));
-		list.add(new Content("新闻通知", "音控组管理系统使用说明"));
-		list.add(new Content("会议记录", "音控组例会20140608"));
-		list.add(new Content("技术文档", "2014招新培训资料"));
-		list.add(new Content("技术文档", "设备说明书文档"));
-		list.add(new Content("技术文档", "话筒使用八忌"));
-		list.add(new Content("规章制度", "华中科技大学音控组管理细则"));
-		list.add(new Content("技术文档", "本系统采用的技术"));
+		getHttpConnection(fType);				// 通用方法
+		FileInputStream fis = null;
+		if (downloadException)
+		{
+			Toast.makeText(activity, "下载错误", Toast.LENGTH_SHORT).show();
+		}
+
+		try
+		{
+			fis = new FileInputStream(file);
+		} catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+
+		try
+		{
+			list = jsonResolve.readJsonStream(fis);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -59,13 +106,15 @@ public class FragmentArticle extends FragmentAbstract
 	{
 		init_widget();
 
+		jsonResolve = new JsonResolve(this);
+		fType = fArticle;
+
 		super.onActivityCreated(savedInstanceState);
 	}
 
 	@Override
 	public void addObj(List<Object> contentList, int position)
 	{
-
 		LinearLayout linearLayout = (LinearLayout) activity.getLayoutInflater()
 				.inflate(R.layout.list_article, null);
 
@@ -77,14 +126,12 @@ public class FragmentArticle extends FragmentAbstract
 				.setText(c.title);
 
 		adapter.setLinearLayout(linearLayout);
-
 	}
 
 	@Override
 	public void removeObj()
 	{
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override

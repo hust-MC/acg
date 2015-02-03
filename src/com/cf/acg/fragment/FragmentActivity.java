@@ -34,7 +34,7 @@ public class FragmentActivity extends FragmentAbstract
 	private ListView listView;
 	FragmentActivity fragmentActivity = this;
 
-	static File file = new File(fileDir, "activity.txt");
+	static File file = new File(fileDir, "/activity.txt");
 
 	private String[] venueName =
 	{ "未知", "305", "513", "东四" };
@@ -64,33 +64,7 @@ public class FragmentActivity extends FragmentAbstract
 		Home.setScrollEvent(listView);				// 设置滑动监听事件
 	}
 
-	public List<Object> readJsonStream(InputStream in) throws IOException
-	{
-		JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-		try
-		{
-			return readContentArray(reader);
-		}
-
-		finally
-		{
-			reader.close();
-		}
-	}
-
-	public List readContentArray(JsonReader reader) throws IOException
-	{
-		List<Content> Contents = new ArrayList<Content>();
-
-		reader.beginArray();
-		while (reader.hasNext())
-		{
-			Contents.add(readContent(reader));
-		}
-		reader.endArray();
-		return Contents;
-	}
-
+	@Override
 	public Content readContent(JsonReader reader) throws IOException
 	{
 		String id = null;
@@ -134,7 +108,8 @@ public class FragmentActivity extends FragmentAbstract
 	@Override
 	public void download()
 	{
-		getHttpConnection(fActivity);
+		Log.d("MC", "f_a");
+		getHttpConnection(fActivity);				// 通用方法
 		FileInputStream fis = null;
 		if (downloadException)
 		{
@@ -143,8 +118,7 @@ public class FragmentActivity extends FragmentAbstract
 
 		try
 		{
-			fis = new FileInputStream(Environment.getExternalStorageDirectory()
-					+ "/ACG/activity.txt");
+			fis = new FileInputStream(file);
 		} catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
@@ -152,7 +126,7 @@ public class FragmentActivity extends FragmentAbstract
 
 		try
 		{
-			list = readJsonStream(fis);
+			list = jsonResolve.readJsonStream(fis);
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -164,6 +138,8 @@ public class FragmentActivity extends FragmentAbstract
 	{
 		init_widget();
 
+		jsonResolve = new JsonResolve(this);
+		
 		super.onActivityCreated(savedInstanceState);
 	}
 

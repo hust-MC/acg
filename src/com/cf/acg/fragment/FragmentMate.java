@@ -1,24 +1,29 @@
 package com.cf.acg.fragment;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
-import com.cf.acg.adapter.ContentAdapter;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FragmentMate extends FragmentAbstract
 {
 	private ListView listView;
+
+	public static File file = new File(fileDir, "/mate.txt");
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,21 +41,76 @@ public class FragmentMate extends FragmentAbstract
 		Home.setScrollEvent(listView);
 	}
 
+	/*
+	 * 解析Json数据的回调函数
+	 */
+	@Override
+	public Object readContent(JsonReader reader) throws IOException
+	{
+		String name = null;
+		String cornet = null;
+		String phone = null;
+
+		reader.beginObject();
+		while (reader.hasNext())
+		{
+			String field = reader.nextName();
+			if (field.equals("name"))
+			{
+				name = reader.nextString();
+			}
+			else if (field.equals("mobile_short"))
+			{
+				cornet = reader.nextString();
+			}
+			else if (field.equals("mobile"))
+			{
+				phone = reader.nextString();
+			}
+			else
+			{
+				reader.skipValue();
+			}
+		}
+		reader.endObject();
+		
+		return new Content(name, null, cornet, phone);
+
+	}
+
 	@Override
 	public void download()
 	{
-		list.add(new Content("蔡建伟", "材料", "616303", "18271396303"));
-		list.add(new Content("陈丰", "光电", "61369", "15271810369"));
-		list.add(new Content("陈佳伟", "机械制造", "", "18688748544"));
-		list.add(new Content("陈章", "道桥", "620700", "15245784112"));
-		list.add(new Content("陈媛筠", "财政学", "", "15271487969"));
-		list.add(new Content("初婷婷", "光电", "", "15575450369"));
+		getHttpConnection(fType);				// 通用方法
+		FileInputStream fis = null;
+		if (downloadException)
+		{
+			Toast.makeText(activity, "下载错误", Toast.LENGTH_SHORT).show();
+		}
+
+		try
+		{
+			fis = new FileInputStream(file);
+		} catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+
+		try
+		{
+			list = jsonResolve.readJsonStream(fis);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
 		init_widget();
+		fType = fMate;
+		jsonResolve = new JsonResolve(this);
 
 		super.onActivityCreated(savedInstanceState);
 	}
@@ -99,5 +159,4 @@ public class FragmentMate extends FragmentAbstract
 			this.phone = phone;
 		}
 	}
-
 }

@@ -1,5 +1,6 @@
 package com.cf.acg.fragment;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.cf.acg.Home;
@@ -10,6 +11,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -188,5 +190,12 @@ public class FragmentHome extends FragmentAbstract
 	{
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Object readContent(JsonReader reader) throws IOException
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
