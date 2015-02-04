@@ -52,12 +52,18 @@ public class FragmentArticle extends FragmentAbstract
 	{
 		String title = null;
 		String category = null;
+		String ID = null;
 
 		reader.beginObject();
 		while (reader.hasNext())
 		{
 			String field = reader.nextName();
-			if (field.equals("title"))
+
+			if (field.equals("id"))
+			{
+				ID = reader.nextString();
+			}
+			else if (field.equals("title"))
 			{
 				title = reader.nextString();
 			}
@@ -71,9 +77,8 @@ public class FragmentArticle extends FragmentAbstract
 			}
 		}
 		reader.endObject();
-		return new Content(category, title);
+		return new Content(ID, category, title);
 	}
-
 	@Override
 	public void download()
 	{
@@ -143,11 +148,13 @@ public class FragmentArticle extends FragmentAbstract
 
 	class Content
 	{
+		String ID;
 		String category;
 		String title;
 
-		public Content(String category, String title)
+		public Content(String ID, String category, String title)
 		{
+			this.ID = ID;
 			this.category = "[" + category + "]";
 			this.title = title;
 		}

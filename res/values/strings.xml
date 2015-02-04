@@ -20,5 +20,6 @@
 
     <string name="title_activity_home">Home</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_activity_detail">ActivityDetail</string>
 
 </resources>

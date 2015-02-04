@@ -37,7 +37,7 @@ public abstract class FragmentAbstract extends Fragment
 	public boolean downloadException = false;
 
 	protected ContentAdapter adapter = new ContentAdapter();
-	protected List<Object> list = new ArrayList<Object>();
+	protected List<Object> list = new ArrayList<Object>();				//
 
 	public abstract void addObj(List<Object> contentList, int position);
 	public abstract void removeObj();

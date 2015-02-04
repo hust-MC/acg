@@ -21,7 +21,6 @@ public class JsonResolve
 
 	public List<Object> readJsonStream(InputStream in) throws IOException
 	{
-		Log.d("MC","jsonResolve___ readJsonStream");
 		JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
 		try
 		{

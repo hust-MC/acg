@@ -50,12 +50,17 @@ public class FragmentMate extends FragmentAbstract
 		String name = null;
 		String cornet = null;
 		String phone = null;
+		String ID = null;
 
 		reader.beginObject();
 		while (reader.hasNext())
 		{
 			String field = reader.nextName();
-			if (field.equals("name"))
+			if (field.equals("uid"))
+			{
+				ID = reader.nextString();
+			}
+			else if (field.equals("name"))
 			{
 				name = reader.nextString();
 			}
@@ -73,8 +78,8 @@ public class FragmentMate extends FragmentAbstract
 			}
 		}
 		reader.endObject();
-		
-		return new Content(name, null, cornet, phone);
+
+		return new Content(ID, name, null, cornet, phone);
 
 	}
 
@@ -146,13 +151,16 @@ public class FragmentMate extends FragmentAbstract
 
 	class Content
 	{
+		String ID;
 		String name;
 		String major;
 		String cornet;
 		String phone;
 
-		public Content(String name, String major, String cornet, String phone)
+		public Content(String ID, String name, String major, String cornet,
+				String phone)
 		{
+			this.ID = ID;
 			this.name = name;
 			this.major = major;
 			this.cornet = cornet;

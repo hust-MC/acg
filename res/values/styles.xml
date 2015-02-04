@@ -49,4 +49,21 @@
         <item name="android:layout_weight">1</item>
     </style>
 
+    <style name="textview_title">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="textview_background">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:background">@drawable/activity_place_back</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
 </resources>

@@ -4,25 +4,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
-
 import com.cf.acg.Home;
 import com.cf.acg.R;
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.JsonReader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,7 +24,6 @@ import android.widget.Toast;
 
 public class FragmentActivity extends FragmentAbstract
 {
-	List<Content> listContent;
 	private ListView listView;
 	FragmentActivity fragmentActivity = this;
 
@@ -62,9 +55,21 @@ public class FragmentActivity extends FragmentAbstract
 		listView.setAdapter(adapter);
 
 		Home.setScrollEvent(listView);				// 设置滑动监听事件
+		listView.setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id)
+			{
+				
+			}
+		});
 	}
 
-	@Override
+	/*
+	 *定义Content对象成员的接收回调函数
+	 */
+	@Override			
 	public Content readContent(JsonReader reader) throws IOException
 	{
 		String id = null;
@@ -108,7 +113,6 @@ public class FragmentActivity extends FragmentAbstract
 	@Override
 	public void download()
 	{
-		Log.d("MC", "f_a");
 		getHttpConnection(fActivity);				// 通用方法
 		FileInputStream fis = null;
 		if (downloadException)
@@ -139,7 +143,7 @@ public class FragmentActivity extends FragmentAbstract
 		init_widget();
 
 		jsonResolve = new JsonResolve(this);
-		
+
 		super.onActivityCreated(savedInstanceState);
 	}
 
@@ -201,19 +205,10 @@ public class FragmentActivity extends FragmentAbstract
 		int venue;
 		int status;
 		String type;
-		Duties duties;
-
-		class Duties
-		{
-			String uid;
-			String name;
-			String status;
-		}
 
 		public Content(String id, String title, String start_time, int venue,
 				int status)
 		{
-			super();
 			this.id = id;
 			this.title = title;
 			this.start_time = start_time;
@@ -221,5 +216,4 @@ public class FragmentActivity extends FragmentAbstract
 			this.status = status;
 		}
 	}
-
 }

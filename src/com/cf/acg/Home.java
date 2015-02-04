@@ -118,12 +118,10 @@ public class Home extends Activity
 					.findFragmentById(getResourceID("fragment_"
 							+ fragmentNames[i]));
 		}
-
 	}
 
 	private void showFragment(int id)
 	{
-
 		FragmentTransaction fragmentTransaction = fragmentManager
 				.beginTransaction();
 		for (Fragment fragment : fragments)

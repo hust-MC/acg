@@ -55,13 +55,17 @@ public class FragmentRecord extends FragmentAbstract
 		int end_time = 0;
 		String venue = null;
 		String title = null;
+		String ID = null;
 
 		reader.beginObject();
 		while (reader.hasNext())
 		{
 			String field = reader.nextName();
-
-			if (field.equals("title"))
+			if (field.equals("id"))
+			{
+				ID = reader.nextString();
+			}
+			else if (field.equals("title"))
 			{
 				title = reader.nextString();
 			}
@@ -83,7 +87,7 @@ public class FragmentRecord extends FragmentAbstract
 			}
 		}
 		reader.endObject();
-		return new Content(start_time, end_time, venue, title);
+		return new Content(ID, start_time, end_time, venue, title);
 	}
 	@Override
 	public void download()
@@ -170,9 +174,12 @@ public class FragmentRecord extends FragmentAbstract
 		int end_time;
 		String venue;
 		String title;
+		String ID;
 
-		public Content(int start_time, int end_time, String venue, String title)
+		public Content(String ID, int start_time, int end_time, String venue,
+				String title)
 		{
+			this.ID = ID;
 			this.start_time = start_time;
 			this.end_time = end_time;
 			this.venue = venue;

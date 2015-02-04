@@ -29,6 +29,10 @@
             android:name="com.cf.acg.Home"
             android:label="@string/title_activity_home" >
         </activity>
+        <activity
+            android:name="com.cf.acg.ActivityDetail"
+            android:label="@string/title_activity_activity_detail" >
+        </activity>
     </application>
 
 </manifest>

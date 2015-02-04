@@ -61,25 +61,14 @@
 
             <TextView
                 android:id="@+id/activity_place"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/activity_place_back"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textColor="#fff" />
+                style="@style/textview_background"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                 android:id="@+id/activity_state"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                style="@style/textview_background"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/activity_state_doing_back"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textColor="#FFF" />
+                android:background="@drawable/activity_state_doing_back" />
         </RelativeLayout>
     </LinearLayout>
 
