@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
+import com.cf.acg.thread.DownloadInterface;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -20,9 +21,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
-public class FragmentHome extends FragmentAbstract
+public class FragmentHome extends FragmentAbstract implements DownloadInterface
 {
-
 
 	Class<String> resClass; 			// 定义用于反射的类
 
@@ -168,28 +168,28 @@ public class FragmentHome extends FragmentAbstract
 	public void addObj(List<Object> contentList, int position)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void removeObj()
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void clear()
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void download()
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

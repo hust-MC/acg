@@ -15,21 +15,21 @@ import android.os.Message;
 
 public class HttpThread extends Thread
 {
-	FragmentAbstract fa;
+	DownloadInterface downloadClass;
 	Handler handler;
 
-	public HttpThread(FragmentAbstract fa, Handler handler)
+	public HttpThread(DownloadInterface downloadClass, Handler handler)
 	{
-		this.fa = fa;
+		this.downloadClass = downloadClass;
 		this.handler = handler;
 	}
 
 	@Override
 	public void run()
 	{
-		fa.download();
+		downloadClass.download();
 		Message message = handler.obtainMessage();
-		message.obj = fa;
+		message.obj = downloadClass;
 		message.sendToTarget();
 	}
 

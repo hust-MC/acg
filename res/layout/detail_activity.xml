@@ -50,8 +50,7 @@
                 <TextView
                     android:id="@+id/act_venue"
                     style="@style/textview_background"
-                    android:background="@drawable/activity_place_back"
-                    android:text="305" />
+                    android:background="@drawable/activity_place_back" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -63,15 +62,14 @@
                     android:id="@+id/act_status"
                     style="@style/textview_background"
                     android:layout_marginLeft="3dp"
-                    android:background="@drawable/activity_state_doing_back"
-                    android:text="排班中" />
+                    android:background="@drawable/activity_state_doing_back" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="#d4d4d4" />
+                android:background="@color/devide_line" />
 
             <!-- 活动名称 -->
 
@@ -84,14 +82,13 @@
                 android:id="@+id/act_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="群说。。。。" />
+                android:layout_marginTop="8dp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="#d4d4d4" />
+                android:background="@color/devide_line" />
 
             <!-- 活动备注 -->
 
@@ -104,8 +101,7 @@
                 android:id="@+id/act_remark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="群说。。。。" />
+                android:layout_marginTop="8dp" />
         </LinearLayout>
     </ScrollView>
 

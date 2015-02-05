@@ -6,31 +6,30 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Calendar;
 
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
+import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.fragment.FragmentAbstract;
+import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
+import android.text.format.Time;
 import android.util.JsonReader;
 import android.view.Menu;
 import android.widget.TextView;
 
-public class ActivityDetail extends Activity
+public class ActivityDetail extends DetailAbstract implements DownloadInterface
 {
-	private String id;
 	private Content content;
 
 	private TextView tv_workTime, tv_time, tv_venue, tv_status, tv_name,
 			tv_remark;
-
-	public static File detailFileDir = new File(
-			FragmentAbstract.fileDir.getPath() + "/detail");
-	private File file = new File(detailFileDir, "activity.txt");
 
 	Handler handler = new Handler()
 	{
@@ -51,42 +50,30 @@ public class ActivityDetail extends Activity
 		tv_venue = (TextView) findViewById(R.id.act_venue);
 	}
 
-	private void downloadDetail() throws IOException
+	@Override
+	public void download()
 	{
 		final String urlAddress = "http://acg.husteye.cn/api/activitydetail?access_token=9926841641313132&activity_id="
 				+ id;
-
-		if (!detailFileDir.exists())
+		HttpThread.httpConnect(urlAddress, file);
+		try
 		{
-			detailFileDir.mkdirs();
-			file.createNewFile();
+			content = (Content) readJsonStream(new FileInputStream(file));
+		} catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
 		}
-
-		new Thread(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				HttpThread.httpConnect(urlAddress, file);
-				try
-				{
-					resolveDetail();
-				} catch (FileNotFoundException e)
-				{
-					e.printStackTrace();
-				} catch (IOException e)
-				{
-					e.printStackTrace();
-				}
-				handler.sendEmptyMessage(0);
-			}
-		}).start();
 	}
+
+	@Override
 	public Content readContent(JsonReader reader) throws IOException
 	{
 		String title = null; 				// 活动标题
-		String work_start_time = null; 		// 值班开始时间
-		String start_time = null;			// 活动开始时间
+		int work_start_time = 0; 			// 值班开始时间
+		int start_time = 0;					// 活动开始时间
 		String remark = null;				// 活动备注
 		int venue = 0;						// 活动场地
 		int status = 0;						// 活动状态
@@ -97,7 +84,7 @@ public class ActivityDetail extends Activity
 			String field = reader.nextName();
 			if (field.equals("start_time"))
 			{
-				start_time = reader.nextString();
+				start_time = reader.nextInt();
 			}
 			else if (field.equals("title"))
 			{
@@ -105,7 +92,7 @@ public class ActivityDetail extends Activity
 			}
 			else if (field.equals("work_start_time"))
 			{
-				work_start_time = reader.nextString();
+				work_start_time = reader.nextInt();
 			}
 			else if (field.equals("venue"))
 			{
@@ -129,45 +116,33 @@ public class ActivityDetail extends Activity
 				status);
 	}
 
-	public Content readJsonStream(InputStream in) throws IOException
-	{
-		JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-		try
-		{
-			return readContent(reader);
-		}
-
-		finally
-		{
-			reader.close();
-		}
-	}
-
-	// public List readContentArray(JsonReader reader) throws IOException
-	// {
-	// List<Object> Contents = new ArrayList<Object>();
-	//
-	// reader.beginArray();
-	// while (reader.hasNext())
-	// {
-	// Contents.add(readContent(reader));
-	// }
-	// reader.endArray();
-	// return Contents;
-	// }
-	private void resolveDetail() throws FileNotFoundException, IOException
-	{
-		content = readJsonStream(new FileInputStream(file));
-	}
-
 	private void setData()
 	{
+		TimeFormat tf_startTime = new TimeFormat(content.start_time);
+		TimeFormat tf_workTime = new TimeFormat(content.work_start_time);
+
 		tv_name.setText(content.title);
 		tv_remark.setText(content.remark);
 		tv_status.setText(MainActivity.activityStatusName[content.status]);
-		tv_time.setText("活动时间：" + content.start_time);
-		tv_workTime.setText("值班时间：" + content.work_start_time);
+		tv_time.setText("活动时间："
+				+ tf_startTime.format("yyyy年MM月dd日")
+				+ " 星期"
+				+ MainActivity.weekNum[tf_startTime
+						.getField(Calendar.DAY_OF_WEEK) - 1]
+				+ tf_startTime.format(" HH:mm"));
+		tv_workTime.setText("值班时间："
+				+ tf_workTime.format("yyyy年MM月dd日")
+				+ " 星期"
+				+ MainActivity.weekNum[tf_workTime
+						.getField(Calendar.DAY_OF_WEEK) - 1]
+				+ tf_workTime.format(" HH:mm"));
 		tv_venue.setText(MainActivity.venueName[content.venue]);
+	}
+
+	private void init_variable()
+	{
+		id = getIntent().getExtras().getString("id");
+		file = new File(detailFileDir, "/activity.txt");
 	}
 
 	@Override
@@ -178,16 +153,9 @@ public class ActivityDetail extends Activity
 
 		init_widget();
 
-		id = getIntent().getExtras().getString("id");
+		init_variable();
 
-		try
-		{
-			downloadDetail();
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
+		new HttpThread(this, handler).start();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
@@ -198,7 +166,7 @@ public class ActivityDetail extends Activity
 
 	class Content
 	{
-		public Content(String title, String work_start_time, String start_time,
+		public Content(String title, int work_start_time, int start_time,
 				String remark, int venue, int status)
 		{
 			this.title = title;
@@ -210,10 +178,10 @@ public class ActivityDetail extends Activity
 		}
 
 		String title; 				// 活动标题
-		String work_start_time; 	// 值班开始时间
-		String start_time;			// 活动开始时间
 		String remark;				// 活动备注
-		int venue;				// 活动场地
-		int status;				// 活动状态
+		int work_start_time; 		// 值班开始时间
+		int start_time;				// 活动开始时间
+		int venue;					// 活动场地
+		int status;					// 活动状态
 	}
 }

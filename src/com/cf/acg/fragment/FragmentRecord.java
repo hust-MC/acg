@@ -11,8 +11,11 @@ import java.util.List;
 import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
+import com.cf.acg.Util.TimeFormat;
+import com.cf.acg.thread.DownloadInterface;
 
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +25,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragmentRecord extends FragmentAbstract
+public class FragmentRecord extends FragmentAbstract implements
+		DownloadInterface
 {
 	private ListView listView;
 
@@ -128,26 +132,19 @@ public class FragmentRecord extends FragmentAbstract
 	{
 		Content c = (Content) contentList.get(position);
 
-		Calendar startCalendar = Calendar.getInstance();
-		Calendar endCalendar = Calendar.getInstance();
-		startCalendar.setTimeInMillis((long) c.start_time * 1000);
-		endCalendar.setTimeInMillis((long) c.end_time * 1000);
-		startCalendar.roll(Calendar.HOUR_OF_DAY, 8);
-		endCalendar.roll(Calendar.HOUR_OF_DAY, 8);
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日");
-		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+		TimeFormat tf_startTime = new TimeFormat(c.start_time);
+		TimeFormat tf_endTime = new TimeFormat(c.end_time);
 
 		LinearLayout linearLayout = (LinearLayout) activity.getLayoutInflater()
 				.inflate(R.layout.list_record, null);
 
 		((TextView) linearLayout.findViewById(R.id.record_time))
-				.setText(dateFormat.format(startCalendar.getTime())
+				.setText(tf_startTime.format("yyyy年MM月dd日")
 						+ "  星期"
-						+ MainActivity.weekNum[startCalendar
-								.get(Calendar.DAY_OF_WEEK) - 1] + "  "
-						+ timeFormat.format(startCalendar.getTime()) + "-"
-						+ timeFormat.format(endCalendar.getTime()));
+						+ MainActivity.weekNum[tf_startTime
+								.getField(Calendar.DAY_OF_WEEK) - 1] + "  "
+						+ tf_startTime.format("HH:mm") + "-"
+						+ tf_endTime.format("HH:mm"));
 		((TextView) linearLayout.findViewById(R.id.record_place)).setText("地点："
 				+ MainActivity.venueName[Integer.parseInt(c.venue)]);
 		((TextView) linearLayout.findViewById(R.id.record_event)).setText("活动："

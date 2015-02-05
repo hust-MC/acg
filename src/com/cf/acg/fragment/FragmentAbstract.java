@@ -37,7 +37,6 @@ public abstract class FragmentAbstract extends Fragment
 	public abstract void addObj(List<Object> contentList, int position);
 	public abstract void removeObj();
 	public abstract void clear();
-	public abstract void download();
 
 	public abstract Object readContent(JsonReader reader) throws IOException;
 

@@ -5,4 +5,5 @@
     <color name="red">#ff0000</color>
     <color name="white">#ffffffff</color>
     <color name="transparent">#00000000</color>
+    <color name="devide_line">#d4d4d4</color>
 </resources>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.cf.acg.R;
+import com.cf.acg.thread.DownloadInterface;
 
 import android.os.Bundle;
 import android.util.JsonReader;
@@ -11,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentMine extends FragmentAbstract
+public class FragmentMine extends FragmentAbstract implements DownloadInterface
 {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,28 +33,28 @@ public class FragmentMine extends FragmentAbstract
 	public void addObj(List<Object> contentList, int position)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void removeObj()
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void clear()
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void download()
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

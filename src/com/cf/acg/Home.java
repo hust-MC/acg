@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cf.acg.fragment.*;
+import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
 public class Home extends Activity
@@ -132,7 +133,7 @@ public class Home extends Activity
 
 		if (!((FragmentAbstract) fragments[id]).hasDownload)
 		{
-			new HttpThread((FragmentAbstract) fragments[id], handler).start();
+			new HttpThread((DownloadInterface) fragments[id], handler).start();
 			((FragmentAbstract) fragments[id]).hasDownload = true;
 		}
 	}

@@ -16,6 +16,7 @@ public final class R {
     }
     public static final class color {
         public static final int dark_grey=0x7f040000;
+        public static final int devide_line=0x7f040004;
         public static final int red=0x7f040001;
         public static final int transparent=0x7f040003;
         public static final int white=0x7f040002;
@@ -107,29 +108,31 @@ public final class R {
     }
     public static final class layout {
         public static final int detail_activity=0x7f030000;
-        public static final int fragment_activity=0x7f030001;
-        public static final int fragment_article=0x7f030002;
-        public static final int fragment_home=0x7f030003;
-        public static final int fragment_mate=0x7f030004;
-        public static final int fragment_mine=0x7f030005;
-        public static final int fragment_record=0x7f030006;
-        public static final int home=0x7f030007;
-        public static final int home_page1=0x7f030008;
-        public static final int home_page2=0x7f030009;
-        public static final int home_page3=0x7f03000a;
-        public static final int home_page4=0x7f03000b;
-        public static final int list_activity=0x7f03000c;
-        public static final int list_article=0x7f03000d;
-        public static final int list_home=0x7f03000e;
-        public static final int list_mate=0x7f03000f;
-        public static final int list_record=0x7f030010;
-        public static final int login=0x7f030011;
-        public static final int menu_list_item=0x7f030012;
+        public static final int detail_article=0x7f030001;
+        public static final int fragment_activity=0x7f030002;
+        public static final int fragment_article=0x7f030003;
+        public static final int fragment_home=0x7f030004;
+        public static final int fragment_mate=0x7f030005;
+        public static final int fragment_mine=0x7f030006;
+        public static final int fragment_record=0x7f030007;
+        public static final int home=0x7f030008;
+        public static final int home_page1=0x7f030009;
+        public static final int home_page2=0x7f03000a;
+        public static final int home_page3=0x7f03000b;
+        public static final int home_page4=0x7f03000c;
+        public static final int list_activity=0x7f03000d;
+        public static final int list_article=0x7f03000e;
+        public static final int list_home=0x7f03000f;
+        public static final int list_mate=0x7f030010;
+        public static final int list_record=0x7f030011;
+        public static final int login=0x7f030012;
+        public static final int menu_list_item=0x7f030013;
     }
     public static final class menu {
         public static final int activity_detail=0x7f090000;
-        public static final int home=0x7f090001;
-        public static final int main=0x7f090002;
+        public static final int article_detail=0x7f090001;
+        public static final int home=0x7f090002;
+        public static final int main=0x7f090003;
     }
     public static final class string {
         public static final int action_settings=0x7f060002;
@@ -137,6 +140,7 @@ public final class R {
         public static final int enter_login=0x7f060001;
         public static final int hello_world=0x7f060004;
         public static final int title_activity_activity_detail=0x7f060005;
+        public static final int title_activity_article_detail=0x7f060006;
         public static final int title_activity_home=0x7f060003;
     }
     public static final class style {

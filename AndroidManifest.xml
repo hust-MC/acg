@@ -33,6 +33,10 @@
             android:name="com.cf.acg.detail.ActivityDetail"
             android:label="@string/title_activity_activity_detail" >
         </activity>
+        <activity
+            android:name="com.cf.acg.detail.ArticleDetail"
+            android:label="@string/title_activity_article_detail" >
+        </activity>
     </application>
 
 </manifest>

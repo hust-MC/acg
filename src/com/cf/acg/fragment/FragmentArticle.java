@@ -8,19 +8,26 @@ import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
+import com.cf.acg.detail.ActivityDetail;
+import com.cf.acg.detail.ArticleDetail;
 import com.cf.acg.fragment.FragmentActivity.Content;
+import com.cf.acg.thread.DownloadInterface;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragmentArticle extends FragmentAbstract
+public class FragmentArticle extends FragmentAbstract implements
+		DownloadInterface
 {
 	private ListView listView;
 	public static File file = new File(fileDir, "/article.txt");
@@ -45,6 +52,18 @@ public class FragmentArticle extends FragmentAbstract
 		listView.setAdapter(adapter);
 
 		Home.setScrollEvent(listView);
+
+		listView.setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id)
+			{
+				Intent intent = new Intent(activity, ArticleDetail.class);
+				intent.putExtra("id", ((Content) list.get(position)).id);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override
@@ -148,13 +167,13 @@ public class FragmentArticle extends FragmentAbstract
 
 	class Content
 	{
-		String ID;
+		String id;
 		String category;
 		String title;
 
-		public Content(String ID, String category, String title)
+		public Content(String id, String category, String title)
 		{
-			this.ID = ID;
+			this.id = id;
 			this.category = "[" + category + "]";
 			this.title = title;
 		}

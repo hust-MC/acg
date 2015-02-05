@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
+import com.cf.acg.thread.DownloadInterface;
 
 import android.os.Bundle;
 import android.util.JsonReader;
@@ -19,7 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragmentMate extends FragmentAbstract
+public class FragmentMate extends FragmentAbstract implements DownloadInterface
 {
 	private ListView listView;
 
