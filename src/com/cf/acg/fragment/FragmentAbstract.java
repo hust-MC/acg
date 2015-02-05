@@ -1,17 +1,12 @@
 package com.cf.acg.fragment;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.cf.acg.adapter.ContentAdapter;
-import com.cf.acg.fragment.FragmentActivity.Content;
+import com.cf.acg.thread.HttpThread;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -20,7 +15,7 @@ import android.util.JsonReader;
 
 public abstract class FragmentAbstract extends Fragment
 {
-	static File fileDir = new File(Environment.getExternalStorageDirectory()
+	public static File fileDir = new File(Environment.getExternalStorageDirectory()
 			+ "/ACG/temp/");
 
 	protected final int fActivity = 1;
@@ -28,7 +23,7 @@ public abstract class FragmentAbstract extends Fragment
 	protected final int fRecord = 3;
 	protected final int fArticle = 4;
 	protected final int fMine = 5;
-	protected int fType;					//用于每个类存放各自上述类型
+	protected int fType;					// 用于每个类存放各自上述类型
 
 	protected Activity activity;
 	protected JsonResolve jsonResolve;
@@ -93,36 +88,8 @@ public abstract class FragmentAbstract extends Fragment
 				e.printStackTrace();
 			}
 		}
-		try
-		{
-			URL url = new URL(urlAddress);
-			HttpURLConnection httpURLConnection = (HttpURLConnection) url
-					.openConnection();
-			httpURLConnection.setRequestMethod("GET");
-			httpURLConnection.setDoInput(true);
-			httpURLConnection.setRequestProperty("Charset", "UTF-8");
-			InputStream is = httpURLConnection.getInputStream();
-
-			FileOutputStream fos = new FileOutputStream(file);
-
-			byte[] buf = new byte[4 * 1024];
-			int num;
-			while ((num = is.read(buf)) != -1)
-			{
-				fos.write(buf, 0, num);
-			}
-			fos.flush();
-			fos.close();
-			downloadException = false;
-		} catch (MalformedURLException e)
-		{
-			downloadException = true;
-		} catch (IOException e)
-		{
-			downloadException = true;
-		}
+		HttpThread.httpConnect(urlAddress, file);
 	}
-
 	public void setData()
 	{
 		for (Object o : list)

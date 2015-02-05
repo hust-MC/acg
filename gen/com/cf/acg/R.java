@@ -49,6 +49,8 @@ public final class R {
         public static final int navigation_top_bar_background=0x7f02000c;
     }
     public static final class id {
+        public static final int act_name=0x7f0a0004;
+        public static final int act_remark=0x7f0a0005;
         public static final int act_status=0x7f0a0003;
         public static final int act_time=0x7f0a0001;
         public static final int act_venue=0x7f0a0002;
@@ -102,8 +104,6 @@ public final class R {
         public static final int sliding=0x7f0a0008;
         public static final int slidingLayout=0x7f0a0014;
         public static final int surfaceview=0x7f0a0036;
-        public static final int textview_act_comment=0x7f0a0005;
-        public static final int textview_act_name=0x7f0a0004;
     }
     public static final class layout {
         public static final int detail_activity=0x7f030000;

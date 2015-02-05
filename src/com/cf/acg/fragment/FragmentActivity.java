@@ -7,9 +7,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import com.cf.acg.Home;
-import com.cf.acg.R;
 
+import com.cf.acg.Home;
+import com.cf.acg.MainActivity;
+import com.cf.acg.R;
+import com.cf.acg.detail.ActivityDetail;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
@@ -28,13 +33,6 @@ public class FragmentActivity extends FragmentAbstract
 	FragmentActivity fragmentActivity = this;
 
 	static File file = new File(fileDir, "/activity.txt");
-
-	private String[] venueName =
-	{ "未知", "305", "513", "东四" };
-	private String[] activityStatusName =
-	{ "未知", "排班中", "正在进行", "已结束", "已取消" };
-	private String[] weekNum =
-	{ "日", "一", "二", "三", "四", "五", "六" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,15 +59,16 @@ public class FragmentActivity extends FragmentAbstract
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id)
 			{
-				
+				Intent intent = new Intent(activity, ActivityDetail.class);
+				intent.putExtra("id", ((Content) list.get(position)).id);
+				startActivity(intent);
 			}
 		});
 	}
-
 	/*
-	 *定义Content对象成员的接收回调函数
+	 * 定义Content对象成员的接收回调函数
 	 */
-	@Override			
+	@Override
 	public Content readContent(JsonReader reader) throws IOException
 	{
 		String id = null;
@@ -169,14 +168,14 @@ public class FragmentActivity extends FragmentAbstract
 		((TextView) linearLayout.findViewById(R.id.activity_time))
 				.setText(sdf_time.format(calendar.getTime()) + "");
 		((TextView) linearLayout.findViewById(R.id.activity_week)).setText("星期"
-				+ weekNum[calendar.get(Calendar.DAY_OF_WEEK) - 1]);
+				+ MainActivity.weekNum[calendar.get(Calendar.DAY_OF_WEEK) - 1]);
 
 		((TextView) linearLayout.findViewById(R.id.activity_place))
-				.setText(venueName[c.venue]);
+				.setText(MainActivity.venueName[c.venue]);
 
 		TextView textState = ((TextView) linearLayout
 				.findViewById(R.id.activity_state));
-		textState.setText(activityStatusName[c.status]);
+		textState.setText(MainActivity.activityStatusName[c.status]);
 		// textState
 		// .setBackgroundResource(c.state.equals("正在进行") ?
 		// R.drawable.activity_state_doing_back

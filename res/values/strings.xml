@@ -18,7 +18,7 @@
         <item>标题</item>
     </string-array>
 
-    <string name="title_activity_home">Home</string>
+    <string name="title_activity_home">音控组管理系统</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_activity_detail">ActivityDetail</string>
 

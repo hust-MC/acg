@@ -8,6 +8,12 @@ import android.view.View;
 
 public class MainActivity extends Activity
 {
+	public static final String[] venueName =
+	{ "未知", "305", "513", "东四" };
+	public static final String[] activityStatusName =
+	{ "未知", "排班中", "正在进行", "已结束", "已取消" };
+	public static final String[] weekNum =
+	{ "日", "一", "二", "三", "四", "五", "六" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -18,7 +24,7 @@ public class MainActivity extends Activity
 
 	public void onClick_login(View view)
 	{
-		startActivity(new Intent(this,Home.class));		//登陆成功
+		startActivity(new Intent(this, Home.class));		// 登陆成功
 	}
 
 	@Override

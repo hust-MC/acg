@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.cf.acg.Home;
+import com.cf.acg.MainActivity;
 import com.cf.acg.R;
 
 import android.os.Bundle;
@@ -26,11 +27,6 @@ public class FragmentRecord extends FragmentAbstract
 	private ListView listView;
 
 	public static File file = new File(fileDir, "/record.txt");
-
-	private String[] weekNum =
-	{ "日", "一", "二", "三", "四", "五", "六" };
-	private String[] venueName =
-	{ "未知", "305", "513", "东四" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -146,12 +142,14 @@ public class FragmentRecord extends FragmentAbstract
 				.inflate(R.layout.list_record, null);
 
 		((TextView) linearLayout.findViewById(R.id.record_time))
-				.setText(dateFormat.format(startCalendar.getTime()) + "  星期"
-						+ weekNum[startCalendar.get(Calendar.DAY_OF_WEEK) - 1]
-						+ "  " + timeFormat.format(startCalendar.getTime())
-						+ "-" + timeFormat.format(endCalendar.getTime()));
+				.setText(dateFormat.format(startCalendar.getTime())
+						+ "  星期"
+						+ MainActivity.weekNum[startCalendar
+								.get(Calendar.DAY_OF_WEEK) - 1] + "  "
+						+ timeFormat.format(startCalendar.getTime()) + "-"
+						+ timeFormat.format(endCalendar.getTime()));
 		((TextView) linearLayout.findViewById(R.id.record_place)).setText("地点："
-				+ venueName[Integer.parseInt(c.venue)]);
+				+ MainActivity.venueName[Integer.parseInt(c.venue)]);
 		((TextView) linearLayout.findViewById(R.id.record_event)).setText("活动："
 				+ c.title);
 
