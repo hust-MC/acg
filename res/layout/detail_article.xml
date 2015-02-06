@@ -10,6 +10,7 @@
     tools:context=".ArticleDetail" >
 
     <TextView
+        android:id="@+id/art_title"
         style="@style/textview_title"
         android:layout_marginTop="10dp"
         android:text="文章标题" />
@@ -19,8 +20,14 @@
         android:layout_height="1dp"
         android:background="@color/devide_line" />
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/art_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
 
 </LinearLayout>

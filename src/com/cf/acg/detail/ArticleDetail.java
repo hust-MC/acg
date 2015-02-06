@@ -1,22 +1,31 @@
 package com.cf.acg.detail;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import com.cf.acg.R;
 import com.cf.acg.detail.DetailAbstract;
+import com.cf.acg.detail.ActivityDetail.Content;
 import com.cf.acg.thread.DownloadInterface;
+import com.cf.acg.thread.HttpThread;
 
 import android.os.Bundle;
-import android.app.Activity;
+import android.text.Html;
 import android.util.JsonReader;
 import android.view.Menu;
+import android.widget.TextView;
 
 public class ArticleDetail extends DetailAbstract implements DownloadInterface
 {
+	private TextView tv_tile, tv_details;
+	private Content content;
 
 	private void init_widget()
 	{
-
+		tv_details = (TextView) findViewById(R.id.art_details);
+		tv_tile = (TextView) findViewById(R.id.art_title);
 	}
 	private void init_variable()
 	{
@@ -30,6 +39,9 @@ public class ArticleDetail extends DetailAbstract implements DownloadInterface
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail_article);
 
+		init_variable();
+		init_widget();
+		new HttpThread(this, handler).start();
 	}
 
 	@Override
@@ -40,15 +52,62 @@ public class ArticleDetail extends DetailAbstract implements DownloadInterface
 	}
 
 	@Override
+	public Object readContent(JsonReader reader) throws IOException
+	{
+		String title = null;				// 文章标题
+		String details = null;				// 文章内容
+
+		reader.beginObject();
+		while (reader.hasNext())
+		{
+			String field = reader.nextName();
+			if (field.equals("title"))
+			{
+				title = reader.nextString();
+			}
+			else if (field.equals("content"))
+			{
+				details = reader.nextString();
+			}
+			else
+			{
+				reader.skipValue();
+			}
+		}
+		reader.endObject();
+		return new Content(title, details);
+	}
+
+	@Override
+	protected void setData()
+	{
+		tv_tile.setText(content.title);
+		tv_details.setText(Html.fromHtml(content.details));
+	}
+
+	@Override
 	public void download()
 	{
+		final String urlAddress = "http://acg.husteye.cn/api/articledetail?access_token=9926841641313132&article_id="
+				+ id;
+		HttpThread.httpConnect(urlAddress, file);
+		try
+		{
+			content = (Content) readJsonStream(new FileInputStream(file));
+		} catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 
 	}
 
 	class Content
 	{
-		String title;
-		String details;
+		String title;				// 文章标题
+		String details;				// 文章内容
 
 		public Content(String title, String details)
 		{
@@ -57,10 +116,4 @@ public class ArticleDetail extends DetailAbstract implements DownloadInterface
 		}
 	}
 
-	@Override
-	public Object readContent(JsonReader reader)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

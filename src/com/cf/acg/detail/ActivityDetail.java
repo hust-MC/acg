@@ -31,14 +31,6 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 	private TextView tv_workTime, tv_time, tv_venue, tv_status, tv_name,
 			tv_remark;
 
-	Handler handler = new Handler()
-	{
-		@Override
-		public void handleMessage(Message msg)
-		{
-			setData();
-		}
-	};
 
 	private void init_widget()
 	{
@@ -116,7 +108,8 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 				status);
 	}
 
-	private void setData()
+	@Override
+	protected void setData()
 	{
 		TimeFormat tf_startTime = new TimeFormat(content.start_time);
 		TimeFormat tf_workTime = new TimeFormat(content.work_start_time);
