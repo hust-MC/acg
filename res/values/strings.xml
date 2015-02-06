@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">音控组管理系统</string>
+    <string name="app_name">音控组</string>
     <string name="enter_login">请填写登陆信息：</string>
     <string name="action_settings">Settings</string>
 
@@ -19,8 +19,9 @@
     </string-array>
 
     <string name="title_activity_home">音控组管理系统</string>
+    <string name="title_activity_activity_detail">活动详情</string>
+    <string name="title_activity_article_detail">文章内容</string>
+    <string name="title_activity_member_detail">成员资料</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_activity_detail">ActivityDetail</string>
-    <string name="title_activity_article_detail">ArticleDetail</string>
 
 </resources>

@@ -8,13 +8,17 @@ import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
+import com.cf.acg.detail.MateDetail;
 import com.cf.acg.thread.DownloadInterface;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,6 +44,18 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 
 		listView.setAdapter(adapter);
 		Home.setScrollEvent(listView);
+
+		listView.setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id)
+			{
+				Intent intent = new Intent(activity, MateDetail.class);
+				intent.putExtra("id", ((Content) list.get(position)).id);
+				startActivity(intent);
+			}
+		});
 	}
 
 	/*
@@ -51,7 +67,7 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 		String name = null;
 		String cornet = null;
 		String phone = null;
-		String ID = null;
+		String id = null;
 
 		reader.beginObject();
 		while (reader.hasNext())
@@ -59,7 +75,7 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 			String field = reader.nextName();
 			if (field.equals("uid"))
 			{
-				ID = reader.nextString();
+				id = reader.nextString();
 			}
 			else if (field.equals("name"))
 			{
@@ -80,7 +96,7 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 		}
 		reader.endObject();
 
-		return new Content(ID, name, null, cornet, phone);
+		return new Content(id, name, null, cornet, phone);
 
 	}
 
@@ -146,22 +162,21 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 	@Override
 	public void clear()
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	class Content
 	{
-		String ID;
+		String id;
 		String name;
 		String major;
 		String cornet;
 		String phone;
 
-		public Content(String ID, String name, String major, String cornet,
+		public Content(String id, String name, String major, String cornet,
 				String phone)
 		{
-			this.ID = ID;
+			this.id = id;
 			this.name = name;
 			this.major = major;
 			this.cornet = cornet;

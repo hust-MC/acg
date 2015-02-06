@@ -38,16 +38,17 @@ public final class R {
         public static final int activity_place_back=0x7f020000;
         public static final int activity_state_doing_back=0x7f020001;
         public static final int activity_state_todo_back=0x7f020002;
-        public static final int edittext_background_focus=0x7f020003;
-        public static final int edittext_background_normal=0x7f020004;
-        public static final int edittext_selector=0x7f020005;
-        public static final int home_button=0x7f020006;
-        public static final int ic_launcher=0x7f020007;
-        public static final int log_background=0x7f020008;
-        public static final int log_button=0x7f020009;
-        public static final int log_new_user=0x7f02000a;
-        public static final int menu_bg=0x7f02000b;
-        public static final int navigation_top_bar_background=0x7f02000c;
+        public static final int app_launch=0x7f020003;
+        public static final int edittext_background_focus=0x7f020004;
+        public static final int edittext_background_normal=0x7f020005;
+        public static final int edittext_selector=0x7f020006;
+        public static final int home_button=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int log_background=0x7f020009;
+        public static final int log_button=0x7f02000a;
+        public static final int log_new_user=0x7f02000b;
+        public static final int menu_bg=0x7f02000c;
+        public static final int navigation_top_bar_background=0x7f02000d;
     }
     public static final class id {
         public static final int act_name=0x7f0a0004;
@@ -56,7 +57,7 @@ public final class R {
         public static final int act_time=0x7f0a0001;
         public static final int act_venue=0x7f0a0002;
         public static final int act_work_time=0x7f0a0000;
-        public static final int action_settings=0x7f0a0037;
+        public static final int action_settings=0x7f0a003a;
         public static final int activity_date=0x7f0a0023;
         public static final int activity_event=0x7f0a0026;
         public static final int activity_place=0x7f0a0027;
@@ -68,6 +69,9 @@ public final class R {
         public static final int article_category=0x7f0a0029;
         public static final int article_title=0x7f0a002a;
         public static final int content=0x7f0a0018;
+        public static final int detail_mate_image=0x7f0a0038;
+        public static final int detail_mate_listview=0x7f0a0037;
+        public static final int detail_mate_resume=0x7f0a0039;
         public static final int fragment_activity=0x7f0a001a;
         public static final int fragment_article=0x7f0a001d;
         public static final int fragment_home=0x7f0a0019;
@@ -106,7 +110,7 @@ public final class R {
         public static final int rem_me=0x7f0a0036;
         public static final int sliding=0x7f0a000a;
         public static final int slidingLayout=0x7f0a0016;
-        public static final int surfaceview=0x7f0a0038;
+        public static final int surfaceview=0x7f0a003b;
     }
     public static final class layout {
         public static final int detail_activity=0x7f030000;
@@ -128,22 +132,25 @@ public final class R {
         public static final int list_mate=0x7f030010;
         public static final int list_record=0x7f030011;
         public static final int login=0x7f030012;
-        public static final int menu_list_item=0x7f030013;
+        public static final int mate_detail=0x7f030013;
+        public static final int menu_list_item=0x7f030014;
     }
     public static final class menu {
         public static final int activity_detail=0x7f090000;
         public static final int article_detail=0x7f090001;
         public static final int home=0x7f090002;
         public static final int main=0x7f090003;
+        public static final int mate_detail=0x7f090004;
     }
     public static final class string {
         public static final int action_settings=0x7f060002;
         public static final int app_name=0x7f060000;
         public static final int enter_login=0x7f060001;
-        public static final int hello_world=0x7f060004;
-        public static final int title_activity_activity_detail=0x7f060005;
-        public static final int title_activity_article_detail=0x7f060006;
+        public static final int hello_world=0x7f060007;
+        public static final int title_activity_activity_detail=0x7f060004;
+        public static final int title_activity_article_detail=0x7f060005;
         public static final int title_activity_home=0x7f060003;
+        public static final int title_activity_member_detail=0x7f060006;
     }
     public static final class style {
         /** 

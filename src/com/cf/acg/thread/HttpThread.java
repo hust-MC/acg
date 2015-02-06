@@ -10,6 +10,8 @@ import java.net.URL;
 
 import com.cf.acg.fragment.FragmentAbstract;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 
@@ -31,6 +33,24 @@ public class HttpThread extends Thread
 		Message message = handler.obtainMessage();
 		message.obj = downloadClass;
 		message.sendToTarget();
+	}
+
+	public static void httpConnect(String urlAddress, Bitmap bitmap)
+	{
+		try
+		{
+			URL url = new URL(urlAddress);
+			HttpURLConnection httpURLConnection = (HttpURLConnection) url
+					.openConnection();
+			httpURLConnection.setRequestMethod("GET");
+			httpURLConnection.setDoInput(true);
+			httpURLConnection.setRequestProperty("Charset", "UTF-8");
+			InputStream is = httpURLConnection.getInputStream();
+
+			bitmap = BitmapFactory.decodeStream(is);
+		} catch (IOException e)
+		{
+		}
 	}
 
 	public static void httpConnect(String urlAddress, File file)
