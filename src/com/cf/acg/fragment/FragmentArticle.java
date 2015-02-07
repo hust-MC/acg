@@ -8,9 +8,7 @@ import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
-import com.cf.acg.detail.ActivityDetail;
 import com.cf.acg.detail.ArticleDetail;
-import com.cf.acg.fragment.FragmentActivity.Content;
 import com.cf.acg.thread.DownloadInterface;
 
 import android.content.Intent;

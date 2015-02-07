@@ -5,6 +5,7 @@
     <string name="enter_login">请填写登陆信息：</string>
     <string name="action_settings">Settings</string>
 
+    <!-- 策划菜单项 -->
     <string-array name="menu_array">
         <item>首页</item>
         <item>活动</item>
@@ -13,9 +14,20 @@
         <item>文章</item>
         <item>我的</item>
     </string-array>
-    <string-array name="article_title_array">
-        <item>分类</item>
-        <item>标题</item>
+
+    <!-- mate detail中左侧内容 -->
+    <string-array name="mate_detail_left">
+        <item>姓名</item>
+        <item>学号</item>
+        <item>性别</item>
+        <item>专业</item>
+        <item>电话号码</item>
+        <item>电话类型</item>
+        <item>电话短号</item>
+        <item>QQ</item>
+        <item>邮箱</item>
+        <item>住址</item>
+        <item>最近登录</item>
     </string-array>
 
     <string name="title_activity_home">音控组管理系统</string>

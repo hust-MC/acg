@@ -4,17 +4,25 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.cf.acg.R;
+import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail.Content;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 public class MateDetail extends DetailAbstract implements DownloadInterface
@@ -64,7 +72,7 @@ public class MateDetail extends DetailAbstract implements DownloadInterface
 		while (reader.hasNext())
 		{
 			String field = reader.nextName();
-
+			Log.d("MC", field);
 			if (field.equals("uid"))
 			{
 				uid = reader.nextString();
@@ -81,39 +89,48 @@ public class MateDetail extends DetailAbstract implements DownloadInterface
 			}
 			else if (field.equals("sex"))
 			{
-				sex = reader.nextBoolean();
+				sex = reader.nextString();
+				infoItem[2] = sex;
 			}
 			else if (field.equals("school"))
 			{
 				school = reader.nextString();
+				infoItem[3] = school;
 			}
 			else if (field.equals("mobile"))
 			{
 				mobile = reader.nextString();
+				infoItem[4] = mobile;
 			}
 			else if (field.equals("mobile_type"))
 			{
 				mobile_type = reader.nextString();
+				infoItem[5] = mobile_type;
 			}
 			else if (field.equals("mobile_short"))
 			{
 				mobile_short = reader.nextString();
+				infoItem[6] = mobile_short;
 			}
 			else if (field.equals("email"))
 			{
 				email = reader.nextString();
+				infoItem[8] = email;
 			}
 			else if (field.equals("qqnum"))
 			{
 				qqnum = reader.nextString();
+				infoItem[7] = qqnum;
 			}
 			else if (field.equals("address"))
 			{
 				address = reader.nextString();
+				infoItem[9] = address;
 			}
 			else if (field.equals("photo"))
 			{
 				photo = reader.nextString();
+				Log.d("MC", photo + "123");
 			}
 			else if (field.equals("introduce"))
 			{
@@ -126,13 +143,16 @@ public class MateDetail extends DetailAbstract implements DownloadInterface
 			else if (field.equals("lastlogin_time"))
 			{
 				lastlogin_time = reader.nextInt();
+				infoItem[10] = new TimeFormat(lastlogin_time)
+						.format("yyyy-MM-dd  HH:mm:ss");
 			}
 			else
 			{
 				reader.skipValue();
 			}
-			reader.endObject();
+
 		}
+		reader.endObject();
 		return new Content(uid, name, type, sex, school, mobile, mobile_type,
 				mobile_short, email, qqnum, address, photo, introduce,
 				register_time, lastlogin_time);
@@ -140,13 +160,34 @@ public class MateDetail extends DetailAbstract implements DownloadInterface
 	@Override
 	protected void setData()
 	{
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+
+		for (int i = 0; i < INFO_NUM; i++)
+		{
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("title",
+					(getResources().getStringArray(R.array.mate_detail_left))[i]);
+
+			map.put("content", infoItem[i]);
+			list.add(map);
+		}
+		SimpleAdapter adapter = new SimpleAdapter(this, list,
+				R.layout.list_mate_detail, new String[]
+				{ "title", "content" }, new int[]
+				{ R.id.list_mate_detail_left, R.id.list_mate_detail_right });
+		listView.setAdapter(adapter);
+
+		// Bitmap bitmap = null;
+		// HttpThread
+		// .httpConnect("http://acg.husteye.cn/" + content.photo, bitmap);
+		// iv_photo.setImageBitmap(bitmap);
 
 	}
 
 	@Override
 	public void download()
 	{
-		final String urlAddress = "http://acg.husteye.cn/api/matedetail?access_token=9926841641313132&mate_id="
+		final String urlAddress = "http://acg.husteye.cn/api/memberdetail?access_token=9926841641313132&member_uid="
 				+ id;
 		HttpThread.httpConnect(urlAddress, file);
 		try
@@ -164,7 +205,7 @@ public class MateDetail extends DetailAbstract implements DownloadInterface
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mate_detail);
+		setContentView(R.layout.detail_mate);
 
 		init_variable();
 		init_widget();
