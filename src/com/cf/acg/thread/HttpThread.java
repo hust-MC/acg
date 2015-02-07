@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.fragment.FragmentAbstract;
 
 import android.graphics.Bitmap;
@@ -65,6 +66,11 @@ public class HttpThread extends Thread
 			httpURLConnection.setRequestProperty("Charset", "UTF-8");
 			InputStream is = httpURLConnection.getInputStream();
 
+			if (!file.exists())
+			{
+				file.getParentFile().mkdirs();
+				file.createNewFile();
+			}
 			FileOutputStream fos = new FileOutputStream(file);
 
 			byte[] buf = new byte[4 * 1024];

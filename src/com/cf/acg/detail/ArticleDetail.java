@@ -14,6 +14,7 @@ import com.cf.acg.thread.HttpThread;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 

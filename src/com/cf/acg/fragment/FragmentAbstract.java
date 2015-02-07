@@ -76,17 +76,6 @@ public abstract class FragmentAbstract extends Fragment
 			break;
 		}
 		}
-		if (!file.exists())
-		{
-			fileDir.mkdirs();
-			try
-			{
-				file.createNewFile();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
 		HttpThread.httpConnect(urlAddress, file);
 	}
 	public void setData()

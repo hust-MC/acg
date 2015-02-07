@@ -4,22 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Calendar;
 
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
 import com.cf.acg.Util.TimeFormat;
-import com.cf.acg.fragment.FragmentAbstract;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.app.Activity;
-import android.text.format.Time;
 import android.util.JsonReader;
 import android.view.Menu;
 import android.widget.TextView;
@@ -30,7 +23,6 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 
 	private TextView tv_workTime, tv_time, tv_venue, tv_status, tv_name,
 			tv_remark;
-
 
 	private void init_widget()
 	{
