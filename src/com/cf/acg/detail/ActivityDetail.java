@@ -14,8 +14,11 @@ import com.cf.acg.thread.HttpThread;
 
 import android.os.Bundle;
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ActivityDetail extends DetailAbstract implements DownloadInterface
 {
@@ -136,12 +139,16 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail_activity);
 
+		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		init_widget();
 
 		init_variable();
 
 		new HttpThread(this, handler).start();
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{

@@ -40,6 +40,9 @@ public class ArticleDetail extends DetailAbstract implements DownloadInterface
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail_article);
 
+		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		init_variable();
 		init_widget();
 		new HttpThread(this, handler).start();

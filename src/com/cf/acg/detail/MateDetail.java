@@ -207,6 +207,9 @@ public class MateDetail extends DetailAbstract implements DownloadInterface
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail_mate);
 
+		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		init_variable();
 		init_widget();
 

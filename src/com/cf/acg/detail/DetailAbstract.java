@@ -13,14 +13,17 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.util.JsonReader;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 abstract public class DetailAbstract extends Activity
 {
 	protected String id;			// 详细文件的ID
 	protected File file;			// Json 文件
-	
+
 	public abstract Object readContent(JsonReader reader) throws IOException;	// 解析Json文件中的对象
-	protected abstract void setData();											//用于把下载到的数据显示到界面上
+	protected abstract void setData();											// 用于把下载到的数据显示到界面上
 
 	public static File detailFileDir = new File(						// Json文件存储目录
 			FragmentAbstract.fileDir.getPath() + "/detail");
@@ -51,4 +54,19 @@ abstract public class DetailAbstract extends Activity
 			reader.close();
 		}
 	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch (item.getItemId())
+		{
+		case android.R.id.home:
+			finish();
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
 }

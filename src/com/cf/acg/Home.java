@@ -171,8 +171,6 @@ public class Home extends Activity
 		JPushInterface.init(this);
 
 		setContentView(R.layout.home);
-//		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setHomeButtonEnabled(true);
 
 		MainActivity.activity.finish();
 
