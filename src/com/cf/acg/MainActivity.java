@@ -83,7 +83,6 @@ public class MainActivity extends Activity
 						{
 						case 0:
 							logs = "Set tag and alias success";
-							Log.d("MC", logs);
 							break;
 
 						case 6002:

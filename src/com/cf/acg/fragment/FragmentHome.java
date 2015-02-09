@@ -7,7 +7,6 @@ import com.cf.acg.Home;
 import com.cf.acg.R;
 import com.cf.acg.thread.DownloadInterface;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -18,8 +17,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 
 public class FragmentHome extends FragmentAbstract implements DownloadInterface
 {
@@ -61,6 +58,8 @@ public class FragmentHome extends FragmentAbstract implements DownloadInterface
 		((Button) activity.findViewById(R.id.home_bt4))
 				.setOnClickListener(buttonListener);
 	}
+	
+	//通过反射获得fragment所在的R类子类
 	private void getResClass()
 	{
 		Class[] resourceClasses = R.class.getClasses();
@@ -80,6 +79,8 @@ public class FragmentHome extends FragmentAbstract implements DownloadInterface
 			}
 		}
 	}
+	
+	//反射获得fragment的ID
 	private int getResourceID(String name)
 	{
 		try
@@ -167,35 +168,26 @@ public class FragmentHome extends FragmentAbstract implements DownloadInterface
 	@Override
 	public void addObj(List<Object> contentList, int position)
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void removeObj()
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void clear()
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void download()
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public Object readContent(JsonReader reader) throws IOException
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -170,6 +171,8 @@ public class Home extends Activity
 		JPushInterface.init(this);
 
 		setContentView(R.layout.home);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setHomeButtonEnabled(true);
 
 		MainActivity.activity.finish();
 
@@ -178,6 +181,23 @@ public class Home extends Activity
 		getResClass();
 
 		handleFragment();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch (item.getItemId())
+		{
+		case android.R.id.home:
+			Log.d("MC", "home");
+			Toast.makeText(this, "213123", Toast.LENGTH_SHORT).show();
+			return true;
+
+		default:
+			Log.d("MC", "default");
+			return super.onOptionsItemSelected(item);
+		}
+
 	}
 
 	@Override
