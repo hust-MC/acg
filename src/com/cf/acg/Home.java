@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.jpush.android.api.JPushInterface;
 
+import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.fragment.*;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
@@ -41,6 +43,7 @@ public class Home extends Activity
 
 	Class<String> resClass; 			// 定义用于反射的类
 
+	private LoadingProcess loadingProcess;
 	private FragmentManager fragmentManager;
 	private Fragment[] fragments;
 	private String[] fragmentNames =
@@ -52,6 +55,7 @@ public class Home extends Activity
 		@Override
 		public void handleMessage(Message msg)
 		{
+			loadingProcess.dismissDialog();
 			((FragmentAbstract) msg.obj).setData();				// 设置相应类的数据
 		}
 	};
@@ -135,6 +139,9 @@ public class Home extends Activity
 		}
 	}
 
+	/*
+	 * 显示传入的id对应的fragment
+	 */
 	private void showFragment(int id)
 	{
 		FragmentTransaction fragmentTransaction = fragmentManager
@@ -145,8 +152,14 @@ public class Home extends Activity
 		}
 		fragmentTransaction.show(fragments[id]).commit();
 
+		/*
+		 * 如果没有显示过，则下载数据。 下载完成之后跳到本函数的handler中表示下载成功
+		 */
 		if (!((FragmentAbstract) fragments[id]).hasDownload)
 		{
+			loadingProcess = new LoadingProcess(this);
+			loadingProcess.startLoading();
+
 			new HttpThread((DownloadInterface) fragments[id], handler).start();
 			((FragmentAbstract) fragments[id]).hasDownload = true;
 		}
@@ -199,29 +212,6 @@ public class Home extends Activity
 	}
 
 	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item)
-	{
-		switch (featureId)
-		{
-		case 0:
-			SharedPreferences sp = getSharedPreferences("login",
-					Context.MODE_PRIVATE);
-
-			Editor editor = sp.edit();
-			editor.clear();
-			editor.commit();
-
-			startActivity(new Intent(this, MainActivity.class));
-			finish();
-			break;
-
-		default:
-			break;
-		}
-		return super.onMenuItemSelected(featureId, item);
-	}
-
-	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
 		if (keyCode == KeyEvent.KEYCODE_BACK)
@@ -248,6 +238,33 @@ public class Home extends Activity
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item)
+	{
+		switch (item.getOrder())
+		{
+		case 0:
+			SharedPreferences sp = getSharedPreferences("login",
+					Context.MODE_PRIVATE);
+
+			Editor editor = sp.edit();
+			editor.clear();
+			editor.commit();
+
+			startActivity(new Intent(this, MainActivity.class));
+			finish();
+			break;
+		case 1:
+			new AlertDialog.Builder(this).setTitle("关于")
+					.setMessage("音控组管理系统（v1）").setNegativeButton("确定", null)
+					.show();
+			break;
+		default:
+			break;
+		}
+		return super.onMenuItemSelected(featureId, item);
 	}
 
 	@Override

@@ -55,7 +55,6 @@ public final class R {
         public static final int navigation_top_bar_background=0x7f02000d;
     }
     public static final class id {
-        public static final int about=0x7f0a003f;
         public static final int act_name=0x7f0a0004;
         public static final int act_remark=0x7f0a0005;
         public static final int act_status=0x7f0a0003;
@@ -103,7 +102,6 @@ public final class R {
         public static final int list_mate_detail_right=0x7f0a0034;
         public static final int list_mine=0x7f0a0017;
         public static final int list_record=0x7f0a0018;
-        public static final int log_out=0x7f0a003e;
         public static final int login_input_id=0x7f0a003a;
         public static final int login_input_pwd=0x7f0a003c;
         public static final int login_message=0x7f0a0038;
@@ -119,7 +117,7 @@ public final class R {
         public static final int record_time=0x7f0a0035;
         public static final int sliding=0x7f0a000d;
         public static final int slidingLayout=0x7f0a0019;
-        public static final int surfaceview=0x7f0a0040;
+        public static final int surfaceview=0x7f0a003e;
     }
     public static final class layout {
         public static final int detail_activity=0x7f030000;

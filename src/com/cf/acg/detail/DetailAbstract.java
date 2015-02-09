@@ -6,10 +6,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
+import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.detail.ActivityDetail.Content;
 import com.cf.acg.fragment.FragmentAbstract;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Handler;
 import android.os.Message;
 import android.util.JsonReader;
@@ -21,6 +23,8 @@ abstract public class DetailAbstract extends Activity
 {
 	protected String id;			// 详细文件的ID
 	protected File file;			// Json 文件
+	
+	protected LoadingProcess loadingProcess;
 
 	public abstract Object readContent(JsonReader reader) throws IOException;	// 解析Json文件中的对象
 	protected abstract void setData();											// 用于把下载到的数据显示到界面上
@@ -36,6 +40,7 @@ abstract public class DetailAbstract extends Activity
 		@Override
 		public void handleMessage(Message msg)
 		{
+			loadingProcess.dismissDialog();
 			setData();
 		}
 	};

@@ -21,7 +21,7 @@ public class ContentAdapter extends BaseAdapter
 	{
 		return linearLayout;
 	}
-	public void setLinearLayout(LinearLayout linearLayout)
+	public void setLinearLayout(LinearLayout linearLayout)			//传入listview所在的布局容器， 以便getView函数使用
 	{
 		this.linearLayout = linearLayout;
 	}

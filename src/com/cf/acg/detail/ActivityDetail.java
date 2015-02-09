@@ -8,10 +8,12 @@ import java.util.Calendar;
 
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
+import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.JsonReader;
 import android.util.Log;
@@ -146,7 +148,13 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 
 		init_variable();
 
-		new HttpThread(this, handler).start();
+		/*
+		 * 启动下载线程并弹出下载框。
+		 * 下载结束后进入父类（Detail Abstract）handler函数
+		 */
+		loadingProcess = new LoadingProcess(this);
+		loadingProcess.startLoading();
+		new HttpThread(this, handler).start();			
 	}
 
 	@Override

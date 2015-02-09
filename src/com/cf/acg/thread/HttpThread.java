@@ -71,7 +71,7 @@ public class HttpThread extends Thread
 				file.getParentFile().mkdirs();
 				file.createNewFile();
 			}
-			FileOutputStream fos = new FileOutputStream(file);
+			FileOutputStream fos = new FileOutputStream(file, false);
 
 			byte[] buf = new byte[4 * 1024];
 			int num;

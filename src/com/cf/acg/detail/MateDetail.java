@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cf.acg.R;
+import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail.Content;
 import com.cf.acg.thread.DownloadInterface;
@@ -213,6 +214,11 @@ public class MateDetail extends DetailAbstract implements DownloadInterface
 		init_variable();
 		init_widget();
 
+		/*
+		 * 启动下载线程并弹出下载框。 下载结束后进入父类（Detail Abstract）handler函数
+		 */
+		loadingProcess = new LoadingProcess(this);
+		loadingProcess.startLoading();
 		new HttpThread(this, handler).start();
 	}
 

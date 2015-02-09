@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.cf.acg.R;
+import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.detail.ActivityDetail.Content;
 import com.cf.acg.thread.DownloadInterface;
@@ -45,6 +46,12 @@ public class ArticleDetail extends DetailAbstract implements DownloadInterface
 
 		init_variable();
 		init_widget();
+
+		/*
+		 * 启动下载线程并弹出下载框。 下载结束后进入父类（Detail Abstract）handler函数
+		 */
+		loadingProcess = new LoadingProcess(this);
+		loadingProcess.startLoading();
 		new HttpThread(this, handler).start();
 	}
 
