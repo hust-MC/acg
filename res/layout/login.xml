@@ -33,8 +33,10 @@
             android:text="账号：" />
 
         <EditText
+            android:id="@+id/login_input_id"
             style="@style/edittext_style"
-            android:hint="请输入账号" />
+            android:digits="UMD1234567890"
+            android:hint="请输入学号（字母大写）" />
     </LinearLayout>
 
     <LinearLayout
@@ -52,32 +54,16 @@
             android:text="密码：" />
 
         <EditText
+            android:id="@+id/login_input_pwd"
             style="@style/edittext_style"
-            android:hint="请输入密码" />
+            android:hint="请输入密码"
+            android:inputType="textPassword" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/rem_me"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/pwd"
-        android:layout_marginTop="10dp" >
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="记住密码" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rem_me"
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:paddingLeft="20dp"
@@ -89,8 +75,8 @@
             android:layout_gravity="center"
             android:layout_marginRight="30dp"
             android:layout_weight="1"
-            android:onClick="onClick_login"
             android:background="@drawable/log_button"
+            android:onClick="onClick_login"
             android:text="登录" />
 
         <Button

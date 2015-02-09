@@ -5,7 +5,7 @@
     android:versionName="1.7.2" >
 
     <uses-sdk
-        android:minSdkVersion="7"
+        android:minSdkVersion="11"
         android:targetSdkVersion="11" />
     <!-- Required 自定义用来收发消息的相关权限 -->
 
@@ -134,14 +134,16 @@
         <!-- Required SDK核心功能 -->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
 
-       
         <!-- Required . Enable it you can get statistics data with channel -->
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="developer-default" />
+
+        <!-- android:value="0a4d5f77ef8e5fa60e4e1904" -CF -->
+        <!-- android:value="54735b1aeaec896bfacb68b1" -MC -->
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="0a4d5f77ef8e5fa60e4e1904" />
+            android:value="54735b1aeaec896bfacb68b1" />
         <!-- </>值来自开发者平台取得的AppKey -->
     </application>
 

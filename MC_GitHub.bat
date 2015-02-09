@@ -2,7 +2,7 @@
 
 git add -A
 
-set /p val=请输入版本备注
+set /p val=\n请输入版本备注\n
 
 git commit -m '%val%'
 

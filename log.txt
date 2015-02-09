@@ -1,5 +1,10 @@
-1��frgment���棬��໬���˵��������ء�TextView�����ڵ���ס
+1、frgment界面，左侧滑动菜单必须隐藏。TextView好像遮挡不住
 
-2��slidingLayout����ʾ�������action_touch�ж������˵�֮�󣬷�����Ȼ�������������ס�����
+2、slidingLayout的显示必须放在action_touch判断拉出菜单之后，否则依然会出现上述挡不住的情况
 
-3��ע������fragment������
+3、注意制作fragment工具类
+
+#2015.2.9
+1、完成广播推送、别名定点推送功能。
+2、自动登录、注销功能
+3、双击退出软件。

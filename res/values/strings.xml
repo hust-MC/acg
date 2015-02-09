@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">音控组</string>
-    <string name="enter_login">请填写登陆信息：</string>
+    <string name="enter_login">请填写登录信息：</string>
     <string name="action_settings">Settings</string>
 
     <!-- 策划菜单项 -->

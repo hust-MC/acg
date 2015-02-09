@@ -55,13 +55,14 @@ public final class R {
         public static final int navigation_top_bar_background=0x7f02000d;
     }
     public static final class id {
+        public static final int about=0x7f0a003f;
         public static final int act_name=0x7f0a0004;
         public static final int act_remark=0x7f0a0005;
         public static final int act_status=0x7f0a0003;
         public static final int act_time=0x7f0a0001;
         public static final int act_venue=0x7f0a0002;
         public static final int act_work_time=0x7f0a0000;
-        public static final int action_settings=0x7f0a003c;
+        public static final int action_settings=0x7f0a003d;
         public static final int activity_date=0x7f0a0026;
         public static final int activity_event=0x7f0a0029;
         public static final int activity_place=0x7f0a002a;
@@ -102,6 +103,9 @@ public final class R {
         public static final int list_mate_detail_right=0x7f0a0034;
         public static final int list_mine=0x7f0a0017;
         public static final int list_record=0x7f0a0018;
+        public static final int log_out=0x7f0a003e;
+        public static final int login_input_id=0x7f0a003a;
+        public static final int login_input_pwd=0x7f0a003c;
         public static final int login_message=0x7f0a0038;
         public static final int mate_cornet=0x7f0a0031;
         public static final int mate_major=0x7f0a0030;
@@ -109,14 +113,13 @@ public final class R {
         public static final int mate_phone=0x7f0a0032;
         public static final int menu_list=0x7f0a001a;
         public static final int name=0x7f0a0039;
-        public static final int pwd=0x7f0a003a;
+        public static final int pwd=0x7f0a003b;
         public static final int record_event=0x7f0a0037;
         public static final int record_place=0x7f0a0036;
         public static final int record_time=0x7f0a0035;
-        public static final int rem_me=0x7f0a003b;
         public static final int sliding=0x7f0a000d;
         public static final int slidingLayout=0x7f0a0019;
-        public static final int surfaceview=0x7f0a003d;
+        public static final int surfaceview=0x7f0a0040;
     }
     public static final class layout {
         public static final int detail_activity=0x7f030000;

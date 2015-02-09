@@ -1,5 +1,8 @@
 package com.cf.acg;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -7,13 +10,20 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.jpush.android.api.JPushInterface;
 
 import com.cf.acg.fragment.*;
@@ -23,6 +33,8 @@ import com.cf.acg.thread.HttpThread;
 public class Home extends Activity
 {
 	private static SlidingLayout slidingLayout;
+	private static boolean firstBack = true;
+
 	TextView textView;
 	ListView menuList;
 
@@ -159,11 +171,65 @@ public class Home extends Activity
 
 		setContentView(R.layout.home);
 
+		MainActivity.activity.finish();
+
 		init_widget();
 
 		getResClass();
 
 		handleFragment();
+	}
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item)
+	{
+		switch (featureId)
+		{
+		case 0:
+			SharedPreferences sp = getSharedPreferences("login",
+					Context.MODE_PRIVATE);
+
+			Editor editor = sp.edit();
+			editor.clear();
+			editor.commit();
+
+			startActivity(new Intent(this, MainActivity.class));
+			finish();
+			break;
+
+		default:
+			break;
+		}
+		return super.onMenuItemSelected(featureId, item);
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if (keyCode == KeyEvent.KEYCODE_BACK)
+		{
+			if (firstBack)
+			{
+				firstBack = false;
+				Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+
+				Timer exitTimer = new Timer();
+				exitTimer.schedule(new TimerTask()
+				{
+					@Override
+					public void run()
+					{
+						firstBack = true;
+					}
+				}, 2000);
+			}
+			else
+			{
+				finish();
+				System.exit(0);
+			}
+		}
+		return true;
 	}
 
 	@Override
