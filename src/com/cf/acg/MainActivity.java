@@ -1,5 +1,6 @@
 package com.cf.acg;
 
+import cn.jpush.android.api.JPushInterface;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import cn.jpush.android.api.JPushInterface;
 
 import com.cf.acg.fragment.*;
 import com.cf.acg.thread.DownloadInterface;
@@ -152,6 +153,10 @@ public class Home extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+
+		JPushInterface.setDebugMode(true);
+		JPushInterface.init(this);
+
 		setContentView(R.layout.home);
 
 		init_widget();
