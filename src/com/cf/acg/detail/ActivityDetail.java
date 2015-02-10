@@ -8,6 +8,7 @@ import java.util.Calendar;
 
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
+import com.cf.acg.UserInfo;
 import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.thread.DownloadInterface;
@@ -42,8 +43,8 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 	@Override
 	public void download()
 	{
-		final String urlAddress = "http://acg.husteye.cn/api/activitydetail?access_token=9926841641313132&activity_id="
-				+ id;
+		final String urlAddress = "http://acg.husteye.cn/api/activitydetail?access_token="
+				+ UserInfo.getToken() + "&activity_id=" + id;
 		HttpThread.httpConnect(urlAddress, file);
 		try
 		{
@@ -56,7 +57,6 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 			e.printStackTrace();
 		}
 	}
-
 	@Override
 	public Content readContent(JsonReader reader) throws IOException
 	{
@@ -149,12 +149,11 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		init_variable();
 
 		/*
-		 * 启动下载线程并弹出下载框。
-		 * 下载结束后进入父类（Detail Abstract）handler函数
+		 * 启动下载线程并弹出下载框。 下载结束后进入父类（Detail Abstract）handler函数
 		 */
 		loadingProcess = new LoadingProcess(this);
 		loadingProcess.startLoading();
-		new HttpThread(this, handler).start();			
+		new HttpThread(this, handler).start();
 	}
 
 	@Override

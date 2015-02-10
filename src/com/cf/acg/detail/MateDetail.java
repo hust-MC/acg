@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cf.acg.R;
+import com.cf.acg.UserInfo;
 import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail.Content;
@@ -188,8 +189,8 @@ public class MateDetail extends DetailAbstract implements DownloadInterface
 	@Override
 	public void download()
 	{
-		final String urlAddress = "http://acg.husteye.cn/api/memberdetail?access_token=9926841641313132&member_uid="
-				+ id;
+		final String urlAddress = "http://acg.husteye.cn/api/memberdetail?access_token="
+				+ UserInfo.getToken() + "&member_uid=" + id;
 		HttpThread.httpConnect(urlAddress, file);
 		try
 		{

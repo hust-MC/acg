@@ -1,11 +1,23 @@
 package com.cf.acg;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Set;
+
+import com.cf.acg.detail.ActivityDetail.Content;
+import com.cf.acg.fragment.FragmentAbstract;
+import com.cf.acg.thread.DownloadInterface;
+import com.cf.acg.thread.HttpThread;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 import cn.jpush.android.util.ac;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +29,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends Activity
+public class MainActivity extends Activity implements DownloadInterface
 {
 	public static final String[] venueName =
 	{ "未知", "305", "513", "东四" };
@@ -30,11 +42,33 @@ public class MainActivity extends Activity
 
 	private EditText input_id, input_pwd;
 	private SharedPreferences sp;
+	private Content content;
+	private File file = new File(FragmentAbstract.fileDir, "login");
+
+	private Handler handler = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg)
+		{
+
+		}
+	};
 
 	private void init_widget()
 	{
 		input_id = (EditText) findViewById(R.id.login_input_id);
 		input_pwd = (EditText) findViewById(R.id.login_input_pwd);
+	}
+
+	@Override
+	public void download()
+	{
+		final String urlAddress = "http://acg.husteye.cn//api/login?username="
+				+ input_id.getText().toString() + "&password="
+				+ input_pwd.getText().toString();
+
+		HttpThread.httpConnect(urlAddress, file);
+		
 	}
 
 	private void getState()
@@ -47,12 +81,8 @@ public class MainActivity extends Activity
 
 	private boolean checkPwd()
 	{
-		if (input_id.getText().toString().equals("M201371888")
-				&& input_pwd.getText().toString().equals("123456"))
-		{
-			startActivity(new Intent(this, Home.class));		// 登录成功
-			return true;
-		}
+		new HttpThread(this, handler).start();		// 开启线程回调download方法
+
 		return false;
 	}
 
@@ -113,5 +143,17 @@ public class MainActivity extends Activity
 	{
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+	class Content
+	{
+		String message;
+		boolean error;
+
+		public Content(String message, boolean error)
+		{
+			this.message = message;
+			this.error = error;
+		}
 	}
 }

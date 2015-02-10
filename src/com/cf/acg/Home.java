@@ -253,6 +253,7 @@ public class Home extends Activity
 			editor.clear();
 			editor.commit();
 
+			Log.d("MC", "dismiss");
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;

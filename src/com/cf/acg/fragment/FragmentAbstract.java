@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cf.acg.MainActivity;
+import com.cf.acg.UserInfo;
 import com.cf.acg.adapter.ContentAdapter;
 import com.cf.acg.thread.HttpThread;
 
@@ -15,8 +17,8 @@ import android.util.JsonReader;
 
 public abstract class FragmentAbstract extends Fragment
 {
-	public static File fileDir = new File(Environment.getExternalStorageDirectory()
-			+ "/ACG/temp/");
+	public static File fileDir = new File(
+			Environment.getExternalStorageDirectory() + "/ACG/temp/");
 
 	protected final int fActivity = 1;
 	protected final int fMate = 2;
@@ -49,28 +51,32 @@ public abstract class FragmentAbstract extends Fragment
 		{
 		case fActivity:
 		{
-			urlAddress = "http://acg.husteye.cn/api/activitylist?access_token=9926841641313132";
+			urlAddress = "http://acg.husteye.cn/api/activitylist?access_token="
+					+ UserInfo.getToken();
 			file = FragmentActivity.file;
 
 			break;
 		}
 		case fArticle:
 		{
-			urlAddress = "http://acg.husteye.cn/api/articlelist?access_token=9926841641313132";
+			urlAddress = "http://acg.husteye.cn/api/articlelist?access_token="
+					+ UserInfo.getToken();
 			file = FragmentArticle.file;
 
 			break;
 		}
 		case fMate:
 		{
-			urlAddress = "http://acg.husteye.cn/api/memberlist?access_token=9926841641313132";
+			urlAddress = "http://acg.husteye.cn/api/memberlist?access_token="
+					+ UserInfo.getToken();
 			file = FragmentMate.file;
 
 			break;
 		}
 		case fRecord:
 		{
-			urlAddress = "http://acg.husteye.cn/api/dutylist?access_token=9926841641313132";
+			urlAddress = "http://acg.husteye.cn/api/dutylist?access_token="
+					+ UserInfo.getToken();
 			file = FragmentRecord.file;
 
 			break;

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.cf.acg.R;
+import com.cf.acg.UserInfo;
 import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.detail.ActivityDetail.Content;
@@ -99,8 +100,8 @@ public class ArticleDetail extends DetailAbstract implements DownloadInterface
 	@Override
 	public void download()
 	{
-		final String urlAddress = "http://acg.husteye.cn/api/articledetail?access_token=9926841641313132&article_id="
-				+ id;
+		final String urlAddress = "http://acg.husteye.cn/api/articledetail?access_token="
+				+ UserInfo.getToken() + "&article_id=" + id;
 		HttpThread.httpConnect(urlAddress, file);
 		try
 		{

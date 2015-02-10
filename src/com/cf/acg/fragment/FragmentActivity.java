@@ -27,7 +27,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragmentActivity extends FragmentAbstract implements DownloadInterface
+public class FragmentActivity extends FragmentAbstract implements
+		DownloadInterface
 {
 	private ListView listView;
 	FragmentActivity fragmentActivity = this;
@@ -39,7 +40,7 @@ public class FragmentActivity extends FragmentAbstract implements DownloadInterf
 			Bundle savedInstanceState)
 	{
 		activity = getActivity();
-
+		jsonResolve = new JsonResolve(this);
 		return inflater.inflate(R.layout.fragment_activity, null);
 	}
 
@@ -141,8 +142,6 @@ public class FragmentActivity extends FragmentAbstract implements DownloadInterf
 	{
 		init_widget();
 
-		jsonResolve = new JsonResolve(this);
-
 		super.onActivityCreated(savedInstanceState);
 	}
 
@@ -158,10 +157,10 @@ public class FragmentActivity extends FragmentAbstract implements DownloadInterf
 		((TextView) linearLayout.findViewById(R.id.activity_event))
 				.setText(c.title);
 
-		((TextView) linearLayout.findViewById(R.id.activity_date))
-				.setText(tf.format("MM-dd"));
-		((TextView) linearLayout.findViewById(R.id.activity_time))
-				.setText(tf.format("HH:mm"));
+		((TextView) linearLayout.findViewById(R.id.activity_date)).setText(tf
+				.format("MM-dd"));
+		((TextView) linearLayout.findViewById(R.id.activity_time)).setText(tf
+				.format("HH:mm"));
 		((TextView) linearLayout.findViewById(R.id.activity_week)).setText("星期"
 				+ MainActivity.weekNum[tf.getField(Calendar.DAY_OF_WEEK) - 1]);
 
