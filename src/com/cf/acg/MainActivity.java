@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.util.Set;
 
 import com.cf.acg.Util.LoadingProcess;
-import com.cf.acg.fragment.FragmentAbstract;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
@@ -28,7 +27,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements DownloadInterface
@@ -111,7 +109,7 @@ public class MainActivity extends Activity implements DownloadInterface
 			String message = null;
 			boolean error = false;
 
-			urlAddress = "http://acg.husteye.cn//api/login?username=" + id
+			urlAddress = "http://acg.husteye.cn/api/login?username=" + id
 					+ "&password=" + pwd;
 
 			HttpThread.httpConnect(urlAddress, file);

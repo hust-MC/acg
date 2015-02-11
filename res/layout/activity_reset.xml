@@ -13,11 +13,11 @@
         android:id="@+id/tv_forget_pwd"
         style="@style/textview_title"
         android:layout_marginTop="10dp"
-        android:text="请输入账户信息"
+        android:text="请输入验证码及新密码"
         android:textColor="#fff" />
 
     <LinearLayout
-        android:id="@+id/name"
+        android:id="@+id/code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_forget_pwd"
@@ -27,45 +27,68 @@
 
         <TextView
             style="@style/textview_style"
-            android:text="账号：" />
+            android:text="验证码：" />
 
         <EditText
-            android:id="@+id/forget_input_id"
+            android:id="@+id/reset_input_vertification"
             style="@style/edittext_style"
-            android:digits="UMD1234567890"
-            android:hint="请输入学号（字母大写）" />
+            android:hint="请输入短信验证码"
+            android:inputType="numberDecimal" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/phone"
+        android:id="@+id/pwd1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/name"
-        android:layout_below="@id/name"
+        android:layout_below="@id/code"
         android:layout_marginTop="30dp"
         android:orientation="horizontal"
         android:padding="10dp" >
 
         <TextView
             style="@style/textview_style"
-            android:text="手机号：" />
+            android:text="新密码：" />
 
         <EditText
-            android:id="@+id/forget_input_phone"
+            android:id="@+id/reset_input_pwd"
             style="@style/edittext_style"
-            android:hint="请输入手机号"
-            android:inputType="numberDecimal" />
+            android:hint="请输入新密码"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pwd2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/name"
+        android:layout_below="@id/pwd1"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <TextView
+            style="@style/textview_style"
+            android:layout_weight="1"
+            android:text="新密码确认：" />
+
+        <EditText
+            android:id="@+id/reset_input_pwd1"
+            style="@style/edittext_style"
+            android:layout_weight="1.5"
+            android:hint="再次输入新密码"
+            android:inputType="textPassword" />
     </LinearLayout>
 
     <Button
-        android:layout_width="160dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/phone"
+        android:layout_below="@id/pwd2"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/log_button"
-        android:onClick="onClick_getVerification"
-        android:text="获取短信验证码" />
+        android:onClick="onClick_resetPwd"
+        android:text="确定重置" />
 
 </RelativeLayout>

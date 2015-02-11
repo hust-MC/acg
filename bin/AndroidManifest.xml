@@ -149,6 +149,10 @@
             android:name="com.cf.acg.ForgetPwd"
             android:label="@string/title_activity_forget_pwd" >
         </activity>
+        <activity
+            android:name="com.cf.acg.ResetPwd"
+            android:label="@string/title_activity_reset_pwd" >
+        </activity>
     </application>
 
 </manifest>

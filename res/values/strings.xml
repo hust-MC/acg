@@ -35,5 +35,6 @@
     <string name="title_activity_member_detail">成员资料</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_forget_pwd">ForgetPwd</string>
+    <string name="title_activity_reset_pwd">找回密码</string>
 
 </resources>
