@@ -203,7 +203,7 @@ public class Home extends Activity implements DownloadInterface
 		JPushInterface.setDebugMode(true);
 		JPushInterface.init(this);
 
-		setContentView(R.layout.home);
+		setContentView(R.layout.activity_home);
 
 		MainActivity.activity.finish();
 

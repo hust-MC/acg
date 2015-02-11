@@ -198,7 +198,7 @@ public class MainActivity extends Activity implements DownloadInterface
 		else
 		// 不自动登录，则显示登录界面
 		{
-			setContentView(R.layout.login);
+			setContentView(R.layout.activity_login);
 			init_widget();
 		}
 	}
@@ -236,17 +236,12 @@ public class MainActivity extends Activity implements DownloadInterface
 				}
 			}
 		});
-
 		checkPwd();
 	}
 
 	public void onClick_forgetPwd(View view)
 	{
-		Toast.makeText(this, "忘记密码", Toast.LENGTH_SHORT).show();
-		// id = input_id.getText().toString();
-		// whichToDownload = WhichToDownload.FORGET_PWD;
-		//
-		// new HttpThread(this, handler).start();
+		startActivity(new Intent(this, ForgetPwd.class));
 	}
 
 	public void onClick_newUser(View view)

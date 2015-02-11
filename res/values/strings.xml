@@ -34,5 +34,6 @@
     <string name="title_activity_article_detail">文章内容</string>
     <string name="title_activity_member_detail">成员资料</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_forget_pwd">ForgetPwd</string>
 
 </resources>
