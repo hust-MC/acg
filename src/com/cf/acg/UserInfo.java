@@ -2,9 +2,9 @@ package com.cf.acg;
 
 public class UserInfo
 {
-	public static String token = "8795023868593463";
-	public static String uid;
-	public static String name;
+	private static String token;
+	private static String uid;
+	private static String name;
 
 	public static String getToken()
 	{

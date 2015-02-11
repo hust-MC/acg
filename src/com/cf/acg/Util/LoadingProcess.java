@@ -18,6 +18,13 @@ public class LoadingProcess
 		dialog = ProgressDialog.show(context, null, "正在下载数据，请稍候...", true,
 				false);    // 进程弹窗
 	}
+	
+	public void startLoading(String message)
+	{
+		dialog = ProgressDialog.show(context, null, message, true,
+				false);    // 进程弹窗
+	}
+	
 	public void dismissDialog()
 	{
 		dialog.dismiss();

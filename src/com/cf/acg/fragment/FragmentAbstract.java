@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.cf.acg.MainActivity;
 import com.cf.acg.UserInfo;
+import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.adapter.ContentAdapter;
 import com.cf.acg.thread.HttpThread;
 

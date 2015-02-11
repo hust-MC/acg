@@ -1,5 +1,10 @@
 package com.cf.acg;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -33,7 +39,7 @@ import com.cf.acg.fragment.*;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
-public class Home extends Activity
+public class Home extends Activity implements DownloadInterface
 {
 	private static SlidingLayout slidingLayout;
 	private static boolean firstBack = true;
@@ -43,20 +49,34 @@ public class Home extends Activity
 
 	Class<String> resClass; 			// 定义用于反射的类
 
+	private File file = new File(MainActivity.logDir, "logout");
 	private LoadingProcess loadingProcess;
 	private FragmentManager fragmentManager;
 	private Fragment[] fragments;
+	private Content content;
+
 	private String[] fragmentNames =
 	{ "home", "activity", "mate", "record", "article", "mine" };
 	private final int fragmentNum = fragmentNames.length;
 
-	Handler handler = new Handler()
+	Handler handler = new Handler()					// 用于处理fragment内容的handler
 	{
 		@Override
 		public void handleMessage(Message msg)
 		{
 			loadingProcess.dismissDialog();
 			((FragmentAbstract) msg.obj).setData();				// 设置相应类的数据
+		}
+	};
+
+	Handler handlerLogout = new Handler()			// 用处理注销内容的handler
+	{
+		@Override
+		public void handleMessage(Message msg)
+		{
+			loadingProcess.dismissDialog();
+			Toast.makeText(Home.this, content.message, Toast.LENGTH_SHORT)
+					.show();
 		}
 	};
 
@@ -195,20 +215,50 @@ public class Home extends Activity
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
+	public void download()
 	{
-		switch (item.getItemId())
-		{
-		case android.R.id.home:
-			Log.d("MC", "home");
-			Toast.makeText(this, "213123", Toast.LENGTH_SHORT).show();
-			return true;
+		String urlAddress = "http://acg.husteye.cn/api/logout?access_token="
+				+ UserInfo.getToken();
+		HttpThread.httpConnect(urlAddress, file);
 
-		default:
-			Log.d("MC", "default");
-			return super.onOptionsItemSelected(item);
+		String message = null;
+		try
+		{
+			JsonReader reader = new JsonReader(new InputStreamReader(
+					new FileInputStream(file)));
+
+			reader.beginObject();
+
+			while (reader.hasNext())
+			{
+				String field = reader.nextName();
+
+				if (field.equals("message"))
+				{
+					message = reader.nextString();
+				}
+				else
+				{
+					reader.skipValue();
+				}
+			}
+			reader.endObject();
+
+			content = new Content(message);
+		} catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
+	}
+
+	private void getLogoutMessage()
+	{
+		new HttpThread(this, handlerLogout).start();
 	}
 
 	@Override
@@ -245,7 +295,11 @@ public class Home extends Activity
 	{
 		switch (item.getOrder())
 		{
-		case 0:
+		case 0:				// 注销函数
+
+			LoadingProcess loadingProcess = new LoadingProcess(this);
+			loadingProcess.startLoading("正在为您注销");
+
 			SharedPreferences sp = getSharedPreferences("login",
 					Context.MODE_PRIVATE);
 
@@ -253,10 +307,11 @@ public class Home extends Activity
 			editor.clear();
 			editor.commit();
 
-			Log.d("MC", "dismiss");
+			getLogoutMessage();			// 向服务器提交注销信息
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;
+
 		case 1:
 			new AlertDialog.Builder(this).setTitle("关于")
 					.setMessage("音控组管理系统（v1）").setNegativeButton("确定", null)
@@ -273,5 +328,16 @@ public class Home extends Activity
 	{
 		getMenuInflater().inflate(R.menu.home, menu);
 		return true;
+	}
+
+	class Content
+	{
+		String message;
+
+		public Content(String message)
+		{
+			this.message = message;
+		}
+
 	}
 }

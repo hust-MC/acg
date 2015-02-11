@@ -10,6 +10,7 @@ import java.util.List;
 import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
+import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail;
 import com.cf.acg.thread.DownloadInterface;

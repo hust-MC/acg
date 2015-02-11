@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
+import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.detail.MateDetail;
 import com.cf.acg.thread.DownloadInterface;
 

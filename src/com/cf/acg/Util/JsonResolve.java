@@ -1,4 +1,4 @@
-package com.cf.acg.fragment;
+package com.cf.acg.Util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
