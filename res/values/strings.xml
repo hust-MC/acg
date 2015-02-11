@@ -7,7 +7,6 @@
 
     <!-- 策划菜单项 -->
     <string-array name="menu_array">
-        <item>首页</item>
         <item>活动</item>
         <item>成员</item>
         <item>记录</item>

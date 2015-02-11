@@ -56,7 +56,7 @@ public class Home extends Activity implements DownloadInterface
 	private Content content;
 
 	private String[] fragmentNames =
-	{ "home", "activity", "mate", "record", "article", "mine" };
+	{ "activity", "mate", "record", "article", "mine" };
 	private final int fragmentNum = fragmentNames.length;
 
 	Handler handler = new Handler()					// 用于处理fragment内容的handler
@@ -250,7 +250,6 @@ public class Home extends Activity implements DownloadInterface
 			e.printStackTrace();
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -338,6 +337,5 @@ public class Home extends Activity implements DownloadInterface
 		{
 			this.message = message;
 		}
-
 	}
 }

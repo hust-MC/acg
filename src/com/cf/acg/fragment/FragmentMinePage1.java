@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentHomePage1 extends Fragment
+public class FragmentMinePage1 extends Fragment
 {
 	Activity activity;
 

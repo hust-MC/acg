@@ -13,28 +13,28 @@
 
         <fragment
             android:id="@+id/fragment_home_page1"
-            android:name="com.cf.acg.fragment.FragmentHomePage1"
+            android:name="com.cf.acg.fragment.FragmentMinePage1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
         <fragment
             android:id="@+id/fragment_home_page2"
-            android:name="com.cf.acg.fragment.FragmentHomePage2"
+            android:name="com.cf.acg.fragment.FragmentMinePage2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
         <fragment
             android:id="@+id/fragment_home_page3"
-            android:name="com.cf.acg.fragment.FragmentHomePage3"
+            android:name="com.cf.acg.fragment.FragmentMinePage3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
         <fragment
             android:id="@+id/fragment_home_page4"
-            android:name="com.cf.acg.fragment.FragmentHomePage4"
+            android:name="com.cf.acg.fragment.FragmentMinePage4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />

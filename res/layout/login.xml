@@ -85,6 +85,7 @@
             android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:background="@drawable/log_button"
+            android:onClick="onClick_forgetPwd"
             android:text="忘记密码" />
     </LinearLayout>
 

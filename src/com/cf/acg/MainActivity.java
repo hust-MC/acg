@@ -45,11 +45,14 @@ public class MainActivity extends Activity implements DownloadInterface
 			Environment.getExternalStorageDirectory() + "/ACG/Log/");
 
 	private EditText input_id, input_pwd;
-	private SharedPreferences sp = getSharedPreferences("login",
-			Context.MODE_PRIVATE);
+	private SharedPreferences sp;
 	private Content_login content;
-	
-	
+	private Editor editor;
+	private String id;					// 用于保存用户的ID和密码
+	private String pwd;
+	private boolean hasDialogShow;		// 标记是否打开对话框
+	private WhichToDownload whichToDownload = WhichToDownload.LOGIN;			// 选择下载内容
+
 	private File file = new File(logDir, "login");
 	private LoadingProcess loadingProcess;
 
@@ -58,19 +61,36 @@ public class MainActivity extends Activity implements DownloadInterface
 		@Override
 		public void handleMessage(Message msg)
 		{
-			loadingProcess.dismissDialog();
-			if (content.error)
+			switch (whichToDownload)
 			{
-				Toast.makeText(MainActivity.this, content.message,
-						Toast.LENGTH_SHORT).show();
-			}
-			else
-			{
-				Editor editor = sp.edit();
-				editor.putString("id", input_id.getText().toString());
-				editor.putString("pwd", input_pwd.getText().toString());
-				editor.commit();
-				startActivity(new Intent(MainActivity.this, Home.class));
+			case LOGIN:
+				if (hasDialogShow)
+				{
+					loadingProcess.dismissDialog();
+					hasDialogShow = false;
+				}
+				if (content.error)
+				{
+					Toast.makeText(MainActivity.this, content.message,
+							Toast.LENGTH_SHORT).show();
+				}
+				else
+				{
+					editor = sp.edit();
+					editor.putString("id", id);
+					editor.putString("pwd", pwd);
+					editor.commit();
+					startActivity(new Intent(MainActivity.this, Home.class));
+				}
+				break;
+
+			case FORGET_PWD:
+
+				break;
+
+			case NEW_USER:
+
+				break;
 			}
 		}
 	};
@@ -84,74 +104,74 @@ public class MainActivity extends Activity implements DownloadInterface
 	@Override
 	public void download()
 	{
-		String message = null;
-		boolean error = false;
-
-		final String urlAddress = "http://acg.husteye.cn//api/login?username="
-				+ input_id.getText().toString() + "&password="
-				+ input_pwd.getText().toString();
-
-		HttpThread.httpConnect(urlAddress, file);
-
-		JsonReader reader;
-		try
+		final String urlAddress;
+		switch (whichToDownload)
 		{
-			reader = new JsonReader(new InputStreamReader(new FileInputStream(
-					file)));
+		case LOGIN:
+			String message = null;
+			boolean error = false;
 
-			reader.beginObject();
-			while (reader.hasNext())
+			urlAddress = "http://acg.husteye.cn//api/login?username=" + id
+					+ "&password=" + pwd;
+
+			HttpThread.httpConnect(urlAddress, file);
+
+			JsonReader reader;
+			try
 			{
-				String field = reader.nextName();
+				reader = new JsonReader(new InputStreamReader(
+						new FileInputStream(file)));
 
-				if (field.equals("access_token"))
+				reader.beginObject();
+				while (reader.hasNext())
 				{
-					UserInfo.setToken(reader.nextString());
+					String field = reader.nextName();
+
+					if (field.equals("access_token"))
+					{
+						UserInfo.setToken(reader.nextString());
+					}
+					else if (field.equals("name"))
+					{
+						UserInfo.setName(reader.nextString());
+					}
+					else if (field.equals("uid"))
+					{
+						UserInfo.setUid(reader.nextString());
+					}
+					else if (field.equals("message"))
+					{
+						message = reader.nextString();
+						error = true;
+					}
+					else
+					{
+						reader.skipValue();
+					}
 				}
-				else if (field.equals("name"))
-				{
-					UserInfo.setName(reader.nextString());
-				}
-				else if (field.equals("uid"))
-				{
-					UserInfo.setUid(reader.nextString());
-				}
-				else if (field.equals("message"))
-				{
-					message = reader.nextString();
-					error = true;
-				}
-				else
-				{
-					reader.skipValue();
-				}
+				reader.endObject();
+			} catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
 			}
-			reader.endObject();
-		} catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		} catch (IOException e)
-		{
-			e.printStackTrace();
+			content = new Content_login(message, error);
+
+			break;
+
+		case FORGET_PWD:
+			// urlAddress = "http://acg.husteye.cn/api/forgetpassword?username="
+			// + id +"&mobile="
+
+			break;
+
+		case NEW_USER:
+			break;
 		}
 
-		content = new Content_login(message, error);
 	}
-
-	private boolean getState()
-	{
-
-		input_id.setText(sp.getString("id", null));
-		input_pwd.setText(sp.getString("pwd", null));
-
-		if (input_id.getText().toString() == null
-				|| input_id.getText().toString().isEmpty())
-		{
-			return false;
-		}
-		return true;
-	}
-
 	private void checkPwd()
 	{
 		new HttpThread(this, handler).start();		// 开启线程回调download方法
@@ -162,49 +182,78 @@ public class MainActivity extends Activity implements DownloadInterface
 	{
 		super.onCreate(savedInstanceState);
 
-		loadingProcess = new LoadingProcess(this);
-		loadingProcess.startLoading("正在验证身份，请稍后");
-
-		setContentView(R.layout.login);
-
+		sp = getSharedPreferences("login", Context.MODE_PRIVATE);
+		id = sp.getString("id", null);
+		pwd = sp.getString("pwd", null);
 		activity = this;
 
-		init_widget();
-		if (getState())				// 获取记住的登录状态
+		if (id != null && !id.isEmpty())				// 准备自动登录
 		{
-			checkPwd();				// 检查用户名、密码
+			loadingProcess = new LoadingProcess(this);
+			loadingProcess.startLoading("正在验证身份，请稍后");
+			hasDialogShow = true;
+
+			checkPwd();
+		}
+		else
+		// 不自动登录，则显示登录界面
+		{
+			setContentView(R.layout.login);
+			init_widget();
 		}
 	}
+
+	/*
+	 * 登录按钮
+	 */
 	public void onClick_login(View view)
 	{
-		JPushInterface.setAlias(this, input_id.getText().toString(),
-				new TagAliasCallback()
+		id = input_id.getText().toString();
+		pwd = input_pwd.getText().toString();
+
+		whichToDownload = WhichToDownload.LOGIN;
+
+		JPushInterface.setAlias(this, id, new TagAliasCallback()
+		{
+			@Override
+			public void gotResult(int code, String alias, Set<String> tags)
+			{
+				String logs;
+				switch (code)
 				{
-					@Override
-					public void gotResult(int code, String alias,
-							Set<String> tags)
-					{
-						String logs;
-						switch (code)
-						{
-						case 0:
-							logs = "Set tag and alias success";
-							break;
+				case 0:
+					logs = "Set tag and alias success";
+					break;
 
-						case 6002:
-							logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-							Log.d("MC", logs);
-							break;
+				case 6002:
+					logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+					Log.d("MC", logs);
+					break;
 
-						default:
-							logs = "Failed with errorCode = " + code;
-							Log.e("MC", logs);
-						}
-					}
-				});
+				default:
+					logs = "Failed with errorCode = " + code;
+					Log.e("MC", logs);
+				}
+			}
+		});
 
 		checkPwd();
 	}
+
+	public void onClick_forgetPwd(View view)
+	{
+		Toast.makeText(this, "忘记密码", Toast.LENGTH_SHORT).show();
+		// id = input_id.getText().toString();
+		// whichToDownload = WhichToDownload.FORGET_PWD;
+		//
+		// new HttpThread(this, handler).start();
+	}
+
+	public void onClick_newUser(View view)
+	{
+		Toast.makeText(this, "注册", Toast.LENGTH_SHORT).show();
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -222,5 +271,10 @@ public class MainActivity extends Activity implements DownloadInterface
 			this.message = message;
 			this.error = error;
 		}
+	}
+
+	enum WhichToDownload
+	{
+		LOGIN, FORGET_PWD, NEW_USER
 	}
 }

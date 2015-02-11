@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentHomePage2 extends Fragment
+public class FragmentMinePage3 extends Fragment
 {
 	Activity activity;
 
@@ -18,7 +18,7 @@ public class FragmentHomePage2 extends Fragment
 			Bundle savedInstanceState)
 	{
 		activity = getActivity();
-		return inflater.inflate(R.layout.home_page2, null);
+		return inflater.inflate(R.layout.home_page3, null);
 	}
 
 	@Override

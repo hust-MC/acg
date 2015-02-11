@@ -33,13 +33,6 @@
             android:orientation="vertical" >
 
             <fragment
-                android:id="@+id/fragment_home"
-                android:name="com.cf.acg.fragment.FragmentHome"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <fragment
                 android:id="@+id/fragment_activity"
                 android:name="com.cf.acg.fragment.FragmentActivity"
                 android:layout_width="match_parent"

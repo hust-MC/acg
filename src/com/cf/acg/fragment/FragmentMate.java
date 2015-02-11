@@ -35,6 +35,7 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
+		jsonResolve = new JsonResolve(this);
 		activity = getActivity();
 		return inflater.inflate(R.layout.fragment_mate, null);
 	}
@@ -133,7 +134,6 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 	{
 		init_widget();
 		fType = fMate;
-		jsonResolve = new JsonResolve(this);
 
 		super.onActivityCreated(savedInstanceState);
 	}
