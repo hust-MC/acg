@@ -37,7 +37,7 @@ public class ForgetPwd extends Activity implements DownloadInterface
 		{
 			loadingProcess.dismissDialog();
 			Toast.makeText(ForgetPwd.this, result, Toast.LENGTH_SHORT).show();
-			// if (verificateSuccess)
+			if (verificateSuccess)
 			{
 				Intent intent = new Intent(ForgetPwd.this, ResetPwd.class);
 				intent.putExtra("id", id);

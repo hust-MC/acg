@@ -20,6 +20,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -29,6 +32,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -243,6 +247,7 @@ public class Home extends Activity implements DownloadInterface
 				}
 			}
 			reader.endObject();
+			reader.close();
 
 			content = new Content(message);
 		} catch (FileNotFoundException e)
@@ -252,7 +257,6 @@ public class Home extends Activity implements DownloadInterface
 		{
 			e.printStackTrace();
 		}
-
 	}
 
 	private void getLogoutMessage()
@@ -312,10 +316,9 @@ public class Home extends Activity implements DownloadInterface
 			break;
 
 		case 1:
-			new AlertDialog.Builder(this).setTitle("关于")
-					.setMessage("音控组管理系统（v1）").setNegativeButton("确定", null)
-					.show();
+			startActivity(new Intent(this, VersionUpdate.class));
 			break;
+			
 		default:
 			break;
 		}
