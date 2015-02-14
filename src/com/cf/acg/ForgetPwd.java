@@ -96,14 +96,14 @@ public class ForgetPwd extends Activity implements DownloadInterface
 					reader.skipValue();
 				}
 			}
+			reader.endObject();
+			reader.close();
 
 		} catch (FileNotFoundException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

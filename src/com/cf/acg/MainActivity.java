@@ -237,14 +237,20 @@ public class MainActivity extends Activity implements DownloadInterface
 		checkPwd();
 	}
 
-	public void onClick_forgetPwd(View view)
+	/*
+	 * 忘记密码事件处理
+	 */
+	public void onClick_forgetPwd(View view)				
 	{
 		startActivity(new Intent(this, ForgetPwd.class));
 	}
 
+	/*
+	 *注册事件处理
+	 */
 	public void onClick_newUser(View view)
 	{
-		Toast.makeText(this, "注册", Toast.LENGTH_SHORT).show();
+		startActivity(new Intent(this,NewUser.class));
 	}
 
 	@Override

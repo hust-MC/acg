@@ -157,6 +157,10 @@
             android:name="com.cf.acg.VersionUpdate"
             android:label="@string/title_activity_version_update" >
         </activity>
+        <activity
+            android:name="com.cf.acg.NewUser"
+            android:label="@string/title_activity_new_user" >
+        </activity>
     </application>
 
 </manifest>
