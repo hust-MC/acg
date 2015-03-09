@@ -40,4 +40,13 @@
         android:onClick="onClick_checkUpdate"
         android:text="检查更新" />
 
+    <ProgressBar
+        android:id="@+id/updata_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:progress="0"
+        android:visibility="gone" />
+
 </LinearLayout>

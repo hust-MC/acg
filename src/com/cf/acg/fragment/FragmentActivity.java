@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.security.Policy.Parameters;
 import java.util.Calendar;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
@@ -67,6 +69,7 @@ public class FragmentActivity extends FragmentAbstract implements
 			}
 		});
 	}
+
 	/*
 	 * 定义Content对象成员的接收回调函数
 	 */
@@ -111,6 +114,7 @@ public class FragmentActivity extends FragmentAbstract implements
 		reader.endObject();
 		return new Content(id, title, start_time, venue, status);
 	}
+
 	@Override
 	public void download()
 	{

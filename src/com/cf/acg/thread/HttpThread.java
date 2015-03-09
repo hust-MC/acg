@@ -19,7 +19,10 @@ import android.os.Message;
 public class HttpThread extends Thread
 {
 	DownloadInterface downloadClass;
+	SetProgressInterface setProgressInterface;
 	Handler handler;
+
+	static int progress = 0;					// 显示下载进度
 
 	public HttpThread(DownloadInterface downloadClass, Handler handler)
 	{
@@ -54,7 +57,11 @@ public class HttpThread extends Thread
 		}
 	}
 
-	public static void httpConnect(String urlAddress, File file)
+	/*
+	 * 带进度条显示的下载函数
+	 */
+	public static void httpConnect(SetProgressInterface setProgressInterface,
+			String urlAddress, File file)		
 	{
 		try
 		{
@@ -66,6 +73,11 @@ public class HttpThread extends Thread
 			httpURLConnection.setRequestProperty("Charset", "UTF-8");
 			InputStream is = httpURLConnection.getInputStream();
 
+			if (setProgressInterface != null)
+			{
+				setProgressInterface.setMaxProgress(httpURLConnection.getContentLength());
+			}
+			
 			if (!file.exists())
 			{
 				file.getParentFile().mkdirs();
@@ -75,8 +87,15 @@ public class HttpThread extends Thread
 
 			byte[] buf = new byte[4 * 1024];
 			int num;
-			while ((num = is.read(buf)) != -1)
+			
+			while ((num = is.read(buf)) != -1)		//实时调整下载进度条
 			{
+				progress += num;
+				if (setProgressInterface != null)
+				{
+					setProgressInterface.setProgress(progress);
+				}
+
 				fos.write(buf, 0, num);
 			}
 			fos.flush();
@@ -86,5 +105,13 @@ public class HttpThread extends Thread
 		} catch (IOException e)
 		{
 		}
+	}
+
+	/*
+	 * 不带进度条显示的下载函数
+	 */
+	public static void httpConnect(String urlAddress, File file)
+	{
+		httpConnect(null, urlAddress, file);
 	}
 }

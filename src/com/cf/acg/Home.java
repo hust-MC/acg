@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -20,11 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.JsonReader;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +27,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -110,7 +104,7 @@ public class Home extends Activity implements DownloadInterface
 			}
 		});
 
-		Home.setScrollEvent(findViewById(R.id.content));
+		// Home.setScrollEvent(findViewById(R.id.content)); // 不要也罢
 	}
 
 	private void getResClass()
@@ -192,7 +186,7 @@ public class Home extends Activity implements DownloadInterface
 	private void handleFragment()
 	{
 		init_fragment();
-		showFragment(1);
+		showFragment(0);
 	}
 
 	public static void setScrollEvent(View v)
@@ -318,7 +312,7 @@ public class Home extends Activity implements DownloadInterface
 		case 1:
 			startActivity(new Intent(this, VersionUpdate.class));
 			break;
-			
+
 		default:
 			break;
 		}

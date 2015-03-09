@@ -2,13 +2,120 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="15dp" >
+    android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/list_mine"
+    <LinearLayout
+        android:id="@+id/sliding"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null" />
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:orientation="vertical" >
+
+        <fragment
+            android:id="@+id/fragment_home_page1"
+            android:name="com.cf.acg.fragment.FragmentMinePage1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <fragment
+            android:id="@+id/fragment_home_page2"
+            android:name="com.cf.acg.fragment.FragmentMinePage2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <fragment
+            android:id="@+id/fragment_home_page3"
+            android:name="com.cf.acg.fragment.FragmentMinePage3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <fragment
+            android:id="@+id/fragment_home_page4"
+            android:name="com.cf.acg.fragment.FragmentMinePage4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.1"
+        android:background="@drawable/home_button"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/home_bt1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ImageView
+                style="@style/home_bottom_image"
+                android:src="@drawable/my_activity" />
+
+            <TextView
+                style="@style/mine_page_textview"
+                android:text="活动" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_bt2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ImageView
+                style="@style/home_bottom_image"
+                android:paddingTop="5dp"
+                android:src="@drawable/my_message" />
+
+            <TextView
+                style="@style/mine_page_textview"
+                android:text="消息" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_bt3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ImageView
+                style="@style/home_bottom_image"
+                android:paddingTop="5dp"
+                android:src="@drawable/my_info" />
+
+            <TextView
+                style="@style/mine_page_textview"
+                android:text="我" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/home_bt4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ImageView
+                style="@style/home_bottom_image"
+                android:paddingTop="5dp"
+                android:src="@drawable/my_setting" />
+
+            <TextView
+                style="@style/mine_page_textview"
+                android:text="设置" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

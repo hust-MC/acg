@@ -154,14 +154,11 @@ public class FragmentArticle extends FragmentAbstract implements
 	@Override
 	public void removeObj()
 	{
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void clear()
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	class Content

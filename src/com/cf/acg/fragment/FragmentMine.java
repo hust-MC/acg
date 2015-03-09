@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class FragmentMine extends FragmentAbstract implements DownloadInterface
 {
@@ -37,29 +38,29 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 			Bundle savedInstanceState)
 	{
 		activity = getActivity();
-		return inflater.inflate(R.layout.fragment_home, null);
+		return inflater.inflate(R.layout.fragment_mine, null);
 	}
 
 	private void init_widget()
 	{
 		buttonListener = new ButtonListener();
 
-		Home.setScrollEvent(activity.findViewById(R.id.home_page1_text));
-		Home.setScrollEvent(activity.findViewById(R.id.home_page2_text));
-		Home.setScrollEvent(activity.findViewById(R.id.home_page3_text));
-		Home.setScrollEvent(activity.findViewById(R.id.home_page4_text));
+		Home.setScrollEvent(activity.findViewById(R.id.sliding));
 
-		((Button) activity.findViewById(R.id.home_bt1))
+		/*
+		 * 底部四个导航按钮单击事件
+		 */
+		((LinearLayout) activity.findViewById(R.id.home_bt1))
 				.setOnClickListener(buttonListener);
-		((Button) activity.findViewById(R.id.home_bt2))
+		((LinearLayout) activity.findViewById(R.id.home_bt2))
 				.setOnClickListener(buttonListener);
-		((Button) activity.findViewById(R.id.home_bt3))
+		((LinearLayout) activity.findViewById(R.id.home_bt3))
 				.setOnClickListener(buttonListener);
-		((Button) activity.findViewById(R.id.home_bt4))
+		((LinearLayout) activity.findViewById(R.id.home_bt4))
 				.setOnClickListener(buttonListener);
 	}
-	
-	//通过反射获得fragment所在的R类子类
+
+	// 通过反射获得fragment所在的R类子类
 	private void getResClass()
 	{
 		Class[] resourceClasses = R.class.getClasses();
@@ -79,8 +80,8 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 			}
 		}
 	}
-	
-	//反射获得fragment的ID
+
+	// 反射获得fragment的ID
 	private int getResourceID(String name)
 	{
 		try
@@ -128,6 +129,7 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 		init_fragment();
 		showFragment(0);
 	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{

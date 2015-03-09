@@ -6,21 +6,29 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.cf.acg.Util.DownloadApk;
 import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
+import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.JsonReader;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class VersionUpdate extends Activity implements DownloadInterface
 {
@@ -29,6 +37,12 @@ public class VersionUpdate extends Activity implements DownloadInterface
 	private String nativeVersion;
 	private String latestVersion;
 	private LoadingProcess loadingProcess;
+	
+	File fileAPK = new File(Environment.getExternalStorageDirectory()
+			+ "/ACG/Download/音控组.apk");
+	String urlAddressAPK = "http://acg.husteye.cn/api/download_app?platform=android";
+
+	private ProgressBar bar;
 
 	private Handler handler = new Handler()
 	{
@@ -42,13 +56,30 @@ public class VersionUpdate extends Activity implements DownloadInterface
 			if (nativeVersion.equals(latestVersion))
 			{
 				message = "当前已经是最新版";
+				new AlertDialog.Builder(VersionUpdate.this).setTitle("版本检查")
+						.setMessage(message).setNegativeButton("确定", null)
+						.show();
 			}
 			else
 			{
-				message = "最新版本为:v" + latestVersion;
+				message = "最新版本为:v" + latestVersion + "\n是否立即下载？";
+				new AlertDialog.Builder(VersionUpdate.this)
+						.setTitle("版本检查")
+						.setMessage(message)
+						.setPositiveButton("取消", null)
+						.setNegativeButton("确定",
+								new DialogInterface.OnClickListener()
+								{
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which)
+									{
+										bar.setVisibility(View.VISIBLE);
+										new DownloadApk(VersionUpdate.this,fileAPK,urlAddressAPK)
+												.startDownload();
+									}
+								}).show();
 			}
-			new AlertDialog.Builder(VersionUpdate.this).setTitle("版本检查")
-					.setMessage(message).setNegativeButton("确定", null).show();
 		}
 	};
 
@@ -81,13 +112,36 @@ public class VersionUpdate extends Activity implements DownloadInterface
 
 		} catch (FileNotFoundException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void setDownloadProgress(int progress)
+	{
+		bar.setProgress(progress);
+	}
+
+	public void setMaxProgress(int max)
+	{
+		bar.setMax(max);
+	}
+
+	public void downloadAppSuccess()
+	{
+		Toast.makeText(this, "下载完成", Toast.LENGTH_SHORT).show();
+
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setDataAndType(Uri.fromFile(fileAPK),
+				"application/vnd.android.package-archive");
+		startActivity(intent);
+	}
+
+	public void init_widget()
+	{
+		bar = (ProgressBar) findViewById(R.id.updata_progress);
 	}
 
 	@Override
@@ -95,6 +149,8 @@ public class VersionUpdate extends Activity implements DownloadInterface
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dialog_version_update);
+
+		init_widget();
 	}
 
 	@Override

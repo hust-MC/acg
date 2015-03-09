@@ -1,16 +1,131 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".NewUser" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@drawable/log_background"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              android:paddingBottom="10dp"
+              tools:context=".NewUser">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        style="@style/textview_title"
+        android:text="请输入个人资料"
+        android:textColor="#fff"/>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/textview_style"
+            android:text="学号："/>
+
+        <EditText
+            android:id="@+id/new_input_id"
+            style="@style/edittext_style"
+            android:hint="请输入学号(字母大写)"
+            android:inputType="textEmailAddress"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/textview_style"
+            android:text="密码："/>
+
+        <EditText
+            android:id="@+id/new_input_pwd"
+            style="@style/edittext_style"
+            android:hint="请输入密码"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/textview_style"
+            android:text="姓名："/>
+
+        <EditText
+            android:id="@+id/new_input_name"
+            style="@style/edittext_style"
+            android:hint="请输入姓名"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/textview_style"
+            android:text="邮箱："/>
+
+        <EditText
+            android:id="@+id/new_input_email"
+            style="@style/edittext_style"
+            android:hint="请输入邮箱"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/textview_style"
+            android:text="手机："/>
+
+        <EditText
+            android:id="@+id/new_input_phone"
+            style="@style/edittext_style"
+            android:hint="请输入手机号"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/textview_style"
+            android:text="注册码："/>
+
+        <EditText
+            android:id="@+id/new_input_reqcode"
+            style="@style/edittext_style"
+            android:hint="请输入注册码"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/log_button"
+        android:onClick="onClick_Confirm"
+        android:text="确认"/>
+</LinearLayout>

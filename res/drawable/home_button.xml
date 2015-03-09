@@ -16,8 +16,8 @@
                 android:angle="90"
                 android:centerX="0.5"
                 android:centerY="0.5"
-                android:endColor="#FFFED69E"
-                android:startColor="#FFEC7600"
+                android:endColor="#FF89D6EE"
+                android:startColor="#FF237670"
                 android:type="linear" />
         </shape>
     </item>

@@ -40,12 +40,19 @@
         <item name="android:layout_marginBottom">5dp</item>
     </style>
 
-    <style name="home_bottom">
-        <item name="android:background">@drawable/home_button</item>
+    <style name="home_bottom_image">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1.5</item>
+    </style>
+
+    <style name="mine_page_textview">
+        <item name="android:background">#0000</item>
         <item name="android:gravity">center</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="textview_title">

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,7 +24,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 	/**
 	 * 屏幕宽度值。
 	 */
-	private int screenWidth;
+	private int screenWidth; //
 
 	/**
 	 * 右侧布局最多可以滑动到的左边缘。
@@ -207,12 +208,15 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 
 		switch (event.getAction())
 		{
+
 		case MotionEvent.ACTION_DOWN:
+			Log.d("MC", "action_down");
 			// 手指按下时，记录按下时的横坐标
 			xDown = event.getRawX();
 			yDown = event.getRawY();
 			break;
 		case MotionEvent.ACTION_MOVE:
+			Log.d("MC", "action_move");
 			// 手指移动时，对比按下时的横坐标，计算出移动的距离，来调整右侧布局的leftMargin值，从而显示和隐藏左侧布局
 			xMove = event.getRawX();
 			yMove = event.getRawY();
@@ -247,6 +251,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 			}
 			break;
 		case MotionEvent.ACTION_UP:
+			Log.d("MC", "action_up");
 			xUp = event.getRawX();
 			int upDistanceX = (int) (xUp - xDown);
 			if (isSliding)
@@ -285,24 +290,33 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 
 		if (v.isEnabled())
 		{
+			Log.d("MC", "v:" + v);
 			if (isSliding)
 			{
 				unFocusBindView();
+				Log.d("MC", "isSliding->true");
 				return true;
 			}
 			if (isLeftLayoutVisible)
 			{
+				Log.d("MC", "isLeft->true");
 				return true;
 			}
 			if (v instanceof TextView)
 			{
+				Log.d("MC", "TextView->true");
 				return true;
 			}
+			if (v instanceof LinearLayout)
+			{
+				return true;
+			}
+			Log.d("MC", "none->false");
 			return false;
 		}
+		Log.d("MC", "not enable->true");
 		return true;
 	}
-
 	/**
 	 * 判断当前手势的意图是不是想显示右侧布局。如果手指移动的距离是负数，且当前左侧布局是可见的，则认为当前手势是想要显示右侧布局。
 	 * 
