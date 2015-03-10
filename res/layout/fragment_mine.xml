@@ -6,9 +6,6 @@
 
     <LinearLayout
         android:id="@+id/sliding"
-        android:paddingLeft="15dp"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
@@ -31,13 +28,6 @@
         <fragment
             android:id="@+id/fragment_home_page3"
             android:name="com.cf.acg.fragment.FragmentMinePage3"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <fragment
-            android:id="@+id/fragment_home_page4"
-            android:name="com.cf.acg.fragment.FragmentMinePage4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
@@ -98,23 +88,6 @@
             <TextView
                 style="@style/mine_page_textview"
                 android:text="我" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/home_bt4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <ImageView
-                style="@style/home_bottom_image"
-                android:paddingTop="5dp"
-                android:src="@drawable/my_setting" />
-
-            <TextView
-                style="@style/mine_page_textview"
-                android:text="设置" />
         </LinearLayout>
     </LinearLayout>
 

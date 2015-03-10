@@ -248,8 +248,8 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 			}
 
 			// (isSliding &&!isLeftLayoutVisible)保证左滑再右滑依然能进入处理函数
-			if ((isLeftLayoutVisible && -distanceX >= touchSlop)
-					|| (isSliding && isLeftLayoutVisible))
+			if ((isLeftLayoutVisible && -distanceX >= touchSlop) || isSliding
+					&& isLeftLayoutVisible)
 			{
 				isSliding = true;
 				rightLayoutParams.rightMargin = rightEdge - distanceX;

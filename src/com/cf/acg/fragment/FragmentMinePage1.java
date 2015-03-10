@@ -10,10 +10,12 @@ import java.util.List;
 import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
+import com.cf.acg.UserInfo;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail;
 import com.cf.acg.thread.DownloadInterface;
+import com.cf.acg.thread.HttpThread;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -116,7 +118,9 @@ public class FragmentMinePage1 extends FragmentAbstract implements
 	@Override
 	public void download()
 	{
-		getHttpConnection(fActivity);				// 通用方法
+		String urlAddress = "http://acg.husteye.cn/api/myactivitylist?access_token="
+				+ UserInfo.getToken();
+		HttpThread.httpConnect(urlAddress, file);
 		FileInputStream fis = null;
 		if (downloadException)
 		{

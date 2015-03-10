@@ -5,19 +5,25 @@ import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
+import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.thread.DownloadInterface;
+import com.cf.acg.thread.HttpThread;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 public class FragmentMine extends FragmentAbstract implements DownloadInterface
 {
@@ -27,11 +33,22 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 	private FragmentManager fragmentManager;
 	private Fragment[] fragments;
 	private String[] fragmentNames =
-	{ "1", "2", "3", "4", };
+	{ "1", "2", "3", };
 	private final int fragmentNum = fragmentNames.length;
 
+	private LoadingProcess loadingProcess;
 	private Button bt1, bt2, bt3, bt4;				// 底部导航栏四个按钮
 	private ButtonListener buttonListener;
+
+	private Handler handler = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg)
+		{
+			loadingProcess.dismissDialog();
+			((FragmentAbstract) msg.obj).setData();				// 设置相应类的数据
+		}
+	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,8 +70,6 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 		((LinearLayout) activity.findViewById(R.id.home_bt2))
 				.setOnClickListener(buttonListener);
 		((LinearLayout) activity.findViewById(R.id.home_bt3))
-				.setOnClickListener(buttonListener);
-		((LinearLayout) activity.findViewById(R.id.home_bt4))
 				.setOnClickListener(buttonListener);
 	}
 
@@ -109,17 +124,30 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 					.findFragmentById(getResourceID("fragment_home_page"
 							+ fragmentNames[i]));
 		}
+
 	}
 
 	private void showFragment(int id)
 	{
 		FragmentTransaction fragmentTransaction = fragmentManager
 				.beginTransaction();
+
 		for (Fragment fragment : fragments)
 		{
 			fragmentTransaction.hide(fragment);
 		}
 		fragmentTransaction.show(fragments[id]).commit();
+		/*
+		 * 如果没有显示过，则下载数据。 下载完成之后跳到本函数的handler中表示下载成功
+		 */
+		if (!((FragmentAbstract) fragments[id]).hasDownload)
+		{
+			loadingProcess = new LoadingProcess(activity);
+			loadingProcess.startLoading();
+
+			new HttpThread((DownloadInterface) fragments[id], handler).start();
+			((FragmentAbstract) fragments[id]).hasDownload = true;
+		}
 	}
 
 	private void handleFragment()
@@ -156,9 +184,6 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 				break;
 			case R.id.home_bt3:
 				index = 2;
-				break;
-			case R.id.home_bt4:
-				index = 3;
 				break;
 			}
 			showFragment(index);
