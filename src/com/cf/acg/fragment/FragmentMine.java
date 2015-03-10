@@ -45,8 +45,6 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 	{
 		buttonListener = new ButtonListener();
 
-		Home.setScrollEvent(activity.findViewById(R.id.sliding));
-
 		/*
 		 * 底部四个导航按钮单击事件
 		 */

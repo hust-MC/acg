@@ -204,6 +204,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 	@Override
 	public boolean onTouch(View v, MotionEvent event)
 	{
+		Log.d("touch", "action_touch");
 		createVelocityTracker(event);
 
 		switch (event.getAction())
@@ -223,8 +224,10 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 			int distanceX = (int) (xMove - xDown);
 			int distanceY = (int) (yMove - yDown);
 
+			// (isSliding &&!isLeftLayoutVisible)保证右滑再左滑依然能进入处理函数
 			if (!isLeftLayoutVisible && distanceX >= touchSlop
-					&& (isSliding || Math.abs(distanceY) <= touchSlop))
+					|| (isSliding && !isLeftLayoutVisible)
+					&& Math.abs(distanceY) <= touchSlop)
 			{
 				if (leftLayout.getVisibility() != View.VISIBLE)
 				{
@@ -236,10 +239,17 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 				{
 					rightLayoutParams.rightMargin = rightEdge;
 				}
+				else if (rightLayoutParams.rightMargin > leftEdge)
+				{
+					rightLayoutParams.rightMargin = leftEdge;			 	// 用于处理右滑再左滑的情况
+				}
+				Log.d("margin", "right" + rightLayoutParams.rightMargin);
 				rightLayout.setLayoutParams(rightLayoutParams);
 			}
 
-			if (isLeftLayoutVisible && -distanceX >= touchSlop)
+			// (isSliding &&!isLeftLayoutVisible)保证左滑再右滑依然能进入处理函数
+			if ((isLeftLayoutVisible && -distanceX >= touchSlop)
+					|| (isSliding && isLeftLayoutVisible))
 			{
 				isSliding = true;
 				rightLayoutParams.rightMargin = rightEdge - distanceX;
@@ -247,6 +257,11 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 				{
 					rightLayoutParams.rightMargin = leftEdge;
 				}
+				else if (rightLayoutParams.rightMargin < rightEdge)
+				{
+					rightLayoutParams.rightMargin = rightEdge;				// 用于处理左滑再右滑的情况
+				}
+				Log.d("margin", "left" + rightLayoutParams.rightMargin);
 				rightLayout.setLayoutParams(rightLayoutParams);
 			}
 			break;
@@ -290,7 +305,6 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 
 		if (v.isEnabled())
 		{
-			Log.d("MC", "v:" + v);
 			if (isSliding)
 			{
 				unFocusBindView();

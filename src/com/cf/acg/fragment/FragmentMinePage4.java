@@ -18,7 +18,7 @@ public class FragmentMinePage4 extends Fragment
 			Bundle savedInstanceState)
 	{
 		activity = getActivity();
-		return inflater.inflate(R.layout.home_page4, null);
+		return inflater.inflate(R.layout.mine_page4, null);
 	}
 
 	@Override
