@@ -29,7 +29,7 @@
 
         <EditText
             android:id="@+id/new_input_id"
-            style="@style/edittext_style"
+            style="@style/edittext_style_white"
             android:hint="请输入学号(字母大写)"
             android:inputType="textEmailAddress"/>
     </LinearLayout>
@@ -47,7 +47,7 @@
 
         <EditText
             android:id="@+id/new_input_pwd"
-            style="@style/edittext_style"
+            style="@style/edittext_style_white"
             android:hint="请输入密码"
             android:inputType="textPassword"/>
     </LinearLayout>
@@ -65,7 +65,7 @@
 
         <EditText
             android:id="@+id/new_input_name"
-            style="@style/edittext_style"
+            style="@style/edittext_style_white"
             android:hint="请输入姓名"/>
     </LinearLayout>
 
@@ -82,7 +82,7 @@
 
         <EditText
             android:id="@+id/new_input_email"
-            style="@style/edittext_style"
+            style="@style/edittext_style_white"
             android:hint="请输入邮箱"/>
     </LinearLayout>
 
@@ -99,7 +99,7 @@
 
         <EditText
             android:id="@+id/new_input_phone"
-            style="@style/edittext_style"
+            style="@style/edittext_style_white"
             android:hint="请输入手机号"/>
     </LinearLayout>
 
@@ -116,7 +116,7 @@
 
         <EditText
             android:id="@+id/new_input_reqcode"
-            style="@style/edittext_style"
+            style="@style/edittext_style_white"
             android:hint="请输入注册码"/>
     </LinearLayout>
 

@@ -31,7 +31,7 @@
 
         <EditText
             android:id="@+id/forget_input_id"
-            style="@style/edittext_style"
+            style="@style/edittext_style_white"
             android:digits="UMD1234567890"
             android:hint="请输入学号（字母大写）" />
     </LinearLayout>
@@ -52,7 +52,7 @@
 
         <EditText
             android:id="@+id/forget_input_phone"
-            style="@style/edittext_style"
+            style="@style/edittext_style_white"
             android:hint="请输入手机号"
             android:inputType="numberDecimal" />
     </LinearLayout>

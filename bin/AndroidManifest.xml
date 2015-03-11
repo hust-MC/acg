@@ -47,7 +47,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.cf.acg.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,40 +56,44 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Home"
+            android:name="com.cf.acg.Home"
             android:label="@string/title_activity_home" >
         </activity>
         <activity
-            android:name=".detail.ActivityDetail"
+            android:name="com.cf.acg.detail.ActivityDetail"
             android:label="@string/title_activity_activity_detail" >
         </activity>
         <activity
-            android:name=".detail.ArticleDetail"
+            android:name="com.cf.acg.detail.ArticleDetail"
             android:label="@string/title_activity_article_detail" >
         </activity>
         <activity
-            android:name=".detail.MemberDetail"
+            android:name="com.cf.acg.detail.MemberDetail"
             android:label="@string/title_activity_member_detail" >
         </activity>
         <activity
-            android:name=".detail.MateDetail"
+            android:name="com.cf.acg.detail.MateDetail"
             android:label="@string/title_activity_member_detail" >
         </activity>
         <activity
-            android:name=".ForgetPwd"
+            android:name="com.cf.acg.ForgetPwd"
             android:label="@string/title_activity_forget_pwd" >
         </activity>
         <activity
-            android:name=".ResetPwd"
+            android:name="com.cf.acg.ResetPwd"
             android:label="@string/title_activity_reset_pwd" >
         </activity>
         <activity
-            android:name=".VersionUpdate"
+            android:name="com.cf.acg.VersionUpdate"
             android:label="@string/title_activity_version_update" >
         </activity>
         <activity
-            android:name=".NewUser"
+            android:name="com.cf.acg.NewUser"
             android:label="@string/title_activity_new_user" >
+        </activity>
+        <activity
+            android:name="com.cf.acg.detail.PersonnalDetail"
+            android:label="@string/title_activity_personnal_detail" >
         </activity>
         <!-- 推送功能 -->
         <!-- Required SDK核心功能 -->

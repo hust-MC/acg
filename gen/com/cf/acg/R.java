@@ -43,20 +43,24 @@ public final class R {
         public static final int activity_state_doing_back=0x7f020001;
         public static final int activity_state_todo_back=0x7f020002;
         public static final int app_launch=0x7f020003;
-        public static final int edittext_background_focus=0x7f020004;
-        public static final int edittext_background_normal=0x7f020005;
-        public static final int edittext_selector=0x7f020006;
-        public static final int home_button=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int log_background=0x7f020009;
-        public static final int log_button=0x7f02000a;
-        public static final int log_new_user=0x7f02000b;
-        public static final int menu_bg=0x7f02000c;
-        public static final int my_activity=0x7f02000d;
-        public static final int my_info=0x7f02000e;
-        public static final int my_message=0x7f02000f;
-        public static final int my_setting=0x7f020010;
-        public static final int navigation_top_bar_background=0x7f020011;
+        public static final int edittext_background_black=0x7f020004;
+        public static final int edittext_background_blue=0x7f020005;
+        public static final int edittext_background_normal=0x7f020006;
+        public static final int edittext_background_yellow=0x7f020007;
+        public static final int edittext_black_selector=0x7f020008;
+        public static final int edittext_selector=0x7f020009;
+        public static final int home_button=0x7f02000a;
+        public static final int ic_launcher=0x7f02000b;
+        public static final int log_background=0x7f02000c;
+        public static final int log_button=0x7f02000d;
+        public static final int log_new_user=0x7f02000e;
+        public static final int menu_bg=0x7f02000f;
+        public static final int my_activity=0x7f020010;
+        public static final int my_info=0x7f020011;
+        public static final int my_message=0x7f020012;
+        public static final int navigation_top_bar_background=0x7f020013;
+        public static final int personal_info=0x7f020014;
+        public static final int setting=0x7f020015;
     }
     public static final class id {
         public static final int act_name=0x7f0a0021;
@@ -65,7 +69,7 @@ public final class R {
         public static final int act_time=0x7f0a001e;
         public static final int act_venue=0x7f0a001f;
         public static final int act_work_time=0x7f0a001d;
-        public static final int action_settings=0x7f0a0049;
+        public static final int action_settings=0x7f0a004c;
         public static final int activity_date=0x7f0a0034;
         public static final int activity_event=0x7f0a0037;
         public static final int activity_place=0x7f0a0038;
@@ -94,7 +98,7 @@ public final class R {
         public static final int home_bt1=0x7f0a0030;
         public static final int home_bt2=0x7f0a0031;
         public static final int home_bt3=0x7f0a0032;
-        public static final int home_page3_text=0x7f0a0048;
+        public static final int home_page3_text=0x7f0a0049;
         public static final int linearLayoutMenu=0x7f0a003c;
         public static final int list_activity=0x7f0a0029;
         public static final int list_article=0x7f0a002a;
@@ -119,6 +123,7 @@ public final class R {
         public static final int new_input_phone=0x7f0a0015;
         public static final int new_input_pwd=0x7f0a0012;
         public static final int new_input_reqcode=0x7f0a0016;
+        public static final int personal_info=0x7f0a0048;
         public static final int phone=0x7f0a0003;
         public static final int pwd=0x7f0a000f;
         public static final int pwd1=0x7f0a0019;
@@ -129,9 +134,11 @@ public final class R {
         public static final int reset_input_pwd=0x7f0a001a;
         public static final int reset_input_pwd1=0x7f0a001c;
         public static final int reset_input_vertification=0x7f0a0018;
+        public static final int settting=0x7f0a004a;
         public static final int sliding=0x7f0a002c;
         public static final int slidingLayout=0x7f0a0005;
-        public static final int surfaceview=0x7f0a004a;
+        public static final int surfaceview=0x7f0a004d;
+        public static final int trya=0x7f0a004b;
         public static final int tv_forget_pwd=0x7f0a0000;
         public static final int updata_progress=0x7f0a0028;
     }
@@ -144,22 +151,23 @@ public final class R {
         public static final int detail_activity=0x7f030005;
         public static final int detail_article=0x7f030006;
         public static final int detail_mate=0x7f030007;
-        public static final int dialog_version_update=0x7f030008;
-        public static final int fragment_activity=0x7f030009;
-        public static final int fragment_article=0x7f03000a;
-        public static final int fragment_mate=0x7f03000b;
-        public static final int fragment_mine=0x7f03000c;
-        public static final int fragment_record=0x7f03000d;
-        public static final int list_activity=0x7f03000e;
-        public static final int list_article=0x7f03000f;
-        public static final int list_home=0x7f030010;
-        public static final int list_mate=0x7f030011;
-        public static final int list_mate_detail=0x7f030012;
-        public static final int list_record=0x7f030013;
-        public static final int menu_list_item=0x7f030014;
-        public static final int mine_page1=0x7f030015;
-        public static final int mine_page2=0x7f030016;
-        public static final int mine_page3=0x7f030017;
+        public static final int detail_personnal=0x7f030008;
+        public static final int dialog_version_update=0x7f030009;
+        public static final int fragment_activity=0x7f03000a;
+        public static final int fragment_article=0x7f03000b;
+        public static final int fragment_mate=0x7f03000c;
+        public static final int fragment_mine=0x7f03000d;
+        public static final int fragment_record=0x7f03000e;
+        public static final int list_activity=0x7f03000f;
+        public static final int list_article=0x7f030010;
+        public static final int list_home=0x7f030011;
+        public static final int list_mate=0x7f030012;
+        public static final int list_mate_detail=0x7f030013;
+        public static final int list_record=0x7f030014;
+        public static final int menu_list_item=0x7f030015;
+        public static final int mine_page1=0x7f030016;
+        public static final int mine_page2=0x7f030017;
+        public static final int mine_page3=0x7f030018;
     }
     public static final class menu {
         public static final int activity_detail=0x7f090000;
@@ -170,14 +178,15 @@ public final class R {
         public static final int main=0x7f090005;
         public static final int mate_detail=0x7f090006;
         public static final int new_user=0x7f090007;
-        public static final int reset_pwd=0x7f090008;
-        public static final int version_update=0x7f090009;
+        public static final int personnal_detail=0x7f090008;
+        public static final int reset_pwd=0x7f090009;
+        public static final int version_update=0x7f09000a;
     }
     public static final class string {
         public static final int action_settings=0x7f060002;
         public static final int app_name=0x7f060000;
+        public static final int base_info=0x7f060007;
         public static final int enter_login=0x7f060001;
-        public static final int hello_world=0x7f060007;
         public static final int title_activity_activity_detail=0x7f060004;
         public static final int title_activity_article_detail=0x7f060005;
         public static final int title_activity_download_app=0x7f06000c;
@@ -185,6 +194,7 @@ public final class R {
         public static final int title_activity_home=0x7f060003;
         public static final int title_activity_member_detail=0x7f060006;
         public static final int title_activity_new_user=0x7f06000b;
+        public static final int title_activity_personnal_detail=0x7f06000d;
         public static final int title_activity_reset_pwd=0x7f060009;
         public static final int title_activity_version_update=0x7f06000a;
     }
@@ -215,12 +225,13 @@ public final class R {
  Customize your theme here. 
          */
         public static final int AppTheme=0x7f080001;
-        public static final int edittext_style=0x7f080003;
-        public static final int home_bottom_image=0x7f080005;
-        public static final int list_record=0x7f080004;
-        public static final int mine_page_textview=0x7f080006;
-        public static final int textview_background=0x7f080008;
+        public static final int edittext_style_black=0x7f080004;
+        public static final int edittext_style_white=0x7f080003;
+        public static final int home_bottom_image=0x7f080006;
+        public static final int list_record=0x7f080005;
+        public static final int mine_page_textview=0x7f080007;
+        public static final int textview_background=0x7f080009;
         public static final int textview_style=0x7f080002;
-        public static final int textview_title=0x7f080007;
+        public static final int textview_title=0x7f080008;
     }
 }

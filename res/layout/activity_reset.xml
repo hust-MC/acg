@@ -31,7 +31,7 @@
 
         <EditText
             android:id="@+id/reset_input_vertification"
-            style="@style/edittext_style"
+            style="@style/edittext_style_white"
             android:hint="请输入短信验证码"
             android:inputType="numberDecimal" />
     </LinearLayout>
@@ -52,7 +52,7 @@
 
         <EditText
             android:id="@+id/reset_input_pwd"
-            style="@style/edittext_style"
+            style="@style/edittext_style_white"
             android:hint="请输入新密码"
             android:inputType="textPassword" />
     </LinearLayout>
@@ -74,7 +74,7 @@
 
         <EditText
             android:id="@+id/reset_input_pwd1"
-            style="@style/edittext_style"
+            style="@style/edittext_style_white"
             android:layout_weight="1.5"
             android:hint="再次输入新密码"
             android:inputType="textPassword" />

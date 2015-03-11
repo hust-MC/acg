@@ -25,12 +25,20 @@
         <item name="android:layout_height">30dp</item>
     </style>
 
-    <style name="edittext_style">
+    <style name="edittext_style_white">
         <item name="android:paddingLeft">8dp</item>
         <item name="android:background">@drawable/edittext_selector</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_weight">3</item>
+    </style>
+
+    <style name="edittext_style_black">
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:background">@drawable/edittext_black_selector</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_weight">2.3</item>
     </style>
 
     <style name="list_record">

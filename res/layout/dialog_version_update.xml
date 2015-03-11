@@ -13,8 +13,7 @@
         android:layout_width="188dp"
         android:layout_height="196dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/app_launch"
-        android:text="@string/hello_world" />
+        android:src="@drawable/app_launch" />
 
     <TextView
         android:layout_width="match_parent"

@@ -1,0 +1,6 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/edittext_background_blue" android:state_focused="true"/>
+    <item android:drawable="@drawable/edittext_background_black"/>
+
+</selector>
