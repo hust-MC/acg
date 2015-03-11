@@ -31,6 +31,10 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements DownloadInterface
 {
+	public static File rootDir = new File(
+			Environment.getExternalStorageDirectory() + "/ACG");
+	public static File logDir = new File(rootDir.getPath() + "/LOG/");
+
 	public static final String[] venueName =
 	{ "未知", "305", "513", "东四" };
 	public static final String[] activityStatusName =
@@ -39,8 +43,6 @@ public class MainActivity extends Activity implements DownloadInterface
 	{ "日", "一", "二", "三", "四", "五", "六" };
 
 	public static Activity activity;				// 获取本activity的上下文，用于在登录之后关闭登陆界面
-	public static File logDir = new File(
-			Environment.getExternalStorageDirectory() + "/ACG/Log/");
 
 	private EditText input_id, input_pwd;
 	private SharedPreferences sp;
@@ -240,17 +242,17 @@ public class MainActivity extends Activity implements DownloadInterface
 	/*
 	 * 忘记密码事件处理
 	 */
-	public void onClick_forgetPwd(View view)				
+	public void onClick_forgetPwd(View view)
 	{
 		startActivity(new Intent(this, ForgetPwd.class));
 	}
 
 	/*
-	 *注册事件处理
+	 * 注册事件处理
 	 */
 	public void onClick_newUser(View view)
 	{
-		startActivity(new Intent(this,NewUser.class));
+		startActivity(new Intent(this, NewUser.class));
 	}
 
 	@Override

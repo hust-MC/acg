@@ -33,6 +33,7 @@
                     android:text="学号：" />
 
                 <EditText
+                    android:id="@+id/person_id"
                     style="@style/edittext_style_black"
                     android:focusable="false" />
             </LinearLayout>
@@ -47,7 +48,9 @@
                     style="@style/textview_style"
                     android:text="姓名：" />
 
-                <EditText style="@style/edittext_style_black" />
+                <EditText
+                    android:id="@+id/person_name"
+                    style="@style/edittext_style_black" />
             </LinearLayout>
 
             <LinearLayout
@@ -60,7 +63,9 @@
                     style="@style/textview_style"
                     android:text="性别：" />
 
-                <EditText style="@style/edittext_style_black" />
+                <EditText
+                    android:id="@+id/person_sex"
+                    style="@style/edittext_style_black" />
             </LinearLayout>
 
             <LinearLayout
@@ -73,7 +78,9 @@
                     style="@style/textview_style"
                     android:text="专业：" />
 
-                <EditText style="@style/edittext_style_black" />
+                <EditText
+                    android:id="@+id/person_major"
+                    style="@style/edittext_style_black" />
             </LinearLayout>
 
             <LinearLayout
@@ -86,7 +93,9 @@
                     style="@style/textview_style"
                     android:text="电话号码：" />
 
-                <EditText style="@style/edittext_style_black" />
+                <EditText
+                    android:id="@+id/person_phone"
+                    style="@style/edittext_style_black" />
             </LinearLayout>
 
             <LinearLayout
@@ -99,7 +108,9 @@
                     style="@style/textview_style"
                     android:text="电话类型：" />
 
-                <EditText style="@style/edittext_style_black" />
+                <EditText
+                    android:id="@+id/person_type"
+                    style="@style/edittext_style_black" />
             </LinearLayout>
 
             <LinearLayout
@@ -112,7 +123,9 @@
                     style="@style/textview_style"
                     android:text="短号：" />
 
-                <EditText style="@style/edittext_style_black" />
+                <EditText
+                    android:id="@+id/person_cornet"
+                    style="@style/edittext_style_black" />
             </LinearLayout>
 
             <LinearLayout
@@ -125,7 +138,9 @@
                     style="@style/textview_style"
                     android:text="QQ：" />
 
-                <EditText style="@style/edittext_style_black" />
+                <EditText
+                    android:id="@+id/person_qq"
+                    style="@style/edittext_style_black" />
             </LinearLayout>
 
             <LinearLayout
@@ -138,7 +153,9 @@
                     style="@style/textview_style"
                     android:text="E-mail：" />
 
-                <EditText style="@style/edittext_style_black" />
+                <EditText
+                    android:id="@+id/person_email"
+                    style="@style/edittext_style_black" />
             </LinearLayout>
 
             <LinearLayout
@@ -151,7 +168,9 @@
                     style="@style/textview_style"
                     android:text="住址：" />
 
-                <EditText style="@style/edittext_style_black" />
+                <EditText
+                    android:id="@+id/person_address"
+                    style="@style/edittext_style_black" />
             </LinearLayout>
 
             <LinearLayout
@@ -165,6 +184,7 @@
                     android:text="银行卡号：" />
 
                 <EditText
+                    android:id="@+id/person_bank"
                     style="@style/edittext_style_black"
                     android:hint="不会公开" />
             </LinearLayout>

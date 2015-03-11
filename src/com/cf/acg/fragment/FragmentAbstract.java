@@ -18,8 +18,8 @@ import android.util.JsonReader;
 
 public abstract class FragmentAbstract extends Fragment
 {
-	public static File fileDir = new File(
-			Environment.getExternalStorageDirectory() + "/ACG/temp/");
+	public static File fileDir = new File(MainActivity.rootDir.getPath()
+			+ "/Home/");
 
 	protected final int fActivity = 1;
 	protected final int fMate = 2;
