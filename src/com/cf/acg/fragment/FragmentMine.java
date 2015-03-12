@@ -3,6 +3,8 @@ package com.cf.acg.fragment;
 import java.io.IOException;
 import java.util.List;
 
+import cn.jpush.android.util.ac;
+
 import com.cf.acg.Home;
 import com.cf.acg.R;
 import com.cf.acg.Util.LoadingProcess;
@@ -22,6 +24,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebView.FindListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -37,8 +40,8 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 	private final int fragmentNum = fragmentNames.length;
 
 	private LoadingProcess loadingProcess;
-	private Button bt1, bt2, bt3, bt4;				// 底部导航栏四个按钮
 	private ButtonListener buttonListener;
+	private ImageView iv_bt1, iv_bt2, iv_bt3;			// 底部导航栏四个按钮图片
 
 	private Handler handler = new Handler()
 	{
@@ -71,8 +74,14 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 				.setOnClickListener(buttonListener);
 		((LinearLayout) activity.findViewById(R.id.home_bt3))
 				.setOnClickListener(buttonListener);
-	}
 
+		/*
+		 * 获取底部四个按钮的imageview
+		 */
+		iv_bt1 = (ImageView) activity.findViewById(R.id.iv_bt1);
+		iv_bt2 = (ImageView) activity.findViewById(R.id.iv_bt2);
+		iv_bt3 = (ImageView) activity.findViewById(R.id.iv_bt3);
+	}
 	// 通过反射获得fragment所在的R类子类
 	private void getResClass()
 	{
@@ -113,6 +122,9 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 		return -1;
 	}
 
+	/*
+	 * 初始化所有fragment
+	 */
 	private void init_fragment()
 	{
 		fragments = new Fragment[fragmentNum];
@@ -124,11 +136,13 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 					.findFragmentById(getResourceID("fragment_home_page"
 							+ fragmentNames[i]));
 		}
-
 	}
 
 	private void showFragment(int id)
 	{
+		/*
+		 * 设置显示相应ID的fragment
+		 */
 		FragmentTransaction fragmentTransaction = fragmentManager
 				.beginTransaction();
 
@@ -137,6 +151,29 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 			fragmentTransaction.hide(fragment);
 		}
 		fragmentTransaction.show(fragments[id]).commit();
+
+		/*
+		 * 将相应的底部按钮变色
+		 */
+		switch (id)
+		{
+		case 0:
+			iv_bt1.setImageResource(R.drawable.my_activity);
+			iv_bt2.setImageResource(R.drawable.my_info_grey);
+			iv_bt3.setImageResource(R.drawable.my_message_grey);
+			break;
+		case 1:
+			iv_bt1.setImageResource(R.drawable.my_activity_grey);
+			iv_bt2.setImageResource(R.drawable.my_info);
+			iv_bt3.setImageResource(R.drawable.my_message_grey);
+			break;
+		case 2:
+			iv_bt1.setImageResource(R.drawable.my_activity_grey);
+			iv_bt2.setImageResource(R.drawable.my_info_grey);
+			iv_bt3.setImageResource(R.drawable.my_message);
+			break;
+		}
+
 		/*
 		 * 如果没有显示过，则下载数据。 下载完成之后跳到本函数的handler中表示下载成功
 		 */

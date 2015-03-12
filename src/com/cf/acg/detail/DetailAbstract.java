@@ -23,7 +23,9 @@ abstract public class DetailAbstract extends Activity
 {
 	protected String id;			// 详细文件的ID
 	protected File file;			// Json 文件
-	
+
+	protected boolean closeDialogAftDownload = true;
+
 	protected LoadingProcess loadingProcess;
 
 	public abstract Object readContent(JsonReader reader) throws IOException;	// 解析Json文件中的对象
@@ -40,7 +42,10 @@ abstract public class DetailAbstract extends Activity
 		@Override
 		public void handleMessage(Message msg)
 		{
-			loadingProcess.dismissDialog();
+			if (closeDialogAftDownload)
+			{
+				loadingProcess.dismissDialog();
+			}
 			setData();
 		}
 	};

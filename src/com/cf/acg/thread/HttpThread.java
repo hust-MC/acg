@@ -39,7 +39,7 @@ public class HttpThread extends Thread
 		message.sendToTarget();
 	}
 
-	public static void httpConnect(String urlAddress, Bitmap bitmap)
+	public static Bitmap httpConnect(String urlAddress)
 	{
 		try
 		{
@@ -51,17 +51,18 @@ public class HttpThread extends Thread
 			httpURLConnection.setRequestProperty("Charset", "UTF-8");
 			InputStream is = httpURLConnection.getInputStream();
 
-			bitmap = BitmapFactory.decodeStream(is);
+			return BitmapFactory.decodeStream(is);
 		} catch (IOException e)
 		{
 		}
+		return null;
 	}
 
 	/*
 	 * 带进度条显示的下载函数
 	 */
 	public static void httpConnect(SetProgressInterface setProgressInterface,
-			String urlAddress, File file)		
+			String urlAddress, File file)
 	{
 		try
 		{
@@ -75,9 +76,10 @@ public class HttpThread extends Thread
 
 			if (setProgressInterface != null)
 			{
-				setProgressInterface.setMaxProgress(httpURLConnection.getContentLength());
+				setProgressInterface.setMaxProgress(httpURLConnection
+						.getContentLength());
 			}
-			
+
 			if (!file.exists())
 			{
 				file.getParentFile().mkdirs();
@@ -87,8 +89,8 @@ public class HttpThread extends Thread
 
 			byte[] buf = new byte[4 * 1024];
 			int num;
-			
-			while ((num = is.read(buf)) != -1)		//实时调整下载进度条
+
+			while ((num = is.read(buf)) != -1)		// 实时调整下载进度条
 			{
 				progress += num;
 				if (setProgressInterface != null)

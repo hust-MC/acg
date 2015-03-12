@@ -48,6 +48,7 @@
             android:orientation="vertical" >
 
             <ImageView
+                android:id="@+id/iv_bt1"
                 style="@style/home_bottom_image"
                 android:src="@drawable/my_activity" />
 
@@ -64,9 +65,10 @@
             android:orientation="vertical" >
 
             <ImageView
+                android:id="@+id/iv_bt2"
                 style="@style/home_bottom_image"
                 android:paddingTop="5dp"
-                android:src="@drawable/my_message" />
+                android:src="@drawable/my_message_grey" />
 
             <TextView
                 style="@style/mine_page_textview"
@@ -81,9 +83,10 @@
             android:orientation="vertical" >
 
             <ImageView
+                android:id="@+id/iv_bt3"
                 style="@style/home_bottom_image"
                 android:paddingTop="5dp"
-                android:src="@drawable/my_info" />
+                android:src="@drawable/my_info_grey" />
 
             <TextView
                 style="@style/mine_page_textview"
