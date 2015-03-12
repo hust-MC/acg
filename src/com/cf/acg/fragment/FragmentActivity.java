@@ -8,17 +8,22 @@ import java.security.Policy.Parameters;
 import java.util.Calendar;
 import java.util.List;
 
+import cn.jpush.android.util.ac;
+
 import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail;
+import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.thread.DownloadInterface;
+import com.cf.acg.thread.HttpThread;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +70,7 @@ public class FragmentActivity extends FragmentAbstract implements
 			{
 				Intent intent = new Intent(activity, ActivityDetail.class);
 				intent.putExtra("id", ((Content) list.get(position)).id);
-				startActivity(intent);
+				startActivityForResult(intent, DetailAbstract.REQUEST_CODE);
 			}
 		});
 	}

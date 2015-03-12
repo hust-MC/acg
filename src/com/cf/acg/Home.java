@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.crypto.spec.IvParameterSpec;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +22,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +30,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,16 +43,17 @@ import com.cf.acg.thread.HttpThread;
 
 public class Home extends AcgActivity implements DownloadInterface
 {
+
 	private static SlidingLayout slidingLayout;
 	private static boolean firstBack = true;
 
 	TextView textView;
 	ListView menuList;
+	ImageView iv_noNet;
 
 	Class<String> resClass; 			// 定义用于反射的类
 
 	private File file = new File(MainActivity.logDir, "logout");
-	private LoadingProcess loadingProcess;
 	private FragmentManager fragmentManager;
 	private Fragment[] fragments;
 	private Content content;
@@ -57,15 +62,20 @@ public class Home extends AcgActivity implements DownloadInterface
 	{ "activity", "mate", "record", "article", "mine" };
 	private final int fragmentNum = fragmentNames.length;
 
-	Handler handler = new Handler()					// 用于处理fragment内容的handler
+	@Override
+	public void afterDownload(Message msg)
 	{
-		@Override
-		public void handleMessage(Message msg)
+		if (msg.what == 0x55)
 		{
-			loadingProcess.dismissDialog();
-			((FragmentAbstract) msg.obj).setData();				// 设置相应类的数据
+			iv_noNet.setVisibility(View.VISIBLE);
 		}
-	};
+		else if (msg.what == 0)
+		{
+			iv_noNet.setVisibility(View.GONE);
+		}
+		loadingProcess.dismissDialog();
+		((FragmentAbstract) msg.obj).setData();				// 设置相应类的数据
+	}
 
 	Handler handlerLogout = new Handler()			// 用处理注销内容的handler
 	{
@@ -84,6 +94,7 @@ public class Home extends AcgActivity implements DownloadInterface
 		 * 控件初始化
 		 */
 		menuList = (ListView) findViewById(R.id.menu_list);
+		iv_noNet = (ImageView) findViewById(R.id.no_net);
 		slidingLayout = (SlidingLayout) findViewById(R.id.slidingLayout);
 
 		/*
@@ -173,10 +184,10 @@ public class Home extends AcgActivity implements DownloadInterface
 		 */
 		if (!((FragmentAbstract) fragments[id]).hasDownload)
 		{
-			loadingProcess = new LoadingProcess(this);
 			loadingProcess.startLoading();
 
-			new HttpThread((DownloadInterface) fragments[id], handler).start();
+			new HttpThread((DownloadInterface) fragments[id], acgHandler)
+					.start();
 			((FragmentAbstract) fragments[id]).hasDownload = true;
 		}
 	}
@@ -200,6 +211,8 @@ public class Home extends AcgActivity implements DownloadInterface
 		JPushInterface.init(this);
 
 		setContentView(R.layout.activity_home);
+
+		loadingProcess = new LoadingProcess(this);
 
 		MainActivity.activity.finish();
 
@@ -289,6 +302,8 @@ public class Home extends AcgActivity implements DownloadInterface
 	{
 		startActivity(new Intent(
 				android.provider.Settings.ACTION_WIRELESS_SETTINGS));
+
+		iv_noNet.setVisibility(View.GONE);
 	}
 
 	@Override

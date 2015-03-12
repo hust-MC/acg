@@ -10,6 +10,7 @@ import com.cf.acg.Home;
 import com.cf.acg.R;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.detail.ArticleDetail;
+import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.thread.DownloadInterface;
 
 import android.content.Intent;
@@ -60,7 +61,7 @@ public class FragmentArticle extends FragmentAbstract implements
 			{
 				Intent intent = new Intent(activity, ArticleDetail.class);
 				intent.putExtra("id", ((Content) list.get(position)).id);
-				startActivity(intent);
+				startActivityForResult(intent, DetailAbstract.REQUEST_CODE);
 			}
 		});
 	}

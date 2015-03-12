@@ -54,46 +54,42 @@ public class MainActivity extends AcgActivity implements DownloadInterface
 	private WhichToDownload whichToDownload = WhichToDownload.LOGIN;			// 选择下载内容
 
 	private File file = new File(logDir, "login");
-	private LoadingProcess loadingProcess;
 
-	private Handler handler = new Handler()
+	@Override
+	protected void afterDownload(Message msg)
 	{
-		@Override
-		public void handleMessage(Message msg)
+		switch (whichToDownload)
 		{
-			switch (whichToDownload)
+		case LOGIN:
+			if (hasDialogShow)
 			{
-			case LOGIN:
-				if (hasDialogShow)
-				{
-					loadingProcess.dismissDialog();
-					hasDialogShow = false;
-				}
-				if (content.error)
-				{
-					Toast.makeText(MainActivity.this, content.message,
-							Toast.LENGTH_SHORT).show();
-				}
-				else
-				{
-					editor = sp.edit();
-					editor.putString("id", id);
-					editor.putString("pwd", pwd);
-					editor.commit();
-					startActivity(new Intent(MainActivity.this, Home.class));
-				}
-				break;
-
-			case FORGET_PWD:
-
-				break;
-
-			case NEW_USER:
-
-				break;
+				loadingProcess.dismissDialog();
+				hasDialogShow = false;
 			}
+			if (content.error)
+			{
+				Toast.makeText(MainActivity.this, content.message,
+						Toast.LENGTH_SHORT).show();
+			}
+			else
+			{
+				editor = sp.edit();
+				editor.putString("id", id);
+				editor.putString("pwd", pwd);
+				editor.commit();
+				startActivity(new Intent(MainActivity.this, Home.class));
+			}
+			break;
+
+		case FORGET_PWD:
+
+			break;
+
+		case NEW_USER:
+
+			break;
 		}
-	};
+	}
 
 	private void init_widget()
 	{
@@ -162,8 +158,6 @@ public class MainActivity extends AcgActivity implements DownloadInterface
 			break;
 
 		case FORGET_PWD:
-			// urlAddress = "http://acg.husteye.cn/api/forgetpassword?username="
-			// + id +"&mobile="
 
 			break;
 
@@ -174,7 +168,7 @@ public class MainActivity extends AcgActivity implements DownloadInterface
 	}
 	private void checkPwd()
 	{
-		new HttpThread(this, handler).start();		// 开启线程回调download方法
+		new HttpThread(this, acgHandler).start();		// 开启线程回调download方法
 	}
 
 	@Override

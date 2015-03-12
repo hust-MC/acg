@@ -29,20 +29,17 @@ public class ResetPwd extends AcgActivity implements DownloadInterface
 
 	private File file = new File(MainActivity.logDir, "reset");
 
-	private Handler handler = new Handler()
+	@Override
+	public void afterDownload(Message msg)
 	{
-		@Override
-		public void handleMessage(Message msg)
+		Toast.makeText(ResetPwd.this, result, Toast.LENGTH_SHORT).show();
+		if (resetSuccess)
 		{
-			Toast.makeText(ResetPwd.this, result, Toast.LENGTH_SHORT).show();
-			if (resetSuccess)
-			{
-				Intent intent = new Intent(ResetPwd.this, MainActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			}
+			Intent intent = new Intent(ResetPwd.this, MainActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
 		}
-	};
+	}
 
 	@Override
 	public void download()
@@ -121,7 +118,7 @@ public class ResetPwd extends AcgActivity implements DownloadInterface
 
 		if (pwd.equals(pwd1))
 		{
-			new HttpThread(this, handler).start();
+			new HttpThread(this, acgHandler).start();
 		}
 		else
 		{

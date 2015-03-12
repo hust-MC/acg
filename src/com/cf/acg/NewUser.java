@@ -28,29 +28,25 @@ public class NewUser extends AcgActivity implements DownloadInterface
 	private EditText input_id, input_pwd, input_name, input_email, input_phone,
 			input_reqcode;
 	private String id, pwd, name, email, phone, reqcode;
-	private LoadingProcess loadingProcess = new LoadingProcess(this);
 	private File file = new File(MainActivity.logDir, "newUser");
 
 	private boolean registerSuccess = false; 		// 标志注册是否成功
 	private String registerMessageArray = ""; 	// 注册结果提示数组
 	private String registerMessage = "";			// 注册结果提示
 
-	Handler handler = new Handler()
+	@Override
+	protected void afterDownload(Message msg)
 	{
-		@Override
-		public void handleMessage(Message msg)
-		{
-			loadingProcess.dismissDialog();
-			Toast.makeText(NewUser.this, registerMessage, Toast.LENGTH_SHORT)
-					.show();
-			registerMessage = "";
+		loadingProcess.dismissDialog();
+		Toast.makeText(NewUser.this, registerMessage, Toast.LENGTH_SHORT)
+				.show();
+		registerMessage = "";
 
-			if (registerSuccess)
-			{
-				finish();
-			}
+		if (registerSuccess)
+		{
+			finish();
 		}
-	};
+	}
 
 	@Override
 	public void download()
@@ -133,6 +129,8 @@ public class NewUser extends AcgActivity implements DownloadInterface
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_user);
 
+		loadingProcess = new LoadingProcess(this);
+
 		init_widget();
 	}
 
@@ -146,7 +144,7 @@ public class NewUser extends AcgActivity implements DownloadInterface
 		reqcode = input_reqcode.getText().toString();
 
 		loadingProcess.startLoading("正在发送注册请求，请稍候。。。");
-		new HttpThread(this, handler).start();
+		new HttpThread(this, acgHandler).start();
 	}
 
 	@Override

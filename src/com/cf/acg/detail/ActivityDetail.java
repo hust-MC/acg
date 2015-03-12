@@ -149,11 +149,11 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		init_variable();
 
 		/*
-		 * 启动下载线程并弹出下载框。 下载结束后进入父类（Detail Abstract）handler函数
+		 * 启动下载线程并弹出下载框。 下载结束后进入父类（Detail Abstract）acgHandler函数
 		 */
 		loadingProcess = new LoadingProcess(this);
 		loadingProcess.startLoading();
-		new HttpThread(this, handler).start();
+		new HttpThread(this, acgHandler).start();
 	}
 
 	@Override

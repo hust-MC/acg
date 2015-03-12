@@ -30,10 +30,11 @@
         <ImageView
             android:id="@+id/no_net"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="#FFF3BB"
             android:onClick="onClick_checkNet"
-            android:src="@drawable/no_net" />
+            android:src="@drawable/no_net"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"

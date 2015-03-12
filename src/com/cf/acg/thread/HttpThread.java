@@ -24,7 +24,7 @@ public class HttpThread extends Thread
 	DownloadInterface downloadClass;
 	SetProgressInterface setProgressInterface;
 	Handler handler;
-	static private boolean hasNet = true;				// 标志网络状态
+	static public boolean hasNet = true;				// 标志网络状态
 
 	static int progress = 0;					// 显示下载进度
 
@@ -41,12 +41,13 @@ public class HttpThread extends Thread
 		Message message = handler.obtainMessage();
 		if (!hasNet)
 		{
-			message.obj = null;
+			message.what = 0x55;			// 标志错误
 		}
 		else
 		{
-			message.obj = downloadClass;
+			message.what = 0;
 		}
+		message.obj = downloadClass;
 		message.sendToTarget();
 	}
 

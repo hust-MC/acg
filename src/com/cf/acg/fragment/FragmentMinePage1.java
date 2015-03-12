@@ -14,6 +14,7 @@ import com.cf.acg.UserInfo;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail;
+import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
@@ -65,7 +66,7 @@ public class FragmentMinePage1 extends FragmentAbstract implements
 			{
 				Intent intent = new Intent(activity, ActivityDetail.class);
 				intent.putExtra("id", ((Content) list.get(position)).id);
-				startActivity(intent);
+				startActivityForResult(intent, DetailAbstract.REQUEST_CODE);
 			}
 		});
 	}

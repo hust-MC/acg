@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 import com.cf.acg.AcgActivity;
+import com.cf.acg.Home;
+import com.cf.acg.R;
+import com.cf.acg.SlidingLayout;
 import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.detail.ActivityDetail.Content;
 import com.cf.acg.fragment.FragmentAbstract;
@@ -18,16 +21,17 @@ import android.os.Message;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 abstract public class DetailAbstract extends AcgActivity
 {
+	public static final int REQUEST_CODE = 1;				// 用于在没网络的情况下detail结束时返回
+	public static final int RESULT_CODE_NO_NET = 2;
+	public static final int RESULT_CODE_NET = 3;
+
 	protected String id;			// 详细文件的ID
 	protected File file;			// Json 文件
 
-	protected boolean closeDialogAftDownload = true;
-
-	protected LoadingProcess loadingProcess;
+	protected boolean closeDialogAftDownload = true;				// 是否需要关闭对话框
 
 	public abstract Object readContent(JsonReader reader) throws IOException;	// 解析Json文件中的对象
 	protected abstract void setData();											// 用于把下载到的数据显示到界面上
@@ -38,18 +42,26 @@ abstract public class DetailAbstract extends AcgActivity
 	/*
 	 * 用于处理Json文件下载之后的处理事件
 	 */
-	Handler handler = new Handler()
+	@Override
+	public void afterDownload(Message msg)
 	{
-		@Override
-		public void handleMessage(Message msg)
+		if (closeDialogAftDownload)
 		{
-			if (closeDialogAftDownload)
-			{
-				loadingProcess.dismissDialog();
-			}
+			loadingProcess.dismissDialog();
+		}
+
+		if (msg.what == 0x55)
+		{
+			setResult(RESULT_CODE_NO_NET);
+			finish();
+
+		}
+		else
+		{
+			setResult(RESULT_CODE_NET);
 			setData();
 		}
-	};
+	}
 
 	/*
 	 * 读取Json流

@@ -2,6 +2,7 @@ package com.cf.acg.Util;
 
 import java.io.File;
 
+import com.cf.acg.AcgActivity;
 import com.cf.acg.VersionUpdate;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
@@ -33,6 +34,11 @@ public class DownloadApk implements DownloadInterface, SetProgressInterface
 		@Override
 		public void handleMessage(Message msg)
 		{
+			if (msg.obj == null)
+			{
+				Toast.makeText(context, "网络连接错误，请检查网络状态", Toast.LENGTH_LONG)
+						.show();
+			}
 			((VersionUpdate) context).downloadAppSuccess();
 		}
 	};
@@ -58,11 +64,5 @@ public class DownloadApk implements DownloadInterface, SetProgressInterface
 	public void setMaxProgress(int max)
 	{
 		((VersionUpdate) context).setMaxProgress(max);
-	}
-
-	@Override
-	public void noNet()
-	{
-	 HttpThread.showNoNetDialog(context);
 	}
 }

@@ -28,23 +28,19 @@ public class ForgetPwd extends AcgActivity implements DownloadInterface
 	private File file = new File(MainActivity.logDir, "forget");
 	private boolean verificateSuccess;
 	private String result;
-	private LoadingProcess loadingProcess = new LoadingProcess(this);
 
-	private Handler handler = new Handler()
+	@Override
+	protected void afterDownload(Message msg)
 	{
-		@Override
-		public void handleMessage(Message msg)
+		loadingProcess.dismissDialog();
+		Toast.makeText(ForgetPwd.this, result, Toast.LENGTH_SHORT).show();
+		if (verificateSuccess)
 		{
-			loadingProcess.dismissDialog();
-			Toast.makeText(ForgetPwd.this, result, Toast.LENGTH_SHORT).show();
-			if (verificateSuccess)
-			{
-				Intent intent = new Intent(ForgetPwd.this, ResetPwd.class);
-				intent.putExtra("id", id);
-				startActivity(intent);
-			}
+			Intent intent = new Intent(ForgetPwd.this, ResetPwd.class);
+			intent.putExtra("id", id);
+			startActivity(intent);
 		}
-	};
+	}
 
 	private void init_widget()
 	{
@@ -57,6 +53,8 @@ public class ForgetPwd extends AcgActivity implements DownloadInterface
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_forget_pwd);
+
+		loadingProcess = new LoadingProcess(this);
 
 		init_widget();
 	}
@@ -115,7 +113,7 @@ public class ForgetPwd extends AcgActivity implements DownloadInterface
 
 		loadingProcess.startLoading("正在获取验证码，请稍后");
 
-		new HttpThread(this, handler).start();
+		new HttpThread(this, acgHandler).start();
 	}
 
 	@Override

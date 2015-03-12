@@ -9,6 +9,7 @@ import java.util.List;
 import com.cf.acg.Home;
 import com.cf.acg.R;
 import com.cf.acg.Util.JsonResolve;
+import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.detail.MateDetail;
 import com.cf.acg.thread.DownloadInterface;
 
@@ -55,7 +56,7 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 			{
 				Intent intent = new Intent(activity, MateDetail.class);
 				intent.putExtra("id", ((Content) list.get(position)).id);
-				startActivity(intent);
+				startActivityForResult(intent, DetailAbstract.REQUEST_CODE);
 			}
 		});
 	}

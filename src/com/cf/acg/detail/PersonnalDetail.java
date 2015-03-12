@@ -230,7 +230,7 @@ public class PersonnalDetail extends DetailAbstract implements
 		 */
 		loadingProcess = new LoadingProcess(this);
 		loadingProcess.startLoading();
-		new HttpThread(this, handler).start();
+		new HttpThread(this, acgHandler).start();
 	}
 
 	class Content

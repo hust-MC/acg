@@ -5,16 +5,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
+import com.cf.acg.R;
 import com.cf.acg.UserInfo;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.adapter.ContentAdapter;
+import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.thread.HttpThread;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Environment;
 import android.util.JsonReader;
+import android.util.Log;
+import android.view.View;
 
 public abstract class FragmentAbstract extends Fragment
 {
@@ -93,11 +99,17 @@ public abstract class FragmentAbstract extends Fragment
 		}
 	}
 
-	/*
-	 * 当无网络的时候调用此函数
-	 */
-	public void noNet()
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		HttpThread.showNoNetDialog(activity);
+		if (resultCode == DetailAbstract.RESULT_CODE_NO_NET)
+		{
+			(activity.findViewById(R.id.no_net)).setVisibility(View.VISIBLE);
+		}
+		else if (resultCode == DetailAbstract.RESULT_CODE_NET)
+		{
+			(activity.findViewById(R.id.no_net)).setVisibility(View.GONE);
+		}
 	}
+
 }

@@ -35,7 +35,6 @@ public class VersionUpdate extends AcgActivity implements DownloadInterface
 
 	private String nativeVersion;
 	private String latestVersion;
-	private LoadingProcess loadingProcess;
 
 	File fileAPK = new File(Environment.getExternalStorageDirectory()
 			+ "/ACG/Download/音控组.apk");
@@ -43,45 +42,41 @@ public class VersionUpdate extends AcgActivity implements DownloadInterface
 
 	private ProgressBar bar;
 
-	private Handler handler = new Handler()
+	@Override
+	public void afterDownload(Message msg)
 	{
-		@Override
-		public void handleMessage(Message msg)
+		String message = null;
+
+		loadingProcess.dismissDialog();
+
+		if (nativeVersion.equals(latestVersion))
 		{
-			String message = null;
-
-			loadingProcess.dismissDialog();
-
-			if (nativeVersion.equals(latestVersion))
-			{
-				message = "当前已经是最新版";
-				new AlertDialog.Builder(VersionUpdate.this).setTitle("版本检查")
-						.setMessage(message).setNegativeButton("确定", null)
-						.show();
-			}
-			else
-			{
-				message = "最新版本为:v" + latestVersion + "\n是否立即下载？";
-				new AlertDialog.Builder(VersionUpdate.this)
-						.setTitle("版本检查")
-						.setMessage(message)
-						.setPositiveButton("取消", null)
-						.setNegativeButton("确定",
-								new DialogInterface.OnClickListener()
-								{
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which)
-									{
-										bar.setVisibility(View.VISIBLE);
-										new DownloadApk(VersionUpdate.this,
-												fileAPK, urlAddressAPK)
-												.startDownload();
-									}
-								}).show();
-			}
+			message = "当前已经是最新版";
+			new AlertDialog.Builder(VersionUpdate.this).setTitle("版本检查")
+					.setMessage(message).setNegativeButton("确定", null).show();
 		}
-	};
+		else
+		{
+			message = "最新版本为:v" + latestVersion + "\n是否立即下载？";
+			new AlertDialog.Builder(VersionUpdate.this)
+					.setTitle("版本检查")
+					.setMessage(message)
+					.setPositiveButton("取消", null)
+					.setNegativeButton("确定",
+							new DialogInterface.OnClickListener()
+							{
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which)
+								{
+									bar.setVisibility(View.VISIBLE);
+									new DownloadApk(VersionUpdate.this,
+											fileAPK, urlAddressAPK)
+											.startDownload();
+								}
+							}).show();
+		}
+	}
 
 	@Override
 	public void download()
@@ -170,6 +165,6 @@ public class VersionUpdate extends AcgActivity implements DownloadInterface
 		PackageInfo pi = pm.getPackageInfo(this.getPackageName(), 0);
 		nativeVersion = pi.versionName;
 
-		new HttpThread(this, handler).start();
+		new HttpThread(this, acgHandler).start();
 	}
 }
