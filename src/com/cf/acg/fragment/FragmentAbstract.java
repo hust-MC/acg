@@ -92,4 +92,12 @@ public abstract class FragmentAbstract extends Fragment
 			adapter.addContent(this, o);
 		}
 	}
+
+	/*
+	 * 当无网络的时候调用此函数
+	 */
+	public void noNet()
+	{
+		HttpThread.showNoNetDialog(activity);
+	}
 }

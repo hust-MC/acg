@@ -32,8 +32,6 @@ public class PersonnalDetail extends DetailAbstract implements
 	{ "未知", "移动", "联通", "电信", "其他" };
 	private EditText id, name, sex, major, phone, phoneType, cornet, qq, email,
 			address, bank;
-	private ImageView[] iv_photos;
-	private ImageView iv_photo;
 	private Bitmap bitmap;
 
 	private Content content;
@@ -48,7 +46,6 @@ public class PersonnalDetail extends DetailAbstract implements
 		@Override
 		public void handleMessage(Message msg)
 		{
-			RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.person_mainlayout);
 			LinearLayout photoLayout = (LinearLayout) findViewById(R.id.person_photos);
 
 			ImageView iv_photo = new ImageView(PersonnalDetail.this);
@@ -179,7 +176,6 @@ public class PersonnalDetail extends DetailAbstract implements
 		 * 设置图片数据显示
 		 */
 		final String[] photos = content.photo.split("\n");
-		iv_photos = new ImageView[photos.length];
 		for (int i = 0; i < photos.length; i++)
 		{
 			final String address = "http://acg.husteye.cn/" + photos[i];
@@ -208,8 +204,6 @@ public class PersonnalDetail extends DetailAbstract implements
 		email = (EditText) findViewById(R.id.person_email);
 		address = (EditText) findViewById(R.id.person_address);
 		bank = (EditText) findViewById(R.id.person_bank);
-
-		// iv_photo = (ImageView) findViewById(R.id.person_photo);
 	}
 
 	public void init_variable()

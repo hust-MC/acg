@@ -11,16 +11,20 @@ import java.net.URL;
 import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.fragment.FragmentAbstract;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
+import android.widget.Toast;
 
 public class HttpThread extends Thread
 {
 	DownloadInterface downloadClass;
 	SetProgressInterface setProgressInterface;
 	Handler handler;
+	static private boolean hasNet = true;				// 标志网络状态
 
 	static int progress = 0;					// 显示下载进度
 
@@ -35,7 +39,14 @@ public class HttpThread extends Thread
 	{
 		downloadClass.download();
 		Message message = handler.obtainMessage();
-		message.obj = downloadClass;
+		if (!hasNet)
+		{
+			message.obj = null;
+		}
+		else
+		{
+			message.obj = downloadClass;
+		}
 		message.sendToTarget();
 	}
 
@@ -102,18 +113,27 @@ public class HttpThread extends Thread
 			}
 			fos.flush();
 			fos.close();
+			hasNet = true;					// 设置网络状态为正常
 		} catch (MalformedURLException e)
 		{
 		} catch (IOException e)
 		{
+			hasNet = false;					// 标志网络异常
 		}
 	}
-
 	/*
 	 * 不带进度条显示的下载函数
 	 */
 	public static void httpConnect(String urlAddress, File file)
 	{
 		httpConnect(null, urlAddress, file);
+	}
+
+	/*
+	 * 无网络的时候调用此函数
+	 */
+	public static void showNoNetDialog(Context context)
+	{
+		Toast.makeText(context, "请检查网络连接状态", Toast.LENGTH_LONG).show();
 	}
 }

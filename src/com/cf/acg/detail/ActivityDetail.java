@@ -183,4 +183,6 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		int venue;					// 活动场地
 		int status;					// 活动状态
 	}
+
+
 }

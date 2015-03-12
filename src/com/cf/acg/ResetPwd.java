@@ -20,7 +20,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ResetPwd extends Activity implements DownloadInterface
+public class ResetPwd extends AcgActivity implements DownloadInterface
 {
 	private EditText input_pwd, input_pwd1, input_vertification;
 	private String vertification, pwd, pwd1, id;

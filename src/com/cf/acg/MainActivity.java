@@ -29,7 +29,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements DownloadInterface
+public class MainActivity extends AcgActivity implements DownloadInterface
 {
 	public static File rootDir = new File(
 			Environment.getExternalStorageDirectory() + "/ACG");

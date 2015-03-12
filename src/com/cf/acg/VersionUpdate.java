@@ -29,14 +29,14 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class VersionUpdate extends Activity implements DownloadInterface
+public class VersionUpdate extends AcgActivity implements DownloadInterface
 {
 	private File file = new File(MainActivity.logDir, "/version");
 
 	private String nativeVersion;
 	private String latestVersion;
 	private LoadingProcess loadingProcess;
-	
+
 	File fileAPK = new File(Environment.getExternalStorageDirectory()
 			+ "/ACG/Download/音控组.apk");
 	String urlAddressAPK = "http://acg.husteye.cn/api/download_app?platform=android";
@@ -74,7 +74,8 @@ public class VersionUpdate extends Activity implements DownloadInterface
 											int which)
 									{
 										bar.setVisibility(View.VISIBLE);
-										new DownloadApk(VersionUpdate.this,fileAPK,urlAddressAPK)
+										new DownloadApk(VersionUpdate.this,
+												fileAPK, urlAddressAPK)
 												.startDownload();
 									}
 								}).show();

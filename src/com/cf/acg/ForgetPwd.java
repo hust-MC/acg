@@ -21,7 +21,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ForgetPwd extends Activity implements DownloadInterface
+public class ForgetPwd extends AcgActivity implements DownloadInterface
 {
 	EditText input_id, input_phone;
 	String id, phone;

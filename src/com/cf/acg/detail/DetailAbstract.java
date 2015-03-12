@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
+import com.cf.acg.AcgActivity;
 import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.detail.ActivityDetail.Content;
 import com.cf.acg.fragment.FragmentAbstract;
@@ -19,7 +20,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-abstract public class DetailAbstract extends Activity
+abstract public class DetailAbstract extends AcgActivity
 {
 	protected String id;			// 详细文件的ID
 	protected File file;			// Json 文件

@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 
-public class NewUser extends Activity implements DownloadInterface
+public class NewUser extends AcgActivity implements DownloadInterface
 {
 	private EditText input_id, input_pwd, input_name, input_email, input_phone,
 			input_reqcode;

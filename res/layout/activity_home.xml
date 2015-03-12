@@ -27,9 +27,18 @@
         android:background="#fff"
         tools:context=".Home" >
 
+        <ImageView
+            android:id="@+id/no_net"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#FFF3BB"
+            android:onClick="onClick_checkNet"
+            android:src="@drawable/no_net" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/no_net"
             android:orientation="vertical" >
 
             <fragment

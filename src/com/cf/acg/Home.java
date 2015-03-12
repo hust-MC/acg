@@ -37,7 +37,7 @@ import com.cf.acg.fragment.*;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
-public class Home extends Activity implements DownloadInterface
+public class Home extends AcgActivity implements DownloadInterface
 {
 	private static SlidingLayout slidingLayout;
 	private static boolean firstBack = true;
@@ -103,8 +103,6 @@ public class Home extends Activity implements DownloadInterface
 				showFragment(position);
 			}
 		});
-
-		// Home.setScrollEvent(findViewById(R.id.content)); // 不要也罢
 	}
 
 	private void getResClass()
@@ -285,6 +283,12 @@ public class Home extends Activity implements DownloadInterface
 			}
 		}
 		return true;
+	}
+
+	public void onClick_checkNet(View v)
+	{
+		startActivity(new Intent(
+				android.provider.Settings.ACTION_WIRELESS_SETTINGS));
 	}
 
 	@Override

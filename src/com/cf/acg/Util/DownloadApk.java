@@ -59,4 +59,10 @@ public class DownloadApk implements DownloadInterface, SetProgressInterface
 	{
 		((VersionUpdate) context).setMaxProgress(max);
 	}
+
+	@Override
+	public void noNet()
+	{
+	 HttpThread.showNoNetDialog(context);
+	}
 }
