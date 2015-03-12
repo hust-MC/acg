@@ -5,22 +5,23 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import com.cf.acg.MainActivity;
 import com.cf.acg.R;
 import com.cf.acg.UserInfo;
 import com.cf.acg.Util.LoadingProcess;
-import com.cf.acg.detail.ActivityDetail.Content;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
 import android.os.Bundle;
 import android.util.JsonReader;
 import android.view.Menu;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 public class PersonnalDetail extends DetailAbstract implements
 		DownloadInterface
 {
+	private String[] phonetypename =
+	{ "未知", "移动", "联通", "电信", "其他" };
 	private EditText id, name, sex, major, phone, phoneType, cornet, qq, email,
 			address, bank;
 	private Content content;
@@ -49,6 +50,9 @@ public class PersonnalDetail extends DetailAbstract implements
 		init_widget();
 
 		file = new File(detailFileDir, "personDetail");
+		getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);		// 隐藏输入法
+
 		/*
 		 * 前台弹出加载框，后台启动线程，结束后进入父类handler
 		 */
@@ -85,13 +89,14 @@ public class PersonnalDetail extends DetailAbstract implements
 	@Override
 	public Object readContent(JsonReader reader) throws IOException
 	{
-		String id = null, name = null, sex = null, major = null, phone = null, phoneType = null, cornet = null, qq = null, email = null, address = null, bank = null;
+		String id = null, name = null, sex = null, major = null, phone = null, cornet = null, qq = null, email = null, address = null, bank = null;
+		int phoneType = 0;
 
 		reader.beginObject();
 		while (reader.hasNext())
 		{
 			String field = reader.nextName();
-			if (field.equals("id"))
+			if (field.equals("uid"))
 			{
 				id = reader.nextString();
 			}
@@ -113,7 +118,7 @@ public class PersonnalDetail extends DetailAbstract implements
 			}
 			else if (field.equals("mobile_type"))
 			{
-				phoneType = reader.nextString();
+				phoneType = reader.nextInt();
 			}
 			else if (field.equals("mobile_short"))
 			{
@@ -147,17 +152,26 @@ public class PersonnalDetail extends DetailAbstract implements
 	@Override
 	protected void setData()
 	{
-		// TODO Auto-generated method stub
-
+		id.setText(content.id);
+		name.setText(content.name);
+		sex.setText(content.sex);
+		major.setText(content.major);
+		phone.setText(content.phone);
+		phoneType.setText(phonetypename[content.phoneType]);
+		cornet.setText(content.cornet);
+		qq.setText(content.qq);
+		email.setText(content.email);
+		address.setText(content.address);
+		bank.setText(content.bank);
 	}
 
 	class Content
 	{
-		String id, name, sex, major, phone, phoneType, cornet, qq, email,
-				address, bank;
+		String id, name, sex, major, phone, cornet, qq, email, address, bank;
+		int phoneType;
 
 		public Content(String id, String name, String sex, String major,
-				String phone, String phoneType, String cornet, String qq,
+				String phone, int phoneType, String cornet, String qq,
 				String email, String address, String bank)
 		{
 			this.id = id;

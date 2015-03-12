@@ -70,7 +70,7 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 	{
 		String id = null; 				// 消息ID
 		String subject = null;			// 消息主题
-		int readtime = 0;				// 阅读时间
+		int sendTime = 0;				// 发送时间
 		String type = null;				// 消息类型
 
 		reader.beginObject();
@@ -86,9 +86,9 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 			{
 				subject = reader.nextString();
 			}
-			else if (field.equals("readtime"))
+			else if (field.equals("sendtime"))
 			{
-				readtime = reader.nextInt();
+				sendTime = reader.nextInt();
 			}
 			else if (field.equals("type"))
 			{
@@ -100,7 +100,7 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 			}
 		}
 		reader.endObject();
-		return new Content(id, subject, readtime, type);
+		return new Content(id, subject, sendTime, type);
 	}
 	@Override
 	public void download()
@@ -150,7 +150,7 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 
 		Content c = (Content) contentList.get(position);
 
-		TimeFormat tf = new TimeFormat(c.readtime);
+		TimeFormat tf = new TimeFormat(c.sendTime);
 
 		((TextView) linearLayout.findViewById(R.id.article_category))
 				.setText(tf.format("MM-dd"));
@@ -174,14 +174,14 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 	{
 		String id; 				// 消息ID
 		String subject;			// 消息主题
-		int readtime;		// 阅读时间
+		int sendTime;		// 阅读时间
 		String type;			// 消息类型
 
-		public Content(String id, String subject, int readtime, String type)
+		public Content(String id, String subject, int sendTime, String type)
 		{
 			this.id = id;
 			this.subject = subject;
-			this.readtime = readtime;
+			this.sendTime = sendTime;
 			this.type = type;
 		}
 	}
