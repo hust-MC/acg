@@ -61,10 +61,9 @@ public final class R {
         public static final int my_info_grey=0x7f020013;
         public static final int my_message=0x7f020014;
         public static final int my_message_grey=0x7f020015;
-        public static final int navigation_top_bar_background=0x7f020016;
-        public static final int no_net=0x7f020017;
-        public static final int personal_info=0x7f020018;
-        public static final int setting=0x7f020019;
+        public static final int no_net=0x7f020016;
+        public static final int personal_info=0x7f020017;
+        public static final int setting=0x7f020018;
     }
     public static final class id {
         public static final int act_name=0x7f0a0022;

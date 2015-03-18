@@ -62,35 +62,26 @@ public class FragmentMinePage3 extends FragmentAbstract implements
 	@Override
 	public void download()
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void addObj(List<Object> contentList, int position)
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void removeObj()
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void clear()
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public Object readContent(JsonReader reader) throws IOException
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
