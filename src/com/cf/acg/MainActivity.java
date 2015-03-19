@@ -15,7 +15,6 @@ import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.Message;
 import android.app.Activity;
 import android.content.Context;

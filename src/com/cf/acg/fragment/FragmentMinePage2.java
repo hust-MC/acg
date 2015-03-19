@@ -18,6 +18,7 @@ import com.cf.acg.thread.HttpThread;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 					int position, long id)
 			{
 				Intent intent = new Intent(activity, ArticleDetail.class);
+				Log.d("token", UserInfo.getToken());
 				intent.putExtra("id", ((Content) list.get(position)).id);
 				startActivity(intent);
 			}

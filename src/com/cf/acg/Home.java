@@ -8,12 +8,9 @@ import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.crypto.spec.IvParameterSpec;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -22,7 +19,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.JsonReader;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
