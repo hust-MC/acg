@@ -62,7 +62,7 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 				Intent intent = new Intent(activity, ArticleDetail.class);
 				Log.d("token", UserInfo.getToken());
 				intent.putExtra("id", ((Content) list.get(position)).id);
-				startActivity(intent);
+//				startActivity(intent);
 			}
 		});
 	}
