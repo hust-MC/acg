@@ -12,6 +12,7 @@ import com.cf.acg.UserInfo;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ArticleDetail;
+import com.cf.acg.detail.MessageDetail;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
@@ -59,10 +60,10 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id)
 			{
-				Intent intent = new Intent(activity, ArticleDetail.class);
+				Intent intent = new Intent(activity, MessageDetail.class);
 				Log.d("token", UserInfo.getToken());
 				intent.putExtra("id", ((Content) list.get(position)).id);
-//				startActivity(intent);
+				startActivity(intent);
 			}
 		});
 	}

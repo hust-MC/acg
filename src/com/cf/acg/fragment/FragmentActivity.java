@@ -4,11 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.Policy.Parameters;
 import java.util.Calendar;
 import java.util.List;
-
-import cn.jpush.android.util.ac;
 
 import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
@@ -18,16 +15,13 @@ import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail;
 import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.thread.DownloadInterface;
-import com.cf.acg.thread.HttpThread;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.JsonReader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
@@ -39,7 +33,7 @@ public class FragmentActivity extends FragmentAbstract implements
 		DownloadInterface
 {
 	private ListView listView;
-	FragmentActivity fragmentActivity = this;
+	private FragmentActivity fragmentActivity = this;
 
 	static File file = new File(fileDir, "/activity.txt");
 

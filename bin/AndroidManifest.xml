@@ -164,7 +164,10 @@
             android:name="JPUSH_APPKEY"
             android:value="0a4d5f77ef8e5fa60e4e1904" />
         <!-- </>值来自开发者平台取得的AppKey -->
-
+        <activity
+            android:name="com.cf.acg.MyMessageDetail"
+            android:label="@string/title_activity_my_message_detail" >
+        </activity>
     </application>
 
 </manifest>

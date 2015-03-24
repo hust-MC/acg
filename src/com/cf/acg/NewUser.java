@@ -1,16 +1,14 @@
 package com.cf.acg;
 
-import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
-import android.app.Activity;
 import android.util.JsonReader;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -30,9 +28,9 @@ public class NewUser extends AcgActivity implements DownloadInterface
 	private String id, pwd, name, email, phone, reqcode;
 	private File file = new File(MainActivity.logDir, "newUser");
 
-	private boolean registerSuccess = false; 		// 标志注册是否成功
-	private String registerMessageArray = ""; 	// 注册结果提示数组
-	private String registerMessage = "";			// 注册结果提示
+	private boolean registerSuccess = false; 				// 标志注册是否成功
+	private String registerMessageArray = ""; 				// 注册结果提示数组
+	private String registerMessage = "";					// 注册结果提示
 
 	@Override
 	protected void afterDownload(Message msg)
@@ -45,6 +43,7 @@ public class NewUser extends AcgActivity implements DownloadInterface
 		if (registerSuccess)
 		{
 			finish();
+			overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
 		}
 	}
 
@@ -121,6 +120,26 @@ public class NewUser extends AcgActivity implements DownloadInterface
 		input_email = (EditText) findViewById(R.id.new_input_email);
 		input_phone = (EditText) findViewById(R.id.new_input_phone);
 		input_reqcode = (EditText) findViewById(R.id.new_input_reqcode);
+	}
+
+	/**
+	 * 检测退出事件，设置切换动画
+	 * 
+	 * @author MC
+	 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if (keyCode == KeyEvent.KEYCODE_BACK)
+		{
+			finish();
+			overridePendingTransition(R.anim.in_from_left, R.anim.out_to_right);
+			return true;
+		}
+		else
+		{
+			return super.onKeyDown(keyCode, event);
+		}
 	}
 
 	@Override

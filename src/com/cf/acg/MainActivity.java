@@ -246,6 +246,7 @@ public class MainActivity extends AcgActivity implements DownloadInterface
 	public void onClick_newUser(View view)
 	{
 		startActivity(new Intent(this, NewUser.class));
+		overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 	}
 
 	@Override

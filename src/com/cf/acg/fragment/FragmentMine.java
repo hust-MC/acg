@@ -159,18 +159,19 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 		{
 		case 0:
 			iv_bt1.setImageResource(R.drawable.my_activity);
-			iv_bt2.setImageResource(R.drawable.my_info_grey);
-			iv_bt3.setImageResource(R.drawable.my_message_grey);
+			iv_bt2.setImageResource(R.drawable.my_message_grey);
+			iv_bt3.setImageResource(R.drawable.my_info_grey);
 			break;
 		case 1:
 			iv_bt1.setImageResource(R.drawable.my_activity_grey);
-			iv_bt2.setImageResource(R.drawable.my_info);
-			iv_bt3.setImageResource(R.drawable.my_message_grey);
+			iv_bt2.setImageResource(R.drawable.my_message);
+			iv_bt3.setImageResource(R.drawable.my_info_grey);
 			break;
 		case 2:
 			iv_bt1.setImageResource(R.drawable.my_activity_grey);
-			iv_bt2.setImageResource(R.drawable.my_info_grey);
-			iv_bt3.setImageResource(R.drawable.my_message);
+			iv_bt2.setImageResource(R.drawable.my_message_grey);
+			iv_bt3.setImageResource(R.drawable.my_info);
+
 			break;
 		}
 

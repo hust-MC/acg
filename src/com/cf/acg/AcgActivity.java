@@ -11,6 +11,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+/**
+ * 类名：AcgActivity
+ * 功能：处理所有涉及到下载的activity的通用方法（注：此类要与Download接口合用）
+ * 使用方法：继承至AcgActivity，需要实现afterDownload方法，在httpThread线程执行结束后调用。
+ * 
+ * @author M~C
+ */
 public abstract class AcgActivity extends Activity
 {
 	protected LoadingProcess loadingProcess = null;

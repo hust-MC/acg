@@ -477,7 +477,6 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 	 */
 	class RefreshingTask extends AsyncTask<Void, Integer, Void>
 	{
-
 		@Override
 		protected Void doInBackground(Void... params)
 		{

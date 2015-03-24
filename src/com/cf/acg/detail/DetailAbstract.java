@@ -4,24 +4,22 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 
 import com.cf.acg.AcgActivity;
-import com.cf.acg.Home;
-import com.cf.acg.R;
-import com.cf.acg.SlidingLayout;
-import com.cf.acg.Util.LoadingProcess;
-import com.cf.acg.detail.ActivityDetail.Content;
 import com.cf.acg.fragment.FragmentAbstract;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.os.Handler;
 import android.os.Message;
 import android.util.JsonReader;
-import android.util.Log;
 import android.view.MenuItem;
 
+/**
+ * 类名：DetailAbstract 功能：用于完成所有细节显示有关的activity的任务（注：本类需要和Download一起使用） 用法说明：
+ * 1、主线程开启httpThread线程； 2、在下载线程中会调用readConent方法，用于解析Json文件。
+ * 3、结束之后自动回调本类的afterDownload方法；
+ * 4、若下载不成功会返回下载失败的错误码，主线程显示无网络。若下载成功，则调用子类的setData方法 ，将readContent解析的内容设置到相应控件中
+ * 
+ * @author M~C
+ */
 abstract public class DetailAbstract extends AcgActivity
 {
 	public static final int REQUEST_CODE = 1;				// 用于在没网络的情况下detail结束时返回
