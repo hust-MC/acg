@@ -40,7 +40,6 @@ import com.cf.acg.thread.HttpThread;
 
 public class Home extends AcgActivity implements DownloadInterface
 {
-	private static RefreshableView refreshableView;
 	private static SlidingLayout slidingLayout;
 	private static boolean firstBack = true;
 

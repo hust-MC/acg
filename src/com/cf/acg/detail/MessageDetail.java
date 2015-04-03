@@ -16,6 +16,7 @@ import android.widget.TextView;
 public class MessageDetail extends DetailAbstract implements DownloadInterface
 {
 	TextView tv_title, tv_detail;
+	String messageID;
 
 	@Override
 	public void download()

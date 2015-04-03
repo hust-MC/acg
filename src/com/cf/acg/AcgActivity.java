@@ -22,6 +22,12 @@ public abstract class AcgActivity extends Activity
 {
 	protected LoadingProcess loadingProcess = null;
 
+	/**
+	 * 用于处理download之后的事件
+	 * 
+	 * @param msg 接收子线程中发过来的Message，功能类似Handler
+	 * @author MC
+	 */
 	abstract protected void afterDownload(Message msg);
 
 	protected Handler acgHandler = new Handler()			//处理下载完成之后的事件——判断下载成功与否
