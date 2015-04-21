@@ -43,7 +43,7 @@ public class VersionUpdate extends AcgActivity implements DownloadInterface
 	private ProgressBar bar;
 
 	@Override
-	public void afterDownload(Message msg)
+	public void onDownloadFinished(Message msg)
 	{
 		String message = null;
 

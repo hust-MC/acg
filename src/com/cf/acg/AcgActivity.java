@@ -12,8 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 /**
- * 类名：AcgActivity
- * 功能：处理所有涉及到下载的activity的通用方法（注：此类要与Download接口合用）
+ * 类名：AcgActivity 功能：处理所有涉及到下载的activity的通用方法（注：此类要与Download接口合用）
  * 使用方法：继承至AcgActivity，需要实现afterDownload方法，在httpThread线程执行结束后调用。
  * 
  * @author M~C
@@ -25,12 +24,13 @@ public abstract class AcgActivity extends Activity
 	/**
 	 * 用于处理download之后的事件
 	 * 
-	 * @param msg 接收子线程中发过来的Message，功能类似Handler
+	 * @param msg
+	 *            接收子线程中发过来的Message，功能类似Handler
 	 * @author MC
 	 */
-	abstract protected void afterDownload(Message msg);
+	abstract protected void onDownloadFinished(Message msg);
 
-	protected Handler acgHandler = new Handler()			//处理下载完成之后的事件——判断下载成功与否
+	protected Handler acgHandler = new Handler()			// 处理下载完成之后的事件——判断下载成功与否
 	{
 		@Override
 		public void handleMessage(Message msg)
@@ -40,7 +40,7 @@ public abstract class AcgActivity extends Activity
 				Toast.makeText(AcgActivity.this, "网络连接错误，请检查网络状态",
 						Toast.LENGTH_LONG).show();
 			}
-			afterDownload(msg);
+			onDownloadFinished(msg);
 		}
 	};
 }

@@ -33,7 +33,7 @@ public class NewUser extends AcgActivity implements DownloadInterface
 	private String registerMessage = "";					// 注册结果提示
 
 	@Override
-	protected void afterDownload(Message msg)
+	protected void onDownloadFinished(Message msg)
 	{
 		loadingProcess.dismissDialog();
 		Toast.makeText(NewUser.this, registerMessage, Toast.LENGTH_SHORT)

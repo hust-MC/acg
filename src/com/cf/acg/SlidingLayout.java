@@ -202,6 +202,37 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 	}
 
 	@Override
+	public boolean onInterceptTouchEvent(MotionEvent event)
+	{
+		switch (event.getAction())
+		{
+		case MotionEvent.ACTION_DOWN:
+			Log.d("MC", "action_down");
+			// 手指按下时，记录按下时的横坐标
+			xDown = event.getRawX();
+			yDown = event.getRawY();
+			break;
+		case MotionEvent.ACTION_MOVE:
+			Log.d("MC", "action_move");
+			// 手指移动时，对比按下时的横坐标，计算出移动的距离，来调整右侧布局的leftMargin值，从而显示和隐藏左侧布局
+			xMove = event.getRawX();
+			yMove = event.getRawY();
+			int distanceX = (int) (xMove - xDown);
+			int distanceY = (int) (yMove - yDown);
+
+			if (Math.abs(distanceY) <= touchSlop
+					&& Math.abs(distanceX) >= touchSlop)
+			{
+				Log.d("intercept", "true");
+				return true;
+			}
+
+			break;
+		}
+		Log.d("intercept", "false");
+		return !super.onInterceptTouchEvent(event);
+	}
+	@Override
 	public boolean onTouch(View v, MotionEvent event)
 	{
 		Log.d("touch", "action_touch");

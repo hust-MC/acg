@@ -30,7 +30,7 @@ public class ForgetPwd extends AcgActivity implements DownloadInterface
 	private String result;
 
 	@Override
-	protected void afterDownload(Message msg)
+	protected void onDownloadFinished(Message msg)
 	{
 		loadingProcess.dismissDialog();
 		Toast.makeText(ForgetPwd.this, result, Toast.LENGTH_SHORT).show();

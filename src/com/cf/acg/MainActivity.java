@@ -55,7 +55,7 @@ public class MainActivity extends AcgActivity implements DownloadInterface
 	private File file = new File(logDir, "login");
 
 	@Override
-	protected void afterDownload(Message msg)
+	protected void onDownloadFinished(Message msg)
 	{
 		switch (whichToDownload)
 		{

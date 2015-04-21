@@ -41,7 +41,7 @@ abstract public class DetailAbstract extends AcgActivity
 	 * 用于处理Json文件下载之后的处理事件
 	 */
 	@Override
-	public void afterDownload(Message msg)
+	public void onDownloadFinished(Message msg)
 	{
 		if (closeDialogAftDownload)
 		{

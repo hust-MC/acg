@@ -30,7 +30,7 @@ public class ResetPwd extends AcgActivity implements DownloadInterface
 	private File file = new File(MainActivity.logDir, "reset");
 
 	@Override
-	public void afterDownload(Message msg)
+	public void onDownloadFinished(Message msg)
 	{
 		Toast.makeText(ResetPwd.this, result, Toast.LENGTH_SHORT).show();
 		if (resetSuccess)

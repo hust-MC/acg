@@ -33,8 +33,8 @@ public class FragmentActivity extends FragmentAbstract implements
 		DownloadInterface
 {
 	private ListView listView;
-	private FragmentActivity fragmentActivity = this;
-
+	
+	
 	static File file = new File(fileDir, "/activity.txt");
 
 	@Override
@@ -51,6 +51,7 @@ public class FragmentActivity extends FragmentAbstract implements
 		/*
 		 * 初始化控件
 		 */
+		
 		listView = (ListView) activity.findViewById(R.id.list_activity);
 
 		listView.setAdapter(adapter);
