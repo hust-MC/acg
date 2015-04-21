@@ -75,7 +75,7 @@ public class FragmentActivity extends FragmentAbstract implements
 		listView = (ListView) activity.findViewById(R.id.list_activity);
 		listView.setAdapter(adapter);
 
-		Home.setScrollEvent(listView);				// 设置滑动监听事件
+		// Home.setScrollEvent(listView); // 设置滑动监听事件
 
 		listView.setOnItemClickListener(new OnItemClickListener()
 		{
@@ -171,38 +171,55 @@ public class FragmentActivity extends FragmentAbstract implements
 	}
 
 	@Override
-	public void addObj(List<Object> contentList, int position)
+	public void addObj(List<Object> contentList, View convertView, int position)
 	{
+		ViewHolder viewHolder;
 		Content c = (Content) contentList.get(position);
-		LinearLayout linearLayout = (LinearLayout) activity.getLayoutInflater()
-				.inflate(R.layout.list_activity, null);
-
 		TimeFormat tf = new TimeFormat(c.start_time);
 
-		((TextView) linearLayout.findViewById(R.id.activity_event))
-				.setText(c.title);
+		if (convertView == null)
+		{
+			convertView = (LinearLayout) activity.getLayoutInflater().inflate(
+					R.layout.list_activity, null);
 
-		((TextView) linearLayout.findViewById(R.id.activity_date)).setText(tf
-				.format("MM-dd"));
-		((TextView) linearLayout.findViewById(R.id.activity_time)).setText(tf
-				.format("HH:mm"));
-		((TextView) linearLayout.findViewById(R.id.activity_week)).setText("星期"
+			viewHolder = new ViewHolder();
+			viewHolder.title = (TextView) convertView
+					.findViewById(R.id.activity_event);
+			viewHolder.date = (TextView) convertView
+					.findViewById(R.id.activity_date);
+			viewHolder.time = (TextView) convertView
+					.findViewById(R.id.activity_time);
+			viewHolder.week = (TextView) convertView
+					.findViewById(R.id.activity_week);
+			viewHolder.place = (TextView) convertView
+					.findViewById(R.id.activity_place);
+			viewHolder.state = (TextView) convertView
+					.findViewById(R.id.activity_state);
+
+			convertView.setTag(viewHolder);
+		}
+		else
+		{
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
+
+		viewHolder.title.setText(c.title);
+
+		viewHolder.date.setText(tf.format("MM-dd"));
+		viewHolder.time.setText(tf.format("HH:mm"));
+		viewHolder.week.setText("星期"
 				+ MainActivity.weekNum[tf.getField(Calendar.DAY_OF_WEEK) - 1]);
 
-		((TextView) linearLayout.findViewById(R.id.activity_place))
-				.setText(MainActivity.venueName[c.venue]);
+		viewHolder.place.setText(MainActivity.venueName[c.venue]);
 
-		TextView textState = ((TextView) linearLayout
-				.findViewById(R.id.activity_state));
-		textState.setText(MainActivity.activityStatusName[c.status]);
+		viewHolder.state.setText(MainActivity.activityStatusName[c.status]);
 		// textState
 		// .setBackgroundResource(c.state.equals("正在进行") ?
 		// R.drawable.activity_state_doing_back
 		// : R.drawable.activity_state_todo_back);
 
-		adapter.setLinearLayout(linearLayout);
+		adapter.setLinearLayout((LinearLayout) convertView);
 	}
-
 	@Override
 	public void removeObj()
 	{
@@ -234,4 +251,10 @@ public class FragmentActivity extends FragmentAbstract implements
 			this.status = status;
 		}
 	}
+
+	class ViewHolder
+	{
+		TextView title, date, time, week, place, state;
+	}
+
 }

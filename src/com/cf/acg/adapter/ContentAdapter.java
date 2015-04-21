@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.cf.acg.fragment.FragmentAbstract;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,7 +22,8 @@ public class ContentAdapter extends BaseAdapter
 	{
 		return linearLayout;
 	}
-	public void setLinearLayout(LinearLayout linearLayout)			//传入listview所在的布局容器， 以便getView函数使用
+	public void setLinearLayout(LinearLayout linearLayout)			// 传入listview所在的布局容器，
+	// 以便getView函数使用
 	{
 		this.linearLayout = linearLayout;
 	}
@@ -46,7 +48,8 @@ public class ContentAdapter extends BaseAdapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		content.addObj(contentList, position);
+		Log.d("MC", "getView");
+		content.addObj(contentList, convertView, position);
 		return linearLayout;
 	}
 

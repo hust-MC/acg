@@ -137,7 +137,7 @@ public class FragmentArticle extends FragmentAbstract implements
 	}
 
 	@Override
-	public void addObj(List<Object> contentList, int position)
+	public void addObj(List<Object> contentList,View convertView, int position)
 	{
 		LinearLayout linearLayout = (LinearLayout) activity.getLayoutInflater()
 				.inflate(R.layout.list_article, null);

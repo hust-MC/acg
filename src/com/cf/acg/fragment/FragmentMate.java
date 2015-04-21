@@ -140,7 +140,7 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 	}
 
 	@Override
-	public void addObj(List<Object> contentList, int position)
+	public void addObj(List<Object> contentList, View convertView, int position)
 	{
 		Content c = (Content) contentList.get(position);
 		LinearLayout linearLayout = (LinearLayout) activity.getLayoutInflater()

@@ -129,7 +129,7 @@ public class FragmentRecord extends FragmentAbstract implements
 	}
 
 	@Override
-	public void addObj(List<Object> contentList, int position)
+	public void addObj(List<Object> contentList, View convertView, int position)
 	{
 		Content c = (Content) contentList.get(position);
 

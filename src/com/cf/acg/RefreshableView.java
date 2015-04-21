@@ -142,7 +142,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 	 * 当前处理什么状态，可选值有STATUS_PULL_TO_REFRESH, STATUS_RELEASE_TO_REFRESH,
 	 * STATUS_REFRESHING 和 STATUS_REFRESH_FINISHED
 	 */
-	private int currentStatus = STATUS_REFRESH_FINISHED;;
+	private int currentStatus = STATUS_REFRESH_FINISHED;
 
 	/**
 	 * 记录上一次的状态是什么，避免进行重复操作
@@ -215,6 +215,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 	@Override
 	public boolean onTouch(View v, MotionEvent event)
 	{
+		Log.d("MC", "ontouch");
 		setIsAbleToPull(event);
 		if (ableToPull)
 		{
@@ -226,6 +227,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 			case MotionEvent.ACTION_MOVE:
 				float yMove = event.getRawY();
 				int distance = (int) (yMove - yDown);
+
 				// 如果手指是下滑状态，并且下拉头是完全隐藏的，就屏蔽下拉事件
 				if (distance <= 0
 						&& headerLayoutParams.topMargin <= hideHeaderHeight)
@@ -246,8 +248,9 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 					{
 						currentStatus = STATUS_PULL_TO_REFRESH;
 					}
+					Log.d("MC", "margin");
 					// 通过偏移下拉头的topMargin值，来实现下拉效果
-					headerLayoutParams.topMargin = (distance / 2)
+					headerLayoutParams.topMargin = (distance)
 							+ hideHeaderHeight;
 					header.setLayoutParams(headerLayoutParams);
 				}
@@ -319,7 +322,6 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 		View firstChild = listView.getChildAt(0);
 		if (firstChild != null)
 		{
-			Log.d("MC", firstChild.getTop() + "");
 			int firstVisiblePos = listView.getFirstVisiblePosition();
 			if (firstVisiblePos == 0 && firstChild.getTop() == 30)
 			{

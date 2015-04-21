@@ -145,7 +145,7 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 	}
 
 	@Override
-	public void addObj(List<Object> contentList, int position)
+	public void addObj(List<Object> contentList, View convertView, int position)
 	{
 
 		LinearLayout linearLayout = (LinearLayout) activity.getLayoutInflater()

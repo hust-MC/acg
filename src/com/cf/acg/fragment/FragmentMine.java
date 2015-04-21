@@ -229,7 +229,7 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 	}
 
 	@Override
-	public void addObj(List<Object> contentList, int position)
+	public void addObj(List<Object> contentList, View convertView, int position)
 	{
 	}
 

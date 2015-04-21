@@ -28,12 +28,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.jpush.android.api.JPushInterface;
 
-import com.cf.acg.RefreshableView.PullToRefreshListener;
 import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.fragment.*;
 import com.cf.acg.thread.DownloadInterface;
