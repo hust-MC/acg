@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -318,8 +319,9 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 		View firstChild = listView.getChildAt(0);
 		if (firstChild != null)
 		{
+			Log.d("MC", firstChild.getTop() + "");
 			int firstVisiblePos = listView.getFirstVisiblePosition();
-			if (firstVisiblePos == 0 && firstChild.getTop() == 0)
+			if (firstVisiblePos == 0 && firstChild.getTop() == 30)
 			{
 				if (!ableToPull)
 				{

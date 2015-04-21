@@ -10,6 +10,8 @@ import java.util.List;
 import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
+import com.cf.acg.RefreshableView;
+import com.cf.acg.RefreshableView.PullToRefreshListener;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail;
@@ -33,8 +35,8 @@ public class FragmentActivity extends FragmentAbstract implements
 		DownloadInterface
 {
 	private ListView listView;
-	
-	
+	private RefreshableView refreshableView;
+
 	static File file = new File(fileDir, "/activity.txt");
 
 	@Override
@@ -51,12 +53,30 @@ public class FragmentActivity extends FragmentAbstract implements
 		/*
 		 * 初始化控件
 		 */
-		
-		listView = (ListView) activity.findViewById(R.id.list_activity);
 
+		refreshableView = (RefreshableView) activity
+				.findViewById(R.id.fragment_activity_refreshble);
+		refreshableView.setOnRefreshListener(new PullToRefreshListener()
+		{
+			@Override
+			public void onRefresh()
+			{
+				try
+				{
+					Thread.sleep(3000);
+				} catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+				refreshableView.finishRefreshing();
+			}
+		}, 0);
+
+		listView = (ListView) activity.findViewById(R.id.list_activity);
 		listView.setAdapter(adapter);
 
 		Home.setScrollEvent(listView);				// 设置滑动监听事件
+
 		listView.setOnItemClickListener(new OnItemClickListener()
 		{
 			@Override

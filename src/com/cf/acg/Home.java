@@ -42,7 +42,6 @@ import com.cf.acg.thread.HttpThread;
 public class Home extends AcgActivity implements DownloadInterface
 {
 	private static SlidingLayout slidingLayout;
-	private RelativeLayout contentLayout;
 	private static boolean firstBack = true;
 
 	TextView textView;
@@ -94,10 +93,7 @@ public class Home extends AcgActivity implements DownloadInterface
 		menuList = (ListView) findViewById(R.id.menu_list);
 		iv_noNet = (ImageView) findViewById(R.id.no_net);
 		slidingLayout = (SlidingLayout) findViewById(R.id.slidingLayout);
-		contentLayout = (RelativeLayout) findViewById(R.id.content);
 
-		Home.setScrollEvent(contentLayout);
-		
 		/*
 		 * 处理ListView
 		 */
