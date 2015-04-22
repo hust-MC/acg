@@ -116,7 +116,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 	private void setSlidingStatus(boolean bool)
 	{
 		isSliding = bool;
-		((Home) context).setRefreshEnable(!bool);
+		((Home) context).setRefreshEnable(!bool);				// 通知HOME类，当前的滑动状态
 	}
 
 	/**

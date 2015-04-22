@@ -56,6 +56,7 @@ public class FragmentRecord extends FragmentAbstract implements
 			@Override
 			public void onRefresh()
 			{
+				clearListView();
 				new HttpThread(FragmentRecord.this, handlerRefresh).start();
 			}
 		});
@@ -175,11 +176,6 @@ public class FragmentRecord extends FragmentAbstract implements
 	}
 	@Override
 	public void removeObj()
-	{
-		// TODO Auto-generated method stub
-	}
-	@Override
-	public void clear()
 	{
 		// TODO Auto-generated method stub
 	}

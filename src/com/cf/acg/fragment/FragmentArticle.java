@@ -62,6 +62,7 @@ public class FragmentArticle extends FragmentAbstract implements
 			@Override
 			public void onRefresh()
 			{
+				clearListView();
 				new HttpThread(FragmentArticle.this, handlerRefresh).start();
 			}
 		});
@@ -175,11 +176,6 @@ public class FragmentArticle extends FragmentAbstract implements
 
 	@Override
 	public void removeObj()
-	{
-	}
-
-	@Override
-	public void clear()
 	{
 	}
 

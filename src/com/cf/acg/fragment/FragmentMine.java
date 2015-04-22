@@ -65,23 +65,6 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 
 	private void init_widget()
 	{
-		/**
-		 * 初始化下拉刷新控件
-		 */
-		refreshableView = (SwipeRefreshLayout) activity
-				.findViewById(R.id.fragment_activity_refreshble);
-		refreshableView.setOnRefreshListener(new OnRefreshListener()
-		{
-			@Override
-			public void onRefresh()
-			{
-				new HttpThread(FragmentMine.this, handlerRefresh).start();
-			}
-		});
-		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
-				android.R.color.holo_orange_light,
-				android.R.color.holo_green_dark);
-
 		buttonListener = new ButtonListener();
 
 		/*
@@ -254,11 +237,6 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 
 	@Override
 	public void removeObj()
-	{
-	}
-
-	@Override
-	public void clear()
 	{
 	}
 

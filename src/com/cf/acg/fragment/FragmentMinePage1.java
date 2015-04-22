@@ -191,11 +191,6 @@ public class FragmentMinePage1 extends FragmentAbstract implements
 	{
 	}
 
-	@Override
-	public void clear()
-	{
-	}
-
 	static class Content
 	{
 		String id;

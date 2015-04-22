@@ -51,8 +51,11 @@ public abstract class FragmentAbstract extends Fragment
 
 	public abstract void addObj(List<Object> contentList, View convertView,
 			int position);
-	public abstract void removeObj();
-	public abstract void clear();
+	public abstract void removeObj();						// 删除条目（待用）
+	protected void clearListView()									// 清空listview
+	{
+		adapter.clearContentList();
+	}
 
 	public abstract Object readContent(JsonReader reader) throws IOException;
 

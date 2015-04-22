@@ -75,11 +75,6 @@ public class FragmentMinePage3 extends FragmentAbstract implements
 	}
 
 	@Override
-	public void clear()
-	{
-	}
-
-	@Override
 	public Object readContent(JsonReader reader) throws IOException
 	{
 		return null;

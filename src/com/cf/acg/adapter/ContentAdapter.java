@@ -18,6 +18,16 @@ public class ContentAdapter extends BaseAdapter
 
 	private LinearLayout linearLayout;				// 返回用于显示的View对象
 
+	/**
+	 * 清空listview的内容
+	 * 
+	 * @author MC
+	 */
+	public void clearContentList()
+	{
+		contentList.clear();
+	}
+
 	public LinearLayout getLinearLayout()
 	{
 		return linearLayout;
@@ -30,7 +40,7 @@ public class ContentAdapter extends BaseAdapter
 
 	public ContentAdapter()
 	{
-		contentList = new ArrayList();
+		contentList = new ArrayList<Object>();
 	}
 
 	// ==========================ListView 必备方法=============================

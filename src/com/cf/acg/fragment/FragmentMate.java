@@ -57,6 +57,7 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 			@Override
 			public void onRefresh()
 			{
+				clearListView();
 				new HttpThread(FragmentMate.this, handlerRefresh).start();
 			}
 		});
@@ -177,12 +178,6 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 	}
 	@Override
 	public void removeObj()
-	{
-
-	}
-
-	@Override
-	public void clear()
 	{
 
 	}

@@ -168,11 +168,6 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 	{
 	}
 
-	@Override
-	public void clear()
-	{
-	}
-
 	class Content
 	{
 		String id; 				// 消息ID
