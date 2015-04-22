@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.cf.acg.Home;
 import com.cf.acg.R;
+import com.cf.acg.RefreshLayout;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.detail.ArticleDetail;
 import com.cf.acg.detail.DetailAbstract;
@@ -55,7 +56,7 @@ public class FragmentArticle extends FragmentAbstract implements
 		/**
 		 * 初始化下拉刷新控件
 		 */
-		refreshableView = (SwipeRefreshLayout) activity
+		refreshableView = (RefreshLayout) activity
 				.findViewById(R.id.fragment_article_refreshble);
 		refreshableView.setOnRefreshListener(new OnRefreshListener()
 		{

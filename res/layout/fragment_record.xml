@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <com.cf.acg.RefreshLayout
         android:id="@+id/fragment_record_refreshble"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,6 +18,6 @@
             android:paddingLeft="15dp"
             android:paddingRight="10dp"
             android:paddingTop="10dp" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </com.cf.acg.RefreshLayout>
 
 </LinearLayout>

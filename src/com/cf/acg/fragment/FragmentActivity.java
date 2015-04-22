@@ -10,6 +10,8 @@ import java.util.List;
 import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
+import com.cf.acg.RefreshLayout;
+import com.cf.acg.RefreshLayout.OnLoadListener;
 import com.cf.acg.SlidingLayout;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
@@ -60,7 +62,7 @@ public class FragmentActivity extends FragmentAbstract implements
 		 * 初始化控件
 		 */
 
-		refreshableView = (SwipeRefreshLayout) activity
+		refreshableView = (RefreshLayout) activity
 				.findViewById(R.id.fragment_activity_refreshble);
 		refreshableView.setOnRefreshListener(new OnRefreshListener()
 		{
@@ -74,6 +76,27 @@ public class FragmentActivity extends FragmentAbstract implements
 		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
 				android.R.color.holo_orange_light,
 				android.R.color.holo_green_dark);
+
+		// 加载监听器
+		refreshableView.setOnLoadListener(new OnLoadListener()
+		{
+
+			@Override
+			public void onLoad()
+			{
+				refreshableView.postDelayed(new Runnable()
+				{
+
+					@Override
+					public void run()
+					{
+						Toast.makeText(FragmentActivity.this.activity, "load",
+								Toast.LENGTH_SHORT).show();
+					}
+				}, 1500);
+
+			}
+		});
 
 		DisplayMetrics dm = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);

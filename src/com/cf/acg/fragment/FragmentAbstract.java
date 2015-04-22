@@ -8,6 +8,7 @@ import java.util.List;
 import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
+import com.cf.acg.RefreshLayout;
 import com.cf.acg.UserInfo;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.adapter.ContentAdapter;
@@ -25,13 +26,14 @@ import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public abstract class FragmentAbstract extends Fragment
 {
 	public static File fileDir = new File(MainActivity.rootDir.getPath()
 			+ "/Home/");
 
-	protected SwipeRefreshLayout refreshableView;
+	protected RefreshLayout refreshableView;
 
 	protected final int fActivity = 1;
 	protected final int fMate = 2;
@@ -52,7 +54,7 @@ public abstract class FragmentAbstract extends Fragment
 	public abstract void addObj(List<Object> contentList, View convertView,
 			int position);
 	public abstract void removeObj();						// 删除条目（待用）
-	protected void clearListView()									// 清空listview
+	protected void clearListView()							// 清空listview
 	{
 		adapter.clearContentList();
 	}
@@ -67,6 +69,8 @@ public abstract class FragmentAbstract extends Fragment
 		@Override
 		public void handleMessage(Message msg)
 		{
+			Toast.makeText(FragmentAbstract.this.activity, "数据已更新",
+					Toast.LENGTH_SHORT).show();
 			setData();
 			refreshableView.setRefreshing(false);
 		}

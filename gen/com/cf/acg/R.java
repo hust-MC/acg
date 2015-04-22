@@ -79,7 +79,7 @@ public final class R {
         public static final int act_time=0x7f0b001f;
         public static final int act_venue=0x7f0b0020;
         public static final int act_work_time=0x7f0b001e;
-        public static final int action_settings=0x7f0b0069;
+        public static final int action_settings=0x7f0b006b;
         public static final int activity_date=0x7f0b004c;
         public static final int activity_event=0x7f0b004f;
         public static final int activity_place=0x7f0b0050;
@@ -162,6 +162,8 @@ public final class R {
         public static final int phone=0x7f0b0003;
         public static final int progress_bar=0x7f0b0066;
         public static final int pull_to_refresh_head=0x7f0b0064;
+        public static final int pull_to_refresh_load_progress=0x7f0b0069;
+        public static final int pull_to_refresh_loadmore_text=0x7f0b006a;
         public static final int pwd=0x7f0b0010;
         public static final int pwd1=0x7f0b001a;
         public static final int pwd2=0x7f0b001c;
@@ -174,7 +176,7 @@ public final class R {
         public static final int settting=0x7f0b0062;
         public static final int sliding=0x7f0b003f;
         public static final int slidingLayout=0x7f0b0005;
-        public static final int surfaceview=0x7f0b006a;
+        public static final int surfaceview=0x7f0b006c;
         public static final int text_view=0x7f0b004b;
         public static final int trya=0x7f0b0063;
         public static final int tv_forget_pwd=0x7f0b0000;
@@ -210,6 +212,7 @@ public final class R {
         public static final int mine_page2=0x7f030019;
         public static final int mine_page3=0x7f03001a;
         public static final int pull_to_refresh=0x7f03001b;
+        public static final int pull_up_refresh=0x7f03001c;
     }
     public static final class menu {
         public static final int activity_detail=0x7f0a0000;

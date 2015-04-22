@@ -37,7 +37,7 @@
             android:text="电话号码" />
     </LinearLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <com.cf.acg.RefreshLayout
         android:id="@+id/fragment_mate_refreshble"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,6 +51,6 @@
             android:paddingBottom="10dp"
             android:paddingLeft="15dp"
             android:paddingRight="10dp" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </com.cf.acg.RefreshLayout>
 
 </LinearLayout>
