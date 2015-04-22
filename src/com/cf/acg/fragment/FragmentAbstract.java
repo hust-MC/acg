@@ -45,11 +45,13 @@ public abstract class FragmentAbstract extends Fragment
 	protected Activity activity;
 	protected JsonResolve jsonResolve;
 
+	protected int currentPage = 1;
+
 	public boolean hasDownload = false;
 	public boolean downloadException = false;
 
 	protected ContentAdapter adapter = new ContentAdapter();
-	protected List<Object> list = new ArrayList<Object>();				//
+	protected List<Object> list = new ArrayList<Object>();
 
 	public abstract void addObj(List<Object> contentList, View convertView,
 			int position);
@@ -75,6 +77,19 @@ public abstract class FragmentAbstract extends Fragment
 			refreshableView.setRefreshing(false);
 		}
 	};
+	/**
+	 * 处理上拉加载的数据
+	 */
+	protected Handler handlerLoadMore = new Handler()
+	{
+
+		@Override
+		public void handleMessage(Message msg)
+		{
+			setData();
+			refreshableView.setLoading(false);
+		}
+	};
 
 	public void setRefreshLayoutEnable(boolean bool)
 	{
@@ -89,41 +104,35 @@ public abstract class FragmentAbstract extends Fragment
 		switch (fObj)
 		{
 		case fActivity:
-		{
 			urlAddress = "http://acg.husteye.cn/api/activitylist?access_token="
 					+ UserInfo.getToken();
 			file = FragmentActivity.file;
-
 			break;
-		}
+
 		case fArticle:
-		{
 			urlAddress = "http://acg.husteye.cn/api/articlelist?access_token="
 					+ UserInfo.getToken();
 			file = FragmentArticle.file;
-
 			break;
-		}
+
 		case fMate:
-		{
 			urlAddress = "http://acg.husteye.cn/api/memberlist?access_token="
 					+ UserInfo.getToken();
 			file = FragmentMate.file;
-
 			break;
-		}
+
 		case fRecord:
-		{
 			urlAddress = "http://acg.husteye.cn/api/dutylist?access_token="
 					+ UserInfo.getToken();
 			file = FragmentRecord.file;
-
 			break;
 		}
+		if (currentPage > 1)
+		{
+			urlAddress += ("&pagenum=" + currentPage);
 		}
 		HttpThread.httpConnect(urlAddress, file);
 	}
-
 	public void setData()
 	{
 		for (Object o : list)

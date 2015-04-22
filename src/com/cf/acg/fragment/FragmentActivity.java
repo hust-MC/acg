@@ -12,7 +12,6 @@ import com.cf.acg.MainActivity;
 import com.cf.acg.R;
 import com.cf.acg.RefreshLayout;
 import com.cf.acg.RefreshLayout.OnLoadListener;
-import com.cf.acg.SlidingLayout;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail;
@@ -22,9 +21,6 @@ import com.cf.acg.thread.HttpThread;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.DisplayMetrics;
 import android.util.JsonReader;
@@ -61,14 +57,17 @@ public class FragmentActivity extends FragmentAbstract implements
 		/*
 		 * 初始化控件
 		 */
-
 		refreshableView = (RefreshLayout) activity
 				.findViewById(R.id.fragment_activity_refreshble);
+		/**
+		 * 下拉刷新监听器
+		 */
 		refreshableView.setOnRefreshListener(new OnRefreshListener()
 		{
 			@Override
 			public void onRefresh()
 			{
+				currentPage = 1;
 				clearListView();
 				new HttpThread(FragmentActivity.this, handlerRefresh).start();
 			}
@@ -77,24 +76,16 @@ public class FragmentActivity extends FragmentAbstract implements
 				android.R.color.holo_orange_light,
 				android.R.color.holo_green_dark);
 
-		// 加载监听器
+		/**
+		 * 上拉加载监听器
+		 */
 		refreshableView.setOnLoadListener(new OnLoadListener()
 		{
-
 			@Override
 			public void onLoad()
 			{
-				refreshableView.postDelayed(new Runnable()
-				{
-
-					@Override
-					public void run()
-					{
-						Toast.makeText(FragmentActivity.this.activity, "load",
-								Toast.LENGTH_SHORT).show();
-					}
-				}, 1500);
-
+				currentPage++;
+				new HttpThread(FragmentActivity.this, handlerLoadMore).start();
 			}
 		});
 
