@@ -25,7 +25,13 @@ public class ContentAdapter extends BaseAdapter
 	 */
 	public void clearContentList()
 	{
-		contentList.clear();
+		try
+		{
+			contentList.clear();
+		} catch (Exception e)
+		{
+			Log.d("MC", "exception");
+		}
 	}
 
 	public LinearLayout getLinearLayout()

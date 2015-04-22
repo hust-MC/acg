@@ -48,24 +48,6 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 	public void init_widget()
 	{
 
-		/**
-		 * 初始化下拉刷新控件
-		 */
-		refreshableView = (RefreshLayout) activity
-				.findViewById(R.id.fragment_mate_refreshble);
-		refreshableView.setOnRefreshListener(new OnRefreshListener()
-		{
-			@Override
-			public void onRefresh()
-			{
-				clearListView();
-				new HttpThread(FragmentMate.this, handlerRefresh).start();
-			}
-		});
-		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
-				android.R.color.holo_orange_light,
-				android.R.color.holo_green_dark);
-
 		listView = (ListView) activity.findViewById(R.id.list_mate);
 
 		listView.setAdapter(adapter);

@@ -49,27 +49,6 @@ public class FragmentArticle extends FragmentAbstract implements
 
 	private void init_widget()
 	{
-		/*
-		 * 初始化变量
-		 */
-
-		/**
-		 * 初始化下拉刷新控件
-		 */
-		refreshableView = (RefreshLayout) activity
-				.findViewById(R.id.fragment_article_refreshble);
-		refreshableView.setOnRefreshListener(new OnRefreshListener()
-		{
-			@Override
-			public void onRefresh()
-			{
-				clearListView();
-				new HttpThread(FragmentArticle.this, handlerRefresh).start();
-			}
-		});
-		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
-				android.R.color.holo_orange_light,
-				android.R.color.holo_green_dark);
 
 		listView = (ListView) activity.findViewById(R.id.list_article);
 		listView.setAdapter(adapter);
@@ -88,7 +67,6 @@ public class FragmentArticle extends FragmentAbstract implements
 			}
 		});
 	}
-
 	@Override
 	public Content readContent(JsonReader reader) throws IOException
 	{

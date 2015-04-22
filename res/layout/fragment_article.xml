@@ -25,21 +25,14 @@
             android:text="标题" />
     </LinearLayout>
 
-    <com.cf.acg.RefreshLayout
-        android:id="@+id/fragment_article_refreshble"
+    <ListView
+        android:id="@+id/list_article"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-
-        <ListView
-            android:id="@+id/list_article"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="10dp" >
-        </ListView>
-    </com.cf.acg.RefreshLayout>
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp" >
+    </ListView>
 
 </LinearLayout>

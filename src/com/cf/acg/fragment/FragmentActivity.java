@@ -36,8 +36,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FragmentActivity extends FragmentAbstract implements
-		DownloadInterface
+public class FragmentActivity extends FragmentAbstract
 {
 	private ListView listView;
 
@@ -51,7 +50,6 @@ public class FragmentActivity extends FragmentAbstract implements
 		jsonResolve = new JsonResolve(this);
 		return inflater.inflate(R.layout.fragment_activity, null);
 	}
-
 	private void init_widget()
 	{
 		/*
@@ -59,49 +57,13 @@ public class FragmentActivity extends FragmentAbstract implements
 		 */
 		refreshableView = (RefreshLayout) activity
 				.findViewById(R.id.fragment_activity_refreshble);
-		/**
-		 * 下拉刷新监听器
-		 */
-		refreshableView.setOnRefreshListener(new OnRefreshListener()
-		{
-			@Override
-			public void onRefresh()
-			{
-				currentPage = 1;
-				clearListView();
-				new HttpThread(FragmentActivity.this, handlerRefresh).start();
-			}
-		});
-		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
-				android.R.color.holo_orange_light,
-				android.R.color.holo_green_dark);
-
-		/**
-		 * 上拉加载监听器
-		 */
-		refreshableView.setOnLoadListener(new OnLoadListener()
-		{
-			@Override
-			public void onLoad()
-			{
-				currentPage++;
-				new HttpThread(FragmentActivity.this, handlerLoadMore).start();
-			}
-		});
-
-		DisplayMetrics dm = new DisplayMetrics();
-		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-
+		
 		listView = (ListView) activity.findViewById(R.id.list_activity);
-		LayoutParams p = (LayoutParams) listView.getLayoutParams();
-		p.height = dm.heightPixels;
-		p.width = dm.widthPixels;
-		listView.setLayoutParams(p);
-
 		listView.setAdapter(adapter);
 
-		Home.setScrollEvent(listView); // 设置滑动监听事件
+		setFreshListener();
 
+		Home.setScrollEvent(listView); // 设置滑动监听事件
 		listView.setOnItemClickListener(new OnItemClickListener()
 		{
 			@Override

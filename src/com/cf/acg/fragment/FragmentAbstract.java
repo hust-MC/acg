@@ -10,9 +10,11 @@ import com.cf.acg.MainActivity;
 import com.cf.acg.R;
 import com.cf.acg.RefreshLayout;
 import com.cf.acg.UserInfo;
+import com.cf.acg.RefreshLayout.OnLoadListener;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.adapter.ContentAdapter;
 import com.cf.acg.detail.DetailAbstract;
+import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
 import android.app.Activity;
@@ -22,13 +24,15 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public abstract class FragmentAbstract extends Fragment
+public abstract class FragmentAbstract extends Fragment implements
+		DownloadInterface
 {
 	public static File fileDir = new File(MainActivity.rootDir.getPath()
 			+ "/Home/");
@@ -91,9 +95,46 @@ public abstract class FragmentAbstract extends Fragment
 		}
 	};
 
+	protected void setFreshListener()
+	{
+
+		/**
+		 * 下拉刷新监听器
+		 */
+		refreshableView.setOnRefreshListener(new OnRefreshListener()
+		{
+			@Override
+			public void onRefresh()
+			{
+				currentPage = 1;
+				clearListView();
+				new HttpThread(FragmentAbstract.this, handlerRefresh).start();
+			}
+		});
+		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
+				android.R.color.holo_orange_light,
+				android.R.color.holo_green_dark);
+
+		/**
+		 * 上拉加载监听器
+		 */
+		refreshableView.setOnLoadListener(new OnLoadListener()
+		{
+			@Override
+			public void onLoad()
+			{
+				currentPage++;
+				new HttpThread(FragmentAbstract.this, handlerLoadMore).start();
+			}
+		});
+	}
+
 	public void setRefreshLayoutEnable(boolean bool)
 	{
-		refreshableView.setEnabled(bool);
+		if (refreshableView != null)
+		{
+			refreshableView.setEnabled(bool);
+		}
 	}
 
 	public void getHttpConnection(int fObj)
@@ -105,7 +146,7 @@ public abstract class FragmentAbstract extends Fragment
 		{
 		case fActivity:
 			urlAddress = "http://acg.husteye.cn/api/activitylist?access_token="
-					+ UserInfo.getToken();
+					+ UserInfo.getToken() + "&pagenum=" + currentPage;
 			file = FragmentActivity.file;
 			break;
 
@@ -123,13 +164,9 @@ public abstract class FragmentAbstract extends Fragment
 
 		case fRecord:
 			urlAddress = "http://acg.husteye.cn/api/dutylist?access_token="
-					+ UserInfo.getToken();
+					+ UserInfo.getToken() + "&pagenum=" + currentPage;
 			file = FragmentRecord.file;
 			break;
-		}
-		if (currentPage > 1)
-		{
-			urlAddress += ("&pagenum=" + currentPage);
 		}
 		HttpThread.httpConnect(urlAddress, file);
 	}
