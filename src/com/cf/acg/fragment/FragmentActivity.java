@@ -10,20 +10,26 @@ import java.util.List;
 import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
-import com.cf.acg.RefreshableView;
-import com.cf.acg.RefreshableView.PullToRefreshListener;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail;
 import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.thread.DownloadInterface;
+import com.cf.acg.thread.HttpThread;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.util.DisplayMetrics;
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
@@ -35,9 +41,22 @@ public class FragmentActivity extends FragmentAbstract implements
 		DownloadInterface
 {
 	private ListView listView;
-	private RefreshableView refreshableView;
+	private SwipeRefreshLayout refreshableView;
 
 	static File file = new File(fileDir, "/activity.txt");
+
+	/**
+	 * 处理刷新的数据
+	 */
+	private Handler handler = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg)
+		{
+			setData();
+			refreshableView.setRefreshing(false);
+		}
+	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,34 +67,60 @@ public class FragmentActivity extends FragmentAbstract implements
 		return inflater.inflate(R.layout.fragment_activity, null);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void init_widget()
 	{
 		/*
 		 * 初始化控件
 		 */
 
-		refreshableView = (RefreshableView) activity
+		refreshableView = (SwipeRefreshLayout) activity
 				.findViewById(R.id.fragment_activity_refreshble);
-		refreshableView.setOnRefreshListener(new PullToRefreshListener()
+
+		refreshableView.setOnRefreshListener(new OnRefreshListener()
 		{
 			@Override
 			public void onRefresh()
 			{
-				try
-				{
-					Thread.sleep(3000);
-				} catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-				refreshableView.finishRefreshing();
+				new HttpThread(FragmentActivity.this, handler).start();
 			}
-		}, 0);
+		});
+		refreshableView.setColorScheme(android.R.color.holo_blue_bright,
+				android.R.color.holo_green_light,
+				android.R.color.holo_orange_light,
+				android.R.color.holo_red_light);
+
+		// refreshableView.setOnRefreshListener(new PullToRefreshListener()
+		// {
+		// @Override
+		// public void onRefresh()
+		// {
+		// try
+		// {
+		// Thread.sleep(3000);
+		// } catch (InterruptedException e)
+		// {
+		// e.printStackTrace();
+		// }
+		// refreshableView.finishRefreshing();
+		// }
+		// }, 0);
+
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
 
 		listView = (ListView) activity.findViewById(R.id.list_activity);
+		LayoutParams p = (LayoutParams) listView.getLayoutParams();
+		p.height = dm.heightPixels;
+		p.width = dm.widthPixels;
+		listView.setLayoutParams(p);
+
+		// listView.setAdapter(new ArrayAdapter<String>(activity,
+		// R.layout.menu_list_item, getResources().getStringArray(
+		// R.array.menu_array)));
 		listView.setAdapter(adapter);
 
-		// Home.setScrollEvent(listView); // 设置滑动监听事件
+		Home.setScrollEvent(refreshableView); // 设置滑动监听事件
 
 		listView.setOnItemClickListener(new OnItemClickListener()
 		{
@@ -89,7 +134,6 @@ public class FragmentActivity extends FragmentAbstract implements
 			}
 		});
 	}
-
 	/*
 	 * 定义Content对象成员的接收回调函数
 	 */
@@ -176,9 +220,10 @@ public class FragmentActivity extends FragmentAbstract implements
 		ViewHolder viewHolder;
 		Content c = (Content) contentList.get(position);
 		TimeFormat tf = new TimeFormat(c.start_time);
-
+		Log.d("MC", "getView");
 		if (convertView == null)
 		{
+			Log.d("MC", "converview");
 			convertView = (LinearLayout) activity.getLayoutInflater().inflate(
 					R.layout.list_activity, null);
 

@@ -24,7 +24,7 @@ public class HttpThread extends Thread
 	DownloadInterface downloadClass;
 	SetProgressInterface setProgressInterface;
 	Handler handler;
-	static public boolean hasNet = true;				// 标志网络状态
+	static public boolean hasNet = true;		// 标志网络状态
 
 	static int progress = 0;					// 显示下载进度
 

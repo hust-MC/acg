@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,9 +19,13 @@ import android.widget.TextView;
 
 /**
  * 可进行下拉刷新的自定义控件。
+ * 
+ * @author guolin
+ * 
  */
 public class RefreshableView extends LinearLayout implements OnTouchListener
 {
+
 	/**
 	 * 下拉状态
 	 */
@@ -142,7 +145,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 	 * 当前处理什么状态，可选值有STATUS_PULL_TO_REFRESH, STATUS_RELEASE_TO_REFRESH,
 	 * STATUS_REFRESHING 和 STATUS_REFRESH_FINISHED
 	 */
-	private int currentStatus = STATUS_REFRESH_FINISHED;
+	private int currentStatus = STATUS_REFRESH_FINISHED;;
 
 	/**
 	 * 记录上一次的状态是什么，避免进行重复操作
@@ -188,7 +191,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 		touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
 		refreshUpdatedAtValue();
 		setOrientation(VERTICAL);
-		addView(header);
+		addView(header, 0);
 	}
 
 	/**
@@ -215,7 +218,6 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 	@Override
 	public boolean onTouch(View v, MotionEvent event)
 	{
-		Log.d("MC", "ontouch");
 		setIsAbleToPull(event);
 		if (ableToPull)
 		{
@@ -227,7 +229,6 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 			case MotionEvent.ACTION_MOVE:
 				float yMove = event.getRawY();
 				int distance = (int) (yMove - yDown);
-
 				// 如果手指是下滑状态，并且下拉头是完全隐藏的，就屏蔽下拉事件
 				if (distance <= 0
 						&& headerLayoutParams.topMargin <= hideHeaderHeight)
@@ -248,9 +249,8 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 					{
 						currentStatus = STATUS_PULL_TO_REFRESH;
 					}
-					Log.d("MC", "margin");
 					// 通过偏移下拉头的topMargin值，来实现下拉效果
-					headerLayoutParams.topMargin = (distance)
+					headerLayoutParams.topMargin = (distance / 2)
 							+ hideHeaderHeight;
 					header.setLayoutParams(headerLayoutParams);
 				}
@@ -323,7 +323,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 		if (firstChild != null)
 		{
 			int firstVisiblePos = listView.getFirstVisiblePosition();
-			if (firstVisiblePos == 0 && firstChild.getTop() == 30)
+			if (firstVisiblePos == 0 && firstChild.getTop() == 0)
 			{
 				if (!ableToPull)
 				{
@@ -477,6 +477,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 	 */
 	class RefreshingTask extends AsyncTask<Void, Integer, Void>
 	{
+
 		@Override
 		protected Void doInBackground(Void... params)
 		{
@@ -508,7 +509,6 @@ public class RefreshableView extends LinearLayout implements OnTouchListener
 			headerLayoutParams.topMargin = topMargin[0];
 			header.setLayoutParams(headerLayoutParams);
 		}
-
 	}
 
 	/**
