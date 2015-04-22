@@ -14,8 +14,11 @@ import com.cf.acg.R;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.thread.DownloadInterface;
+import com.cf.acg.thread.HttpThread;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.format.Time;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
@@ -43,6 +46,23 @@ public class FragmentRecord extends FragmentAbstract implements
 
 	public void init_widget()
 	{
+		/**
+		 * 初始化下拉刷新控件
+		 */
+		refreshableView = (SwipeRefreshLayout) activity
+				.findViewById(R.id.fragment_record_refreshble);
+		refreshableView.setOnRefreshListener(new OnRefreshListener()
+		{
+			@Override
+			public void onRefresh()
+			{
+				new HttpThread(FragmentRecord.this, handlerRefresh).start();
+			}
+		});
+		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
+				android.R.color.holo_orange_light,
+				android.R.color.holo_green_dark);
+
 		listView = (ListView) activity.findViewById(R.id.list_record);
 
 		listView.setAdapter(adapter);

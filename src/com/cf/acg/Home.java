@@ -41,6 +41,7 @@ public class Home extends AcgActivity implements DownloadInterface
 {
 	private static SlidingLayout slidingLayout;
 	private static boolean firstBack = true;
+	private int visibleFragment = 0;
 
 	TextView textView;
 	ListView menuList;
@@ -161,6 +162,12 @@ public class Home extends AcgActivity implements DownloadInterface
 		}
 	}
 
+	public void setRefreshEnable(boolean bool)
+	{
+		((FragmentAbstract) fragments[visibleFragment])
+				.setRefreshLayoutEnable(bool);
+	}
+
 	/*
 	 * 显示传入的id对应的fragment
 	 */
@@ -173,6 +180,7 @@ public class Home extends AcgActivity implements DownloadInterface
 			fragmentTransaction.hide(fragment);
 		}
 		fragmentTransaction.show(fragments[id]).commit();
+		visibleFragment = id;
 
 		/*
 		 * 如果没有显示过，则下载数据。 下载完成之后跳到本函数的handler中表示下载成功
@@ -190,7 +198,7 @@ public class Home extends AcgActivity implements DownloadInterface
 	private void handleFragment()
 	{
 		init_fragment();
-		showFragment(0);
+		showFragment(1);
 	}
 
 	public static void setScrollEvent(View v)

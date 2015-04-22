@@ -12,9 +12,12 @@ import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.detail.MateDetail;
 import com.cf.acg.thread.DownloadInterface;
+import com.cf.acg.thread.HttpThread;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +46,24 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 
 	public void init_widget()
 	{
+
+		/**
+		 * 初始化下拉刷新控件
+		 */
+		refreshableView = (SwipeRefreshLayout) activity
+				.findViewById(R.id.fragment_mate_refreshble);
+		refreshableView.setOnRefreshListener(new OnRefreshListener()
+		{
+			@Override
+			public void onRefresh()
+			{
+				new HttpThread(FragmentMate.this, handlerRefresh).start();
+			}
+		});
+		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
+				android.R.color.holo_orange_light,
+				android.R.color.holo_green_dark);
+
 		listView = (ListView) activity.findViewById(R.id.list_mate);
 
 		listView.setAdapter(adapter);
@@ -60,7 +81,6 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 			}
 		});
 	}
-
 	/*
 	 * 解析Json数据的回调函数
 	 */

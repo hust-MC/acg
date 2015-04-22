@@ -4,13 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/list_record"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/fragment_record_refreshble"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="10dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp" />
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/list_record"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

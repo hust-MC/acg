@@ -18,14 +18,20 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 
 public abstract class FragmentAbstract extends Fragment
 {
 	public static File fileDir = new File(MainActivity.rootDir.getPath()
 			+ "/Home/");
+
+	protected SwipeRefreshLayout refreshableView;
 
 	protected final int fActivity = 1;
 	protected final int fMate = 2;
@@ -49,6 +55,24 @@ public abstract class FragmentAbstract extends Fragment
 	public abstract void clear();
 
 	public abstract Object readContent(JsonReader reader) throws IOException;
+
+	/**
+	 * 处理刷新的数据
+	 */
+	protected Handler handlerRefresh = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg)
+		{
+			setData();
+			refreshableView.setRefreshing(false);
+		}
+	};
+
+	public void setRefreshLayoutEnable(boolean bool)
+	{
+		refreshableView.setEnabled(bool);
+	}
 
 	public void getHttpConnection(int fObj)
 	{
@@ -92,6 +116,7 @@ public abstract class FragmentAbstract extends Fragment
 		}
 		HttpThread.httpConnect(urlAddress, file);
 	}
+
 	public void setData()
 	{
 		for (Object o : list)

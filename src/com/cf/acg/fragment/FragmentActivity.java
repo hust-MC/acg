@@ -10,6 +10,7 @@ import java.util.List;
 import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
+import com.cf.acg.SlidingLayout;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail;
@@ -41,22 +42,8 @@ public class FragmentActivity extends FragmentAbstract implements
 		DownloadInterface
 {
 	private ListView listView;
-	private SwipeRefreshLayout refreshableView;
 
 	static File file = new File(fileDir, "/activity.txt");
-
-	/**
-	 * 处理刷新的数据
-	 */
-	private Handler handler = new Handler()
-	{
-		@Override
-		public void handleMessage(Message msg)
-		{
-			setData();
-			refreshableView.setRefreshing(false);
-		}
-	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +54,6 @@ public class FragmentActivity extends FragmentAbstract implements
 		return inflater.inflate(R.layout.fragment_activity, null);
 	}
 
-	@SuppressWarnings("deprecation")
 	private void init_widget()
 	{
 		/*
@@ -76,35 +62,17 @@ public class FragmentActivity extends FragmentAbstract implements
 
 		refreshableView = (SwipeRefreshLayout) activity
 				.findViewById(R.id.fragment_activity_refreshble);
-
 		refreshableView.setOnRefreshListener(new OnRefreshListener()
 		{
 			@Override
 			public void onRefresh()
 			{
-				new HttpThread(FragmentActivity.this, handler).start();
+				new HttpThread(FragmentActivity.this, handlerRefresh).start();
 			}
 		});
-		refreshableView.setColorScheme(android.R.color.holo_blue_bright,
-				android.R.color.holo_green_light,
+		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
 				android.R.color.holo_orange_light,
-				android.R.color.holo_red_light);
-
-		// refreshableView.setOnRefreshListener(new PullToRefreshListener()
-		// {
-		// @Override
-		// public void onRefresh()
-		// {
-		// try
-		// {
-		// Thread.sleep(3000);
-		// } catch (InterruptedException e)
-		// {
-		// e.printStackTrace();
-		// }
-		// refreshableView.finishRefreshing();
-		// }
-		// }, 0);
+				android.R.color.holo_green_dark);
 
 		DisplayMetrics dm = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -115,12 +83,9 @@ public class FragmentActivity extends FragmentAbstract implements
 		p.width = dm.widthPixels;
 		listView.setLayoutParams(p);
 
-		// listView.setAdapter(new ArrayAdapter<String>(activity,
-		// R.layout.menu_list_item, getResources().getStringArray(
-		// R.array.menu_array)));
 		listView.setAdapter(adapter);
 
-		Home.setScrollEvent(refreshableView); // 设置滑动监听事件
+		Home.setScrollEvent(listView); // 设置滑动监听事件
 
 		listView.setOnItemClickListener(new OnItemClickListener()
 		{

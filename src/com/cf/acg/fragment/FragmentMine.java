@@ -17,6 +17,8 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +65,23 @@ public class FragmentMine extends FragmentAbstract implements DownloadInterface
 
 	private void init_widget()
 	{
+		/**
+		 * 初始化下拉刷新控件
+		 */
+		refreshableView = (SwipeRefreshLayout) activity
+				.findViewById(R.id.fragment_activity_refreshble);
+		refreshableView.setOnRefreshListener(new OnRefreshListener()
+		{
+			@Override
+			public void onRefresh()
+			{
+				new HttpThread(FragmentMine.this, handlerRefresh).start();
+			}
+		});
+		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
+				android.R.color.holo_orange_light,
+				android.R.color.holo_green_dark);
+
 		buttonListener = new ButtonListener();
 
 		/*

@@ -12,9 +12,12 @@ import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.detail.ArticleDetail;
 import com.cf.acg.detail.DetailAbstract;
 import com.cf.acg.thread.DownloadInterface;
+import com.cf.acg.thread.HttpThread;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +51,24 @@ public class FragmentArticle extends FragmentAbstract implements
 		/*
 		 * 初始化变量
 		 */
+
+		/**
+		 * 初始化下拉刷新控件
+		 */
+		refreshableView = (SwipeRefreshLayout) activity
+				.findViewById(R.id.fragment_article_refreshble);
+		refreshableView.setOnRefreshListener(new OnRefreshListener()
+		{
+			@Override
+			public void onRefresh()
+			{
+				new HttpThread(FragmentArticle.this, handlerRefresh).start();
+			}
+		});
+		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
+				android.R.color.holo_orange_light,
+				android.R.color.holo_green_dark);
+
 		listView = (ListView) activity.findViewById(R.id.list_article);
 		listView.setAdapter(adapter);
 
@@ -137,7 +158,7 @@ public class FragmentArticle extends FragmentAbstract implements
 	}
 
 	@Override
-	public void addObj(List<Object> contentList,View convertView, int position)
+	public void addObj(List<Object> contentList, View convertView, int position)
 	{
 		LinearLayout linearLayout = (LinearLayout) activity.getLayoutInflater()
 				.inflate(R.layout.list_article, null);

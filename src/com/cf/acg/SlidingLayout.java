@@ -1,5 +1,7 @@
 package com.cf.acg;
 
+import com.cf.acg.fragment.FragmentActivity;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
@@ -74,7 +76,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 	/**
 	 * 是否正在滑动。
 	 */
-	private boolean isSliding;
+	private static boolean isSliding;
 
 	/**
 	 * 声明两侧布局对象。
@@ -102,6 +104,22 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 	private VelocityTracker mVelocityTracker;
 
 	/**
+	 * 存储调用对象
+	 * 
+	 * @author MC
+	 */
+	private Context context;
+
+	/**
+	 * 设置滑动状态
+	 */
+	private void setSlidingStatus(boolean bool)
+	{
+		isSliding = bool;
+		((Home) context).setRefreshEnable(!bool);
+	}
+
+	/**
 	 * 重写SlidingLayout的构造函数，其中获取了屏幕的宽度。
 	 * 
 	 * @param context
@@ -110,6 +128,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 	public SlidingLayout(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
+		this.context = context;
 		WindowManager wm = (WindowManager) context
 				.getSystemService(Context.WINDOW_SERVICE);
 		screenWidth = wm.getDefaultDisplay().getWidth();
@@ -260,7 +279,8 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 				{
 					leftLayout.setVisibility(View.VISIBLE);
 				}
-				isSliding = true;
+				setSlidingStatus(true);
+
 				rightLayoutParams.rightMargin = -distanceX;
 				if (rightLayoutParams.rightMargin < rightEdge)
 				{
@@ -278,7 +298,8 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 			if ((isLeftLayoutVisible && -distanceX >= touchSlop) || isSliding
 					&& isLeftLayoutVisible)
 			{
-				isSliding = true;
+
+				setSlidingStatus(true);
 				rightLayoutParams.rightMargin = rightEdge - distanceX;
 				if (rightLayoutParams.rightMargin > leftEdge)
 				{
@@ -507,6 +528,7 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 			}
 			rightLayoutParams.rightMargin = rightMargin;
 			rightLayout.setLayoutParams(rightLayoutParams);
+			setSlidingStatus(isSliding);
 		}
 	}
 
