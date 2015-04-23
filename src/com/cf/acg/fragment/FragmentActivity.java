@@ -61,7 +61,8 @@ public class FragmentActivity extends FragmentAbstract
 		listView = (ListView) activity.findViewById(R.id.list_activity);
 		listView.setAdapter(adapter);
 
-		setFreshListener();
+		setRefreshListener();
+		setDownMoreListener();
 
 		Home.setScrollEvent(listView); // 设置滑动监听事件
 		listView.setOnItemClickListener(new OnItemClickListener()

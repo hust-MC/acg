@@ -58,11 +58,11 @@ public class FragmentRecord extends FragmentAbstract implements
 
 		listView = (ListView) activity.findViewById(R.id.list_record);
 		listView.setAdapter(adapter);
-		setFreshListener();
+		setRefreshListener();
+		setDownMoreListener();
 
 		Home.setScrollEvent(listView);
 	}
-
 	@Override
 	public Object readContent(JsonReader reader) throws IOException
 	{

@@ -78,6 +78,7 @@ public abstract class FragmentAbstract extends Fragment implements
 			Log.d("MC", "refresh");
 			Toast.makeText(FragmentAbstract.this.activity, "数据已更新",
 					Toast.LENGTH_SHORT).show();
+			clearListView();
 			setData();
 			refreshableView.setRefreshing(false);
 		}
@@ -97,7 +98,7 @@ public abstract class FragmentAbstract extends Fragment implements
 		}
 	};
 
-	protected void setFreshListener()
+	protected void setRefreshListener()
 	{
 
 		/**
@@ -109,7 +110,6 @@ public abstract class FragmentAbstract extends Fragment implements
 			public void onRefresh()
 			{
 				currentPage = 1;
-				clearListView();
 				new HttpThread(FragmentAbstract.this, handlerRefresh).start();
 			}
 		});
@@ -117,6 +117,10 @@ public abstract class FragmentAbstract extends Fragment implements
 				android.R.color.holo_orange_light,
 				android.R.color.holo_green_dark);
 
+	}
+
+	protected void setDownMoreListener()
+	{
 		/**
 		 * 上拉加载监听器
 		 */

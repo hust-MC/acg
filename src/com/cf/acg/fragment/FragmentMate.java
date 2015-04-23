@@ -47,10 +47,13 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 
 	public void init_widget()
 	{
+		refreshableView = (RefreshLayout) activity
+				.findViewById(R.id.fragment_mate_refreshble);
 
 		listView = (ListView) activity.findViewById(R.id.list_mate);
-
 		listView.setAdapter(adapter);
+
+		setRefreshListener();
 		Home.setScrollEvent(listView);
 
 		listView.setOnItemClickListener(new OnItemClickListener()
