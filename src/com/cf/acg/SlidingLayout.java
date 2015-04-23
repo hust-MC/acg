@@ -290,7 +290,6 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 				{
 					rightLayoutParams.rightMargin = leftEdge;			 	// 用于处理右滑再左滑的情况
 				}
-				Log.d("margin", "right" + rightLayoutParams.rightMargin);
 				rightLayout.setLayoutParams(rightLayoutParams);
 			}
 
@@ -309,7 +308,6 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 				{
 					rightLayoutParams.rightMargin = rightEdge;				// 用于处理左滑再右滑的情况
 				}
-				Log.d("margin", "left" + rightLayoutParams.rightMargin);
 				rightLayout.setLayoutParams(rightLayoutParams);
 			}
 			break;
@@ -355,27 +353,22 @@ public class SlidingLayout extends RelativeLayout implements OnTouchListener
 			if (isSliding)
 			{
 				unFocusBindView();
-				Log.d("MC", "isSliding->true");
 				return true;
 			}
 			if (isLeftLayoutVisible)
 			{
-				Log.d("MC", "isLeft->true");
 				return true;
 			}
 			if (v instanceof TextView)
 			{
-				Log.d("MC", "TextView->true");
 				return true;
 			}
 			if (v instanceof LinearLayout)
 			{
 				return true;
 			}
-			Log.d("MC", "none->false");
 			return false;
 		}
-		Log.d("MC", "not enable->true");
 		return true;
 	}
 	/**

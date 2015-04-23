@@ -20,9 +20,11 @@ import com.cf.acg.thread.HttpThread;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,6 +42,9 @@ public class FragmentRecord extends FragmentAbstract implements
 			Bundle savedInstanceState)
 	{
 		activity = getActivity();
+		jsonResolve = new JsonResolve(this);
+
+		fType = fRecord;
 		return inflater.inflate(R.layout.fragment_record, null);
 	}
 
@@ -52,10 +57,9 @@ public class FragmentRecord extends FragmentAbstract implements
 				.findViewById(R.id.fragment_record_refreshble);
 
 		listView = (ListView) activity.findViewById(R.id.list_record);
-
+		listView.setAdapter(adapter);
 		setFreshListener();
 
-		listView.setAdapter(adapter);
 		Home.setScrollEvent(listView);
 	}
 
@@ -103,7 +107,7 @@ public class FragmentRecord extends FragmentAbstract implements
 	@Override
 	public void download()
 	{
-		getHttpConnection(fType);				// 通用方法
+		getHttpConnection(fRecord);				// 通用方法
 		FileInputStream fis = null;
 		if (downloadException)
 		{
@@ -120,7 +124,9 @@ public class FragmentRecord extends FragmentAbstract implements
 
 		try
 		{
+			Log.d("MC", list.size() + "");
 			list = jsonResolve.readJsonStream(fis);
+			Log.d("MC", "list FInish");
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -132,36 +138,49 @@ public class FragmentRecord extends FragmentAbstract implements
 	{
 		init_widget();
 
-		jsonResolve = new JsonResolve(this);
-		fType = fRecord;
-
 		super.onActivityCreated(savedInstanceState);
 	}
 
 	@Override
 	public void addObj(List<Object> contentList, View convertView, int position)
 	{
+		ViewHolder viewHolder;
 		Content c = (Content) contentList.get(position);
 
 		TimeFormat tf_startTime = new TimeFormat(c.start_time);
 		TimeFormat tf_endTime = new TimeFormat(c.end_time);
 
-		LinearLayout linearLayout = (LinearLayout) activity.getLayoutInflater()
-				.inflate(R.layout.list_record, null);
+		if (convertView == null)
+		{
+			convertView = (LinearLayout) activity.getLayoutInflater().inflate(
+					R.layout.list_record, null);
 
-		((TextView) linearLayout.findViewById(R.id.record_time))
-				.setText(tf_startTime.format("yyyy年MM月dd日")
-						+ "  星期"
-						+ MainActivity.weekNum[tf_startTime
-								.getField(Calendar.DAY_OF_WEEK) - 1] + "  "
-						+ tf_startTime.format("HH:mm") + "-"
-						+ tf_endTime.format("HH:mm"));
-		((TextView) linearLayout.findViewById(R.id.record_place)).setText("地点："
+			viewHolder = new ViewHolder();
+			viewHolder.time = (TextView) convertView
+					.findViewById(R.id.record_time);
+			viewHolder.place = (TextView) convertView
+					.findViewById(R.id.record_place);
+			viewHolder.event = (TextView) convertView
+					.findViewById(R.id.record_event);
+
+			convertView.setTag(viewHolder);
+		}
+		else
+		{
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
+
+		viewHolder.time.setText(tf_startTime.format("yyyy年MM月dd日")
+				+ "  星期"
+				+ MainActivity.weekNum[tf_startTime
+						.getField(Calendar.DAY_OF_WEEK) - 1] + "  "
+				+ tf_startTime.format("HH:mm") + "-"
+				+ tf_endTime.format("HH:mm"));
+		viewHolder.place.setText("地点："
 				+ MainActivity.venueName[Integer.parseInt(c.venue)]);
-		((TextView) linearLayout.findViewById(R.id.record_event)).setText("活动："
-				+ c.title);
+		viewHolder.event.setText("活动：" + c.title);
 
-		adapter.setLinearLayout(linearLayout);
+		adapter.setLinearLayout((LinearLayout) convertView);
 	}
 	@Override
 	public void removeObj()
@@ -186,5 +205,10 @@ public class FragmentRecord extends FragmentAbstract implements
 			this.venue = venue;
 			this.title = title;
 		}
+	}
+
+	class ViewHolder
+	{
+		TextView time, place, event;
 	}
 }

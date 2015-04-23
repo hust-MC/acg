@@ -8,9 +8,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.cf.acg.detail.DetailAbstract;
-import com.cf.acg.fragment.FragmentAbstract;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,6 +34,7 @@ public class HttpThread extends Thread
 	@Override
 	public void run()
 	{
+		Log.d("MC", "thread");
 		downloadClass.download();
 		Message message = handler.obtainMessage();
 		if (!hasNet)

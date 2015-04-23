@@ -27,7 +27,10 @@ public class ContentAdapter extends BaseAdapter
 	{
 		try
 		{
+			Log.d("MC", "size: " + contentList.size() + "");
 			contentList.clear();
+			notifyDataSetChanged();					// 非常重要，否则会数组越界异常！！
+			Log.d("MC", "size: " + contentList.size() + "");
 		} catch (Exception e)
 		{
 			Log.d("MC", "exception");
@@ -56,7 +59,6 @@ public class ContentAdapter extends BaseAdapter
 	@Override
 	public int getCount()
 	{
-		Log.d("MC", "getCount");
 		return contentList.size();
 	}
 	/*
@@ -65,7 +67,6 @@ public class ContentAdapter extends BaseAdapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		Log.d("MC", "getView");
 		content.addObj(contentList, convertView, position);
 		return linearLayout;
 	}
@@ -73,13 +74,11 @@ public class ContentAdapter extends BaseAdapter
 	@Override
 	public Object getItem(int position)
 	{
-		Log.d("MC", "getItem");
 		return null;
 	}
 	@Override
 	public long getItemId(int position)
 	{
-		Log.d("MC", "getId");
 		return 0;
 	}
 	// =====================================END====================================

@@ -57,7 +57,7 @@ public class FragmentActivity extends FragmentAbstract
 		 */
 		refreshableView = (RefreshLayout) activity
 				.findViewById(R.id.fragment_activity_refreshble);
-		
+
 		listView = (ListView) activity.findViewById(R.id.list_activity);
 		listView.setAdapter(adapter);
 
@@ -162,10 +162,8 @@ public class FragmentActivity extends FragmentAbstract
 		ViewHolder viewHolder;
 		Content c = (Content) contentList.get(position);
 		TimeFormat tf = new TimeFormat(c.start_time);
-		Log.d("MC", "getView");
 		if (convertView == null)
 		{
-			Log.d("MC", "converview");
 			convertView = (LinearLayout) activity.getLayoutInflater().inflate(
 					R.layout.list_activity, null);
 

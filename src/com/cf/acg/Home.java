@@ -198,7 +198,7 @@ public class Home extends AcgActivity implements DownloadInterface
 	private void handleFragment()
 	{
 		init_fragment();
-		showFragment(0);
+		showFragment(2);
 	}
 
 	public static void setScrollEvent(View v)

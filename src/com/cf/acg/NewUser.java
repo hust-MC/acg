@@ -54,7 +54,6 @@ public class NewUser extends AcgActivity implements DownloadInterface
 				+ "&password=" + pwd + "&name=" + name + "&email=" + email
 				+ "&mobile=" + phone + "&reqcode=" + reqcode;
 
-		Log.d("MC", urlAddress);
 		HttpThread.httpConnect(urlAddress, file);
 
 		try

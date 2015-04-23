@@ -75,6 +75,7 @@ public abstract class FragmentAbstract extends Fragment implements
 		@Override
 		public void handleMessage(Message msg)
 		{
+			Log.d("MC", "refresh");
 			Toast.makeText(FragmentAbstract.this.activity, "数据已更新",
 					Toast.LENGTH_SHORT).show();
 			setData();
@@ -90,6 +91,7 @@ public abstract class FragmentAbstract extends Fragment implements
 		@Override
 		public void handleMessage(Message msg)
 		{
+			Log.d("MC", "loadmore");
 			setData();
 			refreshableView.setLoading(false);
 		}

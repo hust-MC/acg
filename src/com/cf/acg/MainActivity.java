@@ -220,12 +220,10 @@ public class MainActivity extends AcgActivity implements DownloadInterface
 
 				case 6002:
 					logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-					Log.d("MC", logs);
 					break;
 
 				default:
 					logs = "Failed with errorCode = " + code;
-					Log.e("MC", logs);
 				}
 			}
 		});
