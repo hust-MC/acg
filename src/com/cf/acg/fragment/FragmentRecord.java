@@ -185,7 +185,6 @@ public class FragmentRecord extends FragmentAbstract implements
 	@Override
 	public void removeObj()
 	{
-		// TODO Auto-generated method stub
 	}
 
 	class Content

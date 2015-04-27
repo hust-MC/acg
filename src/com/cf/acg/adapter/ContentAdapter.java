@@ -18,6 +18,11 @@ public class ContentAdapter extends BaseAdapter
 
 	private LinearLayout linearLayout;				// 返回用于显示的View对象
 
+	public List<Object> getContentList()
+	{
+		return contentList;
+	}
+
 	/**
 	 * 清空listview的内容
 	 * 

@@ -141,7 +141,7 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 
 		jsonResolve = new JsonResolve(this);
 
-		super.onActivityCreated(savedInstanceState);
+		super.onActivityCreated(savedInstanceState); 
 	}
 
 	@Override

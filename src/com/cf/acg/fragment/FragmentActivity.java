@@ -11,24 +11,17 @@ import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
 import com.cf.acg.RefreshLayout;
-import com.cf.acg.RefreshLayout.OnLoadListener;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.detail.ActivityDetail;
 import com.cf.acg.detail.DetailAbstract;
-import com.cf.acg.thread.DownloadInterface;
-import com.cf.acg.thread.HttpThread;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.util.DisplayMetrics;
 import android.util.JsonReader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
@@ -72,7 +65,8 @@ public class FragmentActivity extends FragmentAbstract
 					int position, long id)
 			{
 				Intent intent = new Intent(activity, ActivityDetail.class);
-				intent.putExtra("id", ((Content) list.get(position)).id);
+				intent.putExtra("id",
+						((Content) adapter.getContentList().get(position)).id);
 				startActivityForResult(intent, DetailAbstract.REQUEST_CODE);
 			}
 		});

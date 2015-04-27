@@ -66,6 +66,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		String remark = null;				// 活动备注
 		int venue = 0;						// 活动场地
 		int status = 0;						// 活动状态
+		String dutiesArray = null;			// 任务数组
 
 		reader.beginObject();
 		while (reader.hasNext())
@@ -95,6 +96,10 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 			{
 				remark = reader.nextString();
 			}
+			// else if (field.equals("duties"))
+			// {
+			// dutiesArray = reader.nextString();
+			// }
 			else
 			{
 				reader.skipValue();
@@ -104,7 +109,6 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		return new Content(title, work_start_time, start_time, remark, venue,
 				status);
 	}
-
 	@Override
 	protected void setData()
 	{
@@ -183,6 +187,5 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		int venue;					// 活动场地
 		int status;					// 活动状态
 	}
-
 
 }
