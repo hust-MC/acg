@@ -87,28 +87,24 @@ public class FragmentActivity extends FragmentAbstract
 		while (reader.hasNext())
 		{
 			String field = reader.nextName();
-			if (field.equals("id"))
+			switch (field)
 			{
+			case "id":
 				id = reader.nextString();
-			}
-			else if (field.equals("start_time"))
-			{
+				break;
+			case "start_time":
 				start_time = reader.nextInt();
-			}
-			else if (field.equals("title"))
-			{
+				break;
+			case "title":
 				title = reader.nextString();
-			}
-			else if (field.equals("venue"))
-			{
+				break;
+			case "venue":
 				venue = reader.nextInt();
-			}
-			else if (field.equals("status"))
-			{
+				break;
+			case "status":
 				status = reader.nextInt();
-			}
-			else
-			{
+				break;
+			default:
 				reader.skipValue();
 			}
 		}
@@ -193,10 +189,6 @@ public class FragmentActivity extends FragmentAbstract
 		viewHolder.place.setText(MainActivity.venueName[c.venue]);
 
 		viewHolder.state.setText(MainActivity.activityStatusName[c.status]);
-		// textState
-		// .setBackgroundResource(c.state.equals("正在进行") ?
-		// R.drawable.activity_state_doing_back
-		// : R.drawable.activity_state_todo_back);
 
 		adapter.setLinearLayout((LinearLayout) convertView);
 	}

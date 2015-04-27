@@ -102,6 +102,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/devide_line" />
+
+            <!-- 音控员 -->
+
+            <TextView
+                style="@style/textview_title"
+                android:layout_marginTop="10dp"
+                android:text="音控员" />
+
+            <LinearLayout
+                android:id="@+id/staff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="没有音控员被分派到此活动。" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

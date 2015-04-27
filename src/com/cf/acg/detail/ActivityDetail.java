@@ -14,14 +14,12 @@ import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.util.JsonReader;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ActivityDetail extends DetailAbstract implements DownloadInterface
 {
@@ -66,48 +64,77 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		String remark = null;				// 活动备注
 		int venue = 0;						// 活动场地
 		int status = 0;						// 活动状态
-		String dutiesArray = null;			// 任务数组
+		Duties duties = null;
 
 		reader.beginObject();
 		while (reader.hasNext())
 		{
-			String field = reader.nextName();
-			if (field.equals("start_time"))
+			switch (reader.nextName())
 			{
+			case "start_time":
 				start_time = reader.nextInt();
-			}
-			else if (field.equals("title"))
-			{
+				break;
+			case "title":
 				title = reader.nextString();
-			}
-			else if (field.equals("work_start_time"))
-			{
+				break;
+			case "work_start_time":
 				work_start_time = reader.nextInt();
-			}
-			else if (field.equals("venue"))
-			{
+				break;
+			case "venue":
 				venue = reader.nextInt();
-			}
-			else if (field.equals("status"))
-			{
+				break;
+			case "status":
 				status = reader.nextInt();
-			}
-			else if (field.equals("remark"))
-			{
+				break;
+			case "remark":
 				remark = reader.nextString();
-			}
-			// else if (field.equals("duties"))
-			// {
-			// dutiesArray = reader.nextString();
-			// }
-			else
-			{
+				break;
+			case "duties":
+				duties = new Duties();
+				reader.beginArray();					// 开始读取duties数组
+				while (reader.hasNext())
+				{
+					reader.beginObject();				// 读取第一个音控员对象
+					while (reader.hasNext())
+					{
+						switch (reader.nextName())
+						{
+						case "id":
+							duties.id = reader.nextString();
+							break;
+						case "uid":
+							duties.uid = reader.nextString();
+							break;
+						case "name":
+							duties.name = reader.nextString();
+							break;
+						case "mobile":
+							duties.name = reader.nextString();
+							break;
+						case "short":
+							duties.mobile_short = reader.nextString();
+							break;
+						case "status":
+							duties.status = reader.nextString();
+							break;
+						default:
+							reader.skipValue();
+							break;
+						}
+					}
+					reader.endObject();
+				}
+				reader.endArray();
+				break;
+			default:
 				reader.skipValue();
+				break;
 			}
 		}
 		reader.endObject();
-		return new Content(title, work_start_time, start_time, remark, venue,
-				status);
+
+		return new Content(title, remark, work_start_time, start_time, venue,
+				status, duties);
 	}
 	@Override
 	protected void setData()
@@ -131,8 +158,29 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 						.getField(Calendar.DAY_OF_WEEK) - 1]
 				+ tf_workTime.format(" HH:mm"));
 		tv_venue.setText(MainActivity.venueName[content.venue]);
-	}
 
+		/**
+		 * 设置音控员栏目
+		 */
+		if (content.duties.id != null)
+		{
+			LinearLayout layout = (LinearLayout) findViewById(R.id.staff);
+			LinearLayout staffLayout = (LinearLayout) getLayoutInflater()
+					.inflate(R.layout.acg_staff, null);
+
+			// layout.removeAllViews();
+			// ((TextView) staffLayout.findViewById(R.id.staff_name))
+			// .setText(content.duties.name);
+			// ((TextView) staffLayout.findViewById(R.id.staff_phone))
+			// .setText(content.duties.mobile);
+			// ((TextView) staffLayout.findViewById(R.id.staff_cornet))
+			// .setText(content.duties.mobile_short);
+			// ((TextView) staffLayout.findViewById(R.id.staff_state))
+			// .setText(content.duties.status);
+
+			layout.addView(staffLayout);
+		}
+	}
 	private void init_variable()
 	{
 		id = getIntent().getExtras().getString("id");
@@ -169,23 +217,35 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 
 	class Content
 	{
-		public Content(String title, int work_start_time, int start_time,
-				String remark, int venue, int status)
-		{
-			this.title = title;
-			this.work_start_time = work_start_time;
-			this.start_time = start_time;
-			this.remark = remark;
-			this.venue = venue;
-			this.status = status;
-		}
-
 		String title; 				// 活动标题
 		String remark;				// 活动备注
 		int work_start_time; 		// 值班开始时间
 		int start_time;				// 活动开始时间
 		int venue;					// 活动场地
 		int status;					// 活动状态
+		Duties duties;				// 组员职责
+
+		public Content(String title, String remark, int work_start_time,
+				int start_time, int venue, int status, Duties duties)
+		{
+			this.title = title;
+			this.remark = remark;
+			this.work_start_time = work_start_time;
+			this.start_time = start_time;
+			this.venue = venue;
+			this.status = status;
+			this.duties = duties;
+		}
 	}
 
+	class Duties
+	{
+		String id; 			// 任务ID
+		String uid; 		// 用户学号
+		String name;		// 用户姓名
+		String mobile; 		// 手机号
+		String mobile_type; // 手机号类型
+		String mobile_short;// 手机短号
+		String status;// 任务状态
+	}
 }
