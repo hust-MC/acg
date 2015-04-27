@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
@@ -23,6 +25,10 @@ import android.widget.TextView;
 
 public class ActivityDetail extends DetailAbstract implements DownloadInterface
 {
+	private final String[] dutyStatus =
+	{ "正在申请值班", "班长批准值班", "班长拒绝值班", "排班等待确认", "排班拒绝值班", "等待活动开始", "申请换班中",
+			"换班成功", "活动取消", "活动进行中", "活动结束", "任务取消", "取消申请值班" };
+
 	private Content content;
 
 	private TextView tv_workTime, tv_time, tv_venue, tv_status, tv_name,
@@ -64,7 +70,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		String remark = null;				// 活动备注
 		int venue = 0;						// 活动场地
 		int status = 0;						// 活动状态
-		Duties duties = null;
+		List<Duties> dutyList = new ArrayList<>();
 
 		reader.beginObject();
 		while (reader.hasNext())
@@ -90,11 +96,12 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 				remark = reader.nextString();
 				break;
 			case "duties":
-				duties = new Duties();
-				reader.beginArray();					// 开始读取duties数组
+				reader.beginArray();						// 开始读取duties数组
 				while (reader.hasNext())
 				{
-					reader.beginObject();				// 读取第一个音控员对象
+					Duties duties = new Duties();
+
+					reader.beginObject();					// 读取第一个音控员对象
 					while (reader.hasNext())
 					{
 						switch (reader.nextName())
@@ -109,19 +116,20 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 							duties.name = reader.nextString();
 							break;
 						case "mobile":
-							duties.name = reader.nextString();
+							duties.mobile = reader.nextString();
 							break;
-						case "short":
+						case "mobile_short":
 							duties.mobile_short = reader.nextString();
 							break;
 						case "status":
-							duties.status = reader.nextString();
+							duties.status = reader.nextInt();
 							break;
 						default:
 							reader.skipValue();
 							break;
 						}
 					}
+					dutyList.add(duties);
 					reader.endObject();
 				}
 				reader.endArray();
@@ -134,7 +142,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		reader.endObject();
 
 		return new Content(title, remark, work_start_time, start_time, venue,
-				status, duties);
+				status, dutyList);
 	}
 	@Override
 	protected void setData()
@@ -162,23 +170,26 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		/**
 		 * 设置音控员栏目
 		 */
-		if (content.duties.id != null)
+		if (content.dutyList.size() > 0)
 		{
 			LinearLayout layout = (LinearLayout) findViewById(R.id.staff);
-			LinearLayout staffLayout = (LinearLayout) getLayoutInflater()
-					.inflate(R.layout.acg_staff, null);
+			layout.removeAllViews();
+			for (Duties duties : content.dutyList)
+			{
+				LinearLayout staffLayout = (LinearLayout) getLayoutInflater()
+						.inflate(R.layout.acg_staff, null);
 
-			// layout.removeAllViews();
-			// ((TextView) staffLayout.findViewById(R.id.staff_name))
-			// .setText(content.duties.name);
-			// ((TextView) staffLayout.findViewById(R.id.staff_phone))
-			// .setText(content.duties.mobile);
-			// ((TextView) staffLayout.findViewById(R.id.staff_cornet))
-			// .setText(content.duties.mobile_short);
-			// ((TextView) staffLayout.findViewById(R.id.staff_state))
-			// .setText(content.duties.status);
+				((TextView) staffLayout.findViewById(R.id.staff_name))
+						.setText(duties.name);
+				((TextView) staffLayout.findViewById(R.id.staff_phone))
+						.setText(duties.mobile);
+				((TextView) staffLayout.findViewById(R.id.staff_cornet))
+						.setText(duties.mobile_short);
+				((TextView) staffLayout.findViewById(R.id.staff_state))
+						.setText(dutyStatus[duties.status - 1]);
 
-			layout.addView(staffLayout);
+				layout.addView(staffLayout);
+			}
 		}
 	}
 	private void init_variable()
@@ -217,16 +228,16 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 
 	class Content
 	{
-		String title; 				// 活动标题
-		String remark;				// 活动备注
-		int work_start_time; 		// 值班开始时间
-		int start_time;				// 活动开始时间
-		int venue;					// 活动场地
-		int status;					// 活动状态
-		Duties duties;				// 组员职责
+		String title; 						// 活动标题
+		String remark;						// 活动备注
+		int work_start_time; 				// 值班开始时间
+		int start_time;						// 活动开始时间
+		int venue;							// 活动场地
+		int status;							// 活动状态
+		List<Duties> dutyList;				// 组员职责
 
 		public Content(String title, String remark, int work_start_time,
-				int start_time, int venue, int status, Duties duties)
+				int start_time, int venue, int status, List<Duties> dutyList)
 		{
 			this.title = title;
 			this.remark = remark;
@@ -234,18 +245,18 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 			this.start_time = start_time;
 			this.venue = venue;
 			this.status = status;
-			this.duties = duties;
+			this.dutyList = dutyList;
 		}
 	}
 
 	class Duties
 	{
-		String id; 			// 任务ID
-		String uid; 		// 用户学号
-		String name;		// 用户姓名
-		String mobile; 		// 手机号
-		String mobile_type; // 手机号类型
-		String mobile_short;// 手机短号
-		String status;// 任务状态
+		String id; 					// 任务ID
+		String uid; 				// 用户学号
+		String name;				// 用户姓名
+		String mobile; 				// 手机号
+		String mobile_type; 		// 手机号类型
+		String mobile_short;		// 手机短号
+		int status;					// 任务状态
 	}
 }
