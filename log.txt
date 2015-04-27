@@ -81,3 +81,4 @@
 1、对4.24出现的BUG继续修改，加入getContentList直接返回list数组，取出数据。
 2、修改JsonReader中的if-else为swtich，减少判断次数。
 3、添加activityDetail中对音控员的支持，在JsonObject中解析JsonArray。
+4、动态添加音控员栏目布局，“音控员”信息功能完成。
