@@ -19,7 +19,6 @@ import android.widget.ListView;
 public class RefreshLayout extends SwipeRefreshLayout implements
 		OnScrollListener
 {
-
 	/**
 	 * 滑动到最下面时的上拉操作
 	 */

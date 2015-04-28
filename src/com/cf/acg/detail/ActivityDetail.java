@@ -20,7 +20,9 @@ import android.os.Bundle;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public class ActivityDetail extends DetailAbstract implements DownloadInterface
@@ -118,7 +120,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 						case "status":
 							duties.status = reader.nextInt();
 							break;
-						case "operation":
+						case "operations":
 							reader.beginArray();
 							Operations operations = new Operations();
 							while (reader.hasNext())
@@ -131,7 +133,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 									case "name":
 										operations.name = reader.nextString();
 										break;
-									case "titile":
+									case "title":
 										operations.title = reader.nextString();
 										break;
 									case "color":
@@ -151,7 +153,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 									}
 								}
 								reader.endObject();
-								c.operationList.add(operations);
+								duties.operationList.add(operations);
 							}
 							reader.endArray();
 							break;
@@ -216,7 +218,22 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 						.setText(duties.mobile_short);
 				((TextView) staffLayout.findViewById(R.id.staff_state))
 						.setText(dutyStatus[duties.status - 1]);
-
+				if (duties.operationList.size() > 0)
+				{
+					LinearLayout operationLayout = new LinearLayout(this);
+					operationLayout.setLayoutParams(new LayoutParams(
+							LayoutParams.WRAP_CONTENT,
+							LayoutParams.WRAP_CONTENT));
+					operationLayout.setOrientation(LinearLayout.HORIZONTAL);
+					for (Operations operations : duties.operationList)
+					{
+						Button button = new Button(this);
+						button.setText(operations.title);
+						button.setBackgroundResource(R.drawable.log_button);
+						operationLayout.addView(button);
+					}
+					staffLayout.addView(operationLayout);
+				}
 				layout.addView(staffLayout);
 			}
 		}
@@ -264,7 +281,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		int venue;												// 活动场地
 		int status;												// 活动状态
 		List<Duties> dutyList = new ArrayList<>();				// 组员职责
-		List<Operations> operationList = new ArrayList<>();		// 活动操作
+
 	}
 
 	class Duties
@@ -276,6 +293,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		String mobile_type; 		// 手机号类型
 		String mobile_short;		// 手机短号
 		int status;					// 任务状态
+		List<Operations> operationList = new ArrayList<>();		// 活动操作
 	}
 
 	class Operations

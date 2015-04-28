@@ -57,7 +57,7 @@ public class FragmentActivity extends FragmentAbstract
 		setRefreshListener();
 		setDownMoreListener();
 
-		Home.setScrollEvent(listView); // 设置滑动监听事件
+		Home.setScrollEvent(listView);					 // 设置滑动监听事件
 		listView.setOnItemClickListener(new OnItemClickListener()
 		{
 			@Override
