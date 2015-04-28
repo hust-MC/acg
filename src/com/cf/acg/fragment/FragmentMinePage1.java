@@ -86,36 +86,31 @@ public class FragmentMinePage1 extends FragmentAbstract implements
 		reader.beginObject();
 		while (reader.hasNext())
 		{
-			String field = reader.nextName();
-			if (field.equals("id"))
+			switch (reader.nextName())
 			{
+			case "id":
 				id = reader.nextString();
-			}
-			else if (field.equals("start_time"))
-			{
+				break;
+			case "start_time":
 				start_time = reader.nextInt();
-			}
-			else if (field.equals("title"))
-			{
+				break;
+			case "title":
 				title = reader.nextString();
-			}
-			else if (field.equals("venue"))
-			{
+				break;
+			case "venue":
 				venue = reader.nextInt();
-			}
-			else if (field.equals("status"))
-			{
+				break;
+			case "status":
 				status = reader.nextInt();
-			}
-			else
-			{
+				break;
+			default:
 				reader.skipValue();
+				break;
 			}
 		}
 		reader.endObject();
 		return new Content(id, title, start_time, venue, status);
 	}
-
 	@Override
 	public void download()
 	{

@@ -79,27 +79,22 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 		reader.beginObject();
 		while (reader.hasNext())
 		{
-			String field = reader.nextName();
-
-			if (field.equals("id"))
+			switch (reader.nextName())
 			{
+			case "id":
 				id = reader.nextString();
-			}
-			else if (field.equals("subject"))
-			{
+				break;
+			case "subject":
 				subject = reader.nextString();
-			}
-			else if (field.equals("sendtime"))
-			{
+				break;
+			case "sendtime":
 				sendTime = reader.nextInt();
-			}
-			else if (field.equals("type"))
-			{
+				break;
+			case "type":
 				type = reader.nextString();
-			}
-			else
-			{
+			default:
 				reader.skipValue();
+				break;
 			}
 		}
 		reader.endObject();
@@ -141,7 +136,7 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 
 		jsonResolve = new JsonResolve(this);
 
-		super.onActivityCreated(savedInstanceState); 
+		super.onActivityCreated(savedInstanceState);
 	}
 
 	@Override

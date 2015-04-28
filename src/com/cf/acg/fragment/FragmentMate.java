@@ -82,25 +82,21 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 		reader.beginObject();
 		while (reader.hasNext())
 		{
-			String field = reader.nextName();
-			if (field.equals("uid"))
+			switch (reader.nextName())
 			{
+			case "uid":
 				id = reader.nextString();
-			}
-			else if (field.equals("name"))
-			{
+				break;
+			case "name":
 				name = reader.nextString();
-			}
-			else if (field.equals("mobile_short"))
-			{
+				break;
+			case "mobile_short":
 				cornet = reader.nextString();
-			}
-			else if (field.equals("mobile"))
-			{
+				break;
+			case "mobile":
 				phone = reader.nextString();
-			}
-			else
-			{
+				break;
+			default:
 				reader.skipValue();
 			}
 		}
@@ -109,7 +105,6 @@ public class FragmentMate extends FragmentAbstract implements DownloadInterface
 		return new Content(id, name, null, cornet, phone);
 
 	}
-
 	@Override
 	public void download()
 	{

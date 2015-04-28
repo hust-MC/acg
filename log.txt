@@ -82,3 +82,6 @@
 2、修改JsonReader中的if-else为swtich，减少判断次数。
 3、添加activityDetail中对音控员的支持，在JsonObject中解析JsonArray。
 4、动态添加音控员栏目布局，“音控员”信息功能完成。
+
+#2015.4.28
+1、动态新增活动任务里的操作按钮

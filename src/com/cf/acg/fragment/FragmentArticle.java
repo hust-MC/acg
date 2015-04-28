@@ -82,22 +82,18 @@ public class FragmentArticle extends FragmentAbstract implements
 		reader.beginObject();
 		while (reader.hasNext())
 		{
-			String field = reader.nextName();
-
-			if (field.equals("id"))
+			switch (reader.nextName())
 			{
+			case "id":
 				ID = reader.nextString();
-			}
-			else if (field.equals("title"))
-			{
+				break;
+			case "title":
 				title = reader.nextString();
-			}
-			else if (field.equals("cate_id"))
-			{
+				break;
+			case "cate_id":
 				category = article_category[reader.nextInt()];
-			}
-			else
-			{
+				break;
+			default:
 				reader.skipValue();
 			}
 		}
