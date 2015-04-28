@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -15,16 +14,12 @@ import com.cf.acg.RefreshLayout;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.thread.DownloadInterface;
-import com.cf.acg.thread.HttpThread;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.JsonReader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,7 +29,6 @@ public class FragmentRecord extends FragmentAbstract implements
 		DownloadInterface
 {
 	private ListView listView;
-
 	public static File file = new File(fileDir, "/record.txt");
 
 	@Override
@@ -124,9 +118,7 @@ public class FragmentRecord extends FragmentAbstract implements
 
 		try
 		{
-			Log.d("MC", list.size() + "");
 			list = jsonResolve.readJsonStream(fis);
-			Log.d("MC", "list FInish");
 		} catch (IOException e)
 		{
 			e.printStackTrace();

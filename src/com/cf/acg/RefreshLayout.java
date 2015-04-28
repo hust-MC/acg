@@ -15,7 +15,6 @@ import android.widget.ListView;
 /**
  * 继承自SwipeRefreshLayout,从而实现滑动到底部时上拉加载更多的功能.
  * 
- * @author mrsimple
  */
 public class RefreshLayout extends SwipeRefreshLayout implements
 		OnScrollListener
@@ -24,7 +23,6 @@ public class RefreshLayout extends SwipeRefreshLayout implements
 	/**
 	 * 滑动到最下面时的上拉操作
 	 */
-
 	private int mTouchSlop;
 	/**
 	 * listview实例
@@ -234,7 +232,6 @@ public class RefreshLayout extends SwipeRefreshLayout implements
 	/**
 	 * 加载更多的监听器
 	 * 
-	 * @author mrsimple
 	 */
 	public static interface OnLoadListener
 	{

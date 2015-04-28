@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cf.acg.Home;
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
 import com.cf.acg.RefreshLayout;
@@ -20,15 +19,12 @@ import com.cf.acg.thread.HttpThread;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.Toast;
 
 public abstract class FragmentAbstract extends Fragment implements
@@ -75,7 +71,6 @@ public abstract class FragmentAbstract extends Fragment implements
 		@Override
 		public void handleMessage(Message msg)
 		{
-			Log.d("MC", "refresh");
 			Toast.makeText(FragmentAbstract.this.activity, "数据已更新",
 					Toast.LENGTH_SHORT).show();
 			clearListView();
@@ -116,7 +111,6 @@ public abstract class FragmentAbstract extends Fragment implements
 		refreshableView.setColorSchemeResources(android.R.color.holo_red_light,
 				android.R.color.holo_orange_light,
 				android.R.color.holo_green_dark);
-
 	}
 
 	protected void setDownMoreListener()

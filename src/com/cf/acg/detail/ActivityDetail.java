@@ -64,13 +64,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 	@Override
 	public Content readContent(JsonReader reader) throws IOException
 	{
-		String title = null; 				// 活动标题
-		int work_start_time = 0; 			// 值班开始时间
-		int start_time = 0;					// 活动开始时间
-		String remark = null;				// 活动备注
-		int venue = 0;						// 活动场地
-		int status = 0;						// 活动状态
-		List<Duties> dutyList = new ArrayList<>();
+		Content c = new Content();
 
 		reader.beginObject();
 		while (reader.hasNext())
@@ -78,22 +72,22 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 			switch (reader.nextName())
 			{
 			case "start_time":
-				start_time = reader.nextInt();
+				c.start_time = reader.nextInt();
 				break;
 			case "title":
-				title = reader.nextString();
+				c.title = reader.nextString();
 				break;
 			case "work_start_time":
-				work_start_time = reader.nextInt();
+				c.work_start_time = reader.nextInt();
 				break;
 			case "venue":
-				venue = reader.nextInt();
+				c.venue = reader.nextInt();
 				break;
 			case "status":
-				status = reader.nextInt();
+				c.status = reader.nextInt();
 				break;
 			case "remark":
-				remark = reader.nextString();
+				c.remark = reader.nextString();
 				break;
 			case "duties":
 				reader.beginArray();						// 开始读取duties数组
@@ -124,13 +118,50 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 						case "status":
 							duties.status = reader.nextInt();
 							break;
+						case "operation":
+							reader.beginArray();
+							Operations operations = new Operations();
+							while (reader.hasNext())
+							{
+								reader.beginObject();
+								while (reader.hasNext())
+								{
+									switch (reader.nextName())
+									{
+									case "name":
+										operations.name = reader.nextString();
+										break;
+									case "titile":
+										operations.title = reader.nextString();
+										break;
+									case "color":
+										operations.color = reader.nextString();
+										break;
+									case "content":
+										operations.content = reader
+												.nextString();
+										break;
+									case "require":
+										operations.require = reader
+												.nextString();
+										break;
+									default:
+										reader.skipValue();
+										break;
+									}
+								}
+								reader.endObject();
+								c.operationList.add(operations);
+							}
+							reader.endArray();
+							break;
 						default:
 							reader.skipValue();
 							break;
 						}
 					}
-					dutyList.add(duties);
 					reader.endObject();
+					c.dutyList.add(duties);
 				}
 				reader.endArray();
 				break;
@@ -140,9 +171,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 			}
 		}
 		reader.endObject();
-
-		return new Content(title, remark, work_start_time, start_time, venue,
-				status, dutyList);
+		return c;
 	}
 	@Override
 	protected void setData()
@@ -228,25 +257,14 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 
 	class Content
 	{
-		String title; 						// 活动标题
-		String remark;						// 活动备注
-		int work_start_time; 				// 值班开始时间
-		int start_time;						// 活动开始时间
-		int venue;							// 活动场地
-		int status;							// 活动状态
-		List<Duties> dutyList;				// 组员职责
-
-		public Content(String title, String remark, int work_start_time,
-				int start_time, int venue, int status, List<Duties> dutyList)
-		{
-			this.title = title;
-			this.remark = remark;
-			this.work_start_time = work_start_time;
-			this.start_time = start_time;
-			this.venue = venue;
-			this.status = status;
-			this.dutyList = dutyList;
-		}
+		String title; 											// 活动标题
+		String remark;											// 活动备注
+		int work_start_time; 									// 值班开始时间
+		int start_time;											// 活动开始时间
+		int venue;												// 活动场地
+		int status;												// 活动状态
+		List<Duties> dutyList = new ArrayList<>();				// 组员职责
+		List<Operations> operationList = new ArrayList<>();		// 活动操作
 	}
 
 	class Duties
@@ -258,5 +276,14 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		String mobile_type; 		// 手机号类型
 		String mobile_short;		// 手机短号
 		int status;					// 任务状态
+	}
+
+	class Operations
+	{
+		String name; 			// 操作名称
+		String title;			// 操作显示名称
+		String color; 			// 显示颜色
+		String content;			// 提示框信息
+		String require; 		// 是否需要填写附加信息
 	}
 }
