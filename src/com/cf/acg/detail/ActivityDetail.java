@@ -16,11 +16,16 @@ import com.cf.acg.Util.TimeFormat;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.JsonReader;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
@@ -203,7 +208,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		 */
 		if (content.dutyList.size() > 0)
 		{
-			LinearLayout layout = (LinearLayout) findViewById(R.id.staff);
+			final LinearLayout layout = (LinearLayout) findViewById(R.id.staff);
 			layout.removeAllViews();
 			for (Duties duties : content.dutyList)
 			{
@@ -226,7 +231,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 					LinearLayout operationLayout = new LinearLayout(this);
 					operationLayout.setLayoutParams(wrapParams);
 					operationLayout.setOrientation(LinearLayout.HORIZONTAL);
-					for (Operations operations : duties.operationList)
+					for (final Operations operations : duties.operationList)
 					{
 						Button button = new Button(this);
 						button.setLayoutParams(new LayoutParams(
@@ -236,6 +241,50 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 						button.setTextSize(15);
 						button.setTextColor(android.graphics.Color.WHITE);
 						button.setBackgroundResource(R.drawable.duty_opt_bt);
+
+						button.setOnClickListener(new OnClickListener()
+						{
+							@Override
+							public void onClick(View v)
+							{
+								if (operations.content != null)
+								{
+									/*
+									 * 添加content和require布局容器
+									 */
+									LinearLayout layout = new LinearLayout(
+											ActivityDetail.this);
+									layout.setLayoutParams(new LayoutParams(
+											LayoutParams.WRAP_CONTENT,
+											LayoutParams.WRAP_CONTENT));
+									layout.setOrientation(LinearLayout.VERTICAL);
+
+									/*
+									 * 添加content
+									 */
+									TextView content = new TextView(
+											ActivityDetail.this);
+									content.setText(operations.content);
+
+									/*
+									 * 添加require
+									 */
+									EditText require = new EditText(
+											ActivityDetail.this);
+
+									layout.addView(content);
+									layout.addView(require);
+
+								}
+								new AlertDialog.Builder(ActivityDetail.this)
+										.setTitle(operations.title)
+										.setView(layout)
+										.setPositiveButton("确认", null)
+										.setNegativeButton("取消", null).show();
+
+							}
+						});
+
 						operationLayout.addView(button);
 					}
 					staffLayout.addView(operationLayout);
