@@ -1,25 +1,34 @@
 package com.cf.acg.detail;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.cf.acg.MainActivity;
 import com.cf.acg.R;
 import com.cf.acg.UserInfo;
 import com.cf.acg.Util.LoadingProcess;
 import com.cf.acg.Util.TimeFormat;
+import com.cf.acg.fragment.FragmentAbstract;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Editable;
+import android.os.Handler;
+import android.os.Message;
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -27,6 +36,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
@@ -210,7 +220,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		{
 			final LinearLayout layout = (LinearLayout) findViewById(R.id.staff);
 			layout.removeAllViews();
-			for (Duties duties : content.dutyList)
+			for (final Duties duties : content.dutyList)
 			{
 				LinearLayout staffLayout = (LinearLayout) getLayoutInflater()
 						.inflate(R.layout.acg_staff, null);
@@ -247,44 +257,55 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 							@Override
 							public void onClick(View v)
 							{
+								LinearLayout dialogLayout = new LinearLayout(
+										ActivityDetail.this);
 								if (operations.content != null)
 								{
 									/*
 									 * 添加content和require布局容器
 									 */
-									LinearLayout layout = new LinearLayout(
-											ActivityDetail.this);
-									layout.setLayoutParams(new LayoutParams(
+									LayoutParams params = new LayoutParams(
 											LayoutParams.WRAP_CONTENT,
-											LayoutParams.WRAP_CONTENT));
-									layout.setOrientation(LinearLayout.VERTICAL);
+											LayoutParams.WRAP_CONTENT);
+									dialogLayout.setLayoutParams(params);
+									dialogLayout
+											.setOrientation(LinearLayout.VERTICAL);
+									dialogLayout.setPadding(100, 50, 0, 0);
 
 									/*
 									 * 添加content
 									 */
 									TextView content = new TextView(
 											ActivityDetail.this);
+
 									content.setText(operations.content);
+									content.setTextSize(18);
+									dialogLayout.addView(content);
 
-									/*
-									 * 添加require
-									 */
-									EditText require = new EditText(
-											ActivityDetail.this);
-
-									layout.addView(content);
-									layout.addView(require);
+									if (operations.require != null)
+									{
+										/*
+										 * 添加require
+										 */
+										EditText require = new EditText(
+												ActivityDetail.this);
+										dialogLayout.addView(require);
+									}
 
 								}
 								new AlertDialog.Builder(ActivityDetail.this)
 										.setTitle(operations.title)
-										.setView(layout)
-										.setPositiveButton("确认", null)
-										.setNegativeButton("取消", null).show();
-
+										.setView(dialogLayout)
+										.setNegativeButton("取消", null)
+										.setPositiveButton(
+												"确认",
+												new AlertDialogPostiveButton(
+														duties.id,
+														operations.name,
+														operations.require))
+										.show();
 							}
 						});
-
 						operationLayout.addView(button);
 					}
 					staffLayout.addView(operationLayout);
@@ -325,6 +346,74 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 	{
 		getMenuInflater().inflate(R.menu.activity_detail, menu);
 		return true;
+	}
+
+	class AlertDialogPostiveButton implements DialogInterface.OnClickListener,
+			DownloadInterface
+	{
+
+		String duty_id;
+		String operation;
+		String reason;
+
+		public AlertDialogPostiveButton(String duty_id, String operation,
+				String reason)
+		{
+			this.duty_id = duty_id;
+			this.operation = operation;
+			this.reason = reason;
+		}
+
+		File optFile = new File(FragmentAbstract.fileDir.getPath(), "opt");
+		Handler dutyOptHandler = new Handler()
+		{
+			@Override
+			public void handleMessage(Message msg)
+			{
+				String tmp;
+				BufferedReader fileBuffer = null;
+				StringBuffer jsonStr = new StringBuffer();
+				try
+				{
+					fileBuffer = new BufferedReader(new FileReader(optFile));
+					while (((tmp = fileBuffer.readLine()) != null))
+					{
+						jsonStr.append(tmp);
+					}
+					Log.d("MC", jsonStr.toString());
+					JSONObject jsonObject = new JSONObject(jsonStr.toString());
+				} catch (FileNotFoundException e)
+				{
+					e.printStackTrace();
+				} catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		};
+
+		@Override
+		public void onClick(DialogInterface dialog, int which)
+		{
+			new HttpThread(this, dutyOptHandler).start();
+		}
+
+		@Override
+		public void download()
+		{
+			String urlAddress = "http://acg.husteye.cn/api/activityoperation?access_token="
+					+ UserInfo.getToken()
+					+ "&duty_id="
+					+ duty_id
+					+ "&operation=" + operation + "&reason=" + reason;
+
+			HttpThread.httpConnect(urlAddress, detailFileDir);
+		}
 	}
 
 	class Content
