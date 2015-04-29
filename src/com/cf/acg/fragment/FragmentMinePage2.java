@@ -11,7 +11,6 @@ import com.cf.acg.R;
 import com.cf.acg.UserInfo;
 import com.cf.acg.Util.JsonResolve;
 import com.cf.acg.Util.TimeFormat;
-import com.cf.acg.detail.ArticleDetail;
 import com.cf.acg.detail.MessageDetail;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;

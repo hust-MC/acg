@@ -18,7 +18,7 @@ import com.cf.acg.thread.HttpThread;
 
 import android.os.Bundle;
 import android.util.JsonReader;
-import android.view.LayoutInflater;
+import android.view.Gravity;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -220,16 +220,22 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 						.setText(dutyStatus[duties.status - 1]);
 				if (duties.operationList.size() > 0)
 				{
-					LinearLayout operationLayout = new LinearLayout(this);
-					operationLayout.setLayoutParams(new LayoutParams(
+					LayoutParams wrapParams = new LayoutParams(
 							LayoutParams.WRAP_CONTENT,
-							LayoutParams.WRAP_CONTENT));
+							LayoutParams.WRAP_CONTENT);
+					LinearLayout operationLayout = new LinearLayout(this);
+					operationLayout.setLayoutParams(wrapParams);
 					operationLayout.setOrientation(LinearLayout.HORIZONTAL);
 					for (Operations operations : duties.operationList)
 					{
 						Button button = new Button(this);
+						button.setLayoutParams(new LayoutParams(
+								LayoutParams.WRAP_CONTENT, 80));
 						button.setText(operations.title);
-						button.setBackgroundResource(R.drawable.log_button);
+						button.setGravity(Gravity.CENTER);
+						button.setTextSize(15);
+						button.setTextColor(android.graphics.Color.WHITE);
+						button.setBackgroundResource(R.drawable.duty_opt_bt);
 						operationLayout.addView(button);
 					}
 					staffLayout.addView(operationLayout);

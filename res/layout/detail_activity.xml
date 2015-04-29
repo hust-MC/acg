@@ -49,8 +49,7 @@
 
                 <TextView
                     android:id="@+id/act_venue"
-                    style="@style/textview_background"
-                    android:background="@drawable/activity_place_back" />
+                    style="@style/textview_background" />
 
                 <TextView
                     android:layout_width="wrap_content"
