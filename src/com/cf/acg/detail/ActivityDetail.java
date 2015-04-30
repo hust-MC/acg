@@ -158,9 +158,9 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 										operations.content = reader
 												.nextString();
 										break;
-									case "require":
+									case "require_input":
 										operations.require = reader
-												.nextString();
+												.nextBoolean();
 										break;
 									default:
 										reader.skipValue();
@@ -259,6 +259,8 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 							{
 								LinearLayout dialogLayout = new LinearLayout(
 										ActivityDetail.this);
+								TextView content = null;
+								EditText require = null;
 								if (operations.content != null)
 								{
 									/*
@@ -270,24 +272,23 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 									dialogLayout.setLayoutParams(params);
 									dialogLayout
 											.setOrientation(LinearLayout.VERTICAL);
-									dialogLayout.setPadding(100, 50, 0, 0);
+									dialogLayout.setPadding(100, 50, 100, 0);
 
 									/*
-									 * 添加content
+									 * 添加content提示信息
 									 */
-									TextView content = new TextView(
-											ActivityDetail.this);
+									content = new TextView(ActivityDetail.this);
 
 									content.setText(operations.content);
 									content.setTextSize(18);
 									dialogLayout.addView(content);
 
-									if (operations.require != null)
+									if (operations.require)
 									{
 										/*
-										 * 添加require
+										 * 添加require输入框
 										 */
-										EditText require = new EditText(
+										require = new EditText(
 												ActivityDetail.this);
 										dialogLayout.addView(require);
 									}
@@ -302,8 +303,7 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 												new AlertDialogPostiveButton(
 														duties.id,
 														operations.name,
-														operations.require))
-										.show();
+														require)).show();
 							}
 						});
 						operationLayout.addView(button);
@@ -348,23 +348,29 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		return true;
 	}
 
+	/**
+	 * 任务操作对话框，确认按钮事件
+	 * 
+	 * @author M C
+	 * 
+	 */
 	class AlertDialogPostiveButton implements DialogInterface.OnClickListener,
 			DownloadInterface
 	{
 
 		String duty_id;
 		String operation;
-		String reason;
+		EditText reason;
 
 		public AlertDialogPostiveButton(String duty_id, String operation,
-				String reason)
+				EditText reason)
 		{
 			this.duty_id = duty_id;
 			this.operation = operation;
 			this.reason = reason;
 		}
 
-		File optFile = new File(FragmentAbstract.fileDir.getPath(), "opt");
+		File optFile = new File(FragmentAbstract.fileDir.getPath(), "/opt");
 		Handler dutyOptHandler = new Handler()
 		{
 			@Override
@@ -380,18 +386,21 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 					{
 						jsonStr.append(tmp);
 					}
-					Log.d("MC", jsonStr.toString());
 					JSONObject jsonObject = new JSONObject(jsonStr.toString());
+					Toast.makeText(
+							ActivityDetail.this,
+							jsonObject.has("success") ? jsonObject
+									.getString("message") : jsonObject
+									.getString("content"), Toast.LENGTH_SHORT)
+							.show();
 				} catch (FileNotFoundException e)
 				{
 					e.printStackTrace();
 				} catch (IOException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (JSONException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -410,9 +419,12 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 					+ UserInfo.getToken()
 					+ "&duty_id="
 					+ duty_id
-					+ "&operation=" + operation + "&reason=" + reason;
+					+ "&operation="
+					+ operation
+					+ ((reason != null) ? ("&reason=" + reason.getText()
+							.toString()) : "");
 
-			HttpThread.httpConnect(urlAddress, detailFileDir);
+			HttpThread.httpConnect(urlAddress, optFile);
 		}
 	}
 
@@ -446,6 +458,6 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 		String title;			// 操作显示名称
 		String color; 			// 显示颜色
 		String content;			// 提示框信息
-		String require; 		// 是否需要填写附加信息
+		boolean require; 		// 是否需要填写附加信息
 	}
 }

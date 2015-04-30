@@ -13,7 +13,7 @@ public class TimeFormat
 		this.time = time;
 
 		calendar.setTimeInMillis(((long) time) * 1000);
-		calendar.roll(Calendar.HOUR_OF_DAY, 8);
+		// calendar.roll(Calendar.HOUR_OF_DAY, 8);
 	}
 
 	public String format(String format)
