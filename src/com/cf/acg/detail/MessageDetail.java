@@ -33,7 +33,6 @@ public class MessageDetail extends DetailAbstract implements DownloadInterface
 	@Override
 	protected void setData()
 	{
-		// TODO Auto-generated method stub
 
 	}
 	public void init_widget()

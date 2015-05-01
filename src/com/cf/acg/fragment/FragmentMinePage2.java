@@ -59,10 +59,10 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id)
 			{
-				Intent intent = new Intent(activity, MessageDetail.class);
-				Log.d("token", UserInfo.getToken());
-				intent.putExtra("id", ((Content) list.get(position)).id);
-				startActivity(intent);
+				Toast.makeText(activity, "功能待添加", Toast.LENGTH_SHORT).show();
+				// Intent intent = new Intent(activity, MessageDetail.class);
+				// intent.putExtra("id", ((Content) list.get(position)).id);
+				// startActivity(intent);
 			}
 		});
 	}
@@ -91,9 +91,10 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 				break;
 			case "type":
 				type = reader.nextString();
+				break;
 			default:
 				reader.skipValue();
-				break;
+
 			}
 		}
 		reader.endObject();

@@ -24,9 +24,11 @@ import com.cf.acg.thread.HttpThread;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.renderscript.Int2;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.Gravity;
@@ -393,6 +395,11 @@ public class ActivityDetail extends DetailAbstract implements DownloadInterface
 									.getString("message") : jsonObject
 									.getString("content"), Toast.LENGTH_SHORT)
 							.show();
+					/*
+					 * 重启当前activity
+					 */
+					ActivityDetail.this.finish();
+					startActivity(getIntent());
 				} catch (FileNotFoundException e)
 				{
 					e.printStackTrace();

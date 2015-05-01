@@ -57,44 +57,37 @@
         </activity>
         <activity
             android:name="com.cf.acg.Home"
-            android:label="@string/title_activity_home" >
-        </activity>
+            android:label="@string/title_activity_home" />
         <activity
             android:name="com.cf.acg.detail.ActivityDetail"
-            android:label="@string/title_activity_activity_detail" >
-        </activity>
+            android:label="@string/title_activity_activity_detail" />
         <activity
             android:name="com.cf.acg.detail.ArticleDetail"
-            android:label="@string/title_activity_article_detail" >
-        </activity>
+            android:label="@string/title_activity_article_detail" />
         <activity
             android:name="com.cf.acg.detail.MemberDetail"
-            android:label="@string/title_activity_member_detail" >
-        </activity>
+            android:label="@string/title_activity_member_detail" />
         <activity
             android:name="com.cf.acg.detail.MateDetail"
-            android:label="@string/title_activity_member_detail" >
-        </activity>
+            android:label="@string/title_activity_member_detail" />
         <activity
             android:name="com.cf.acg.ForgetPwd"
-            android:label="@string/title_activity_forget_pwd" >
-        </activity>
+            android:label="@string/title_activity_forget_pwd" />
         <activity
             android:name="com.cf.acg.ResetPwd"
-            android:label="@string/title_activity_reset_pwd" >
-        </activity>
+            android:label="@string/title_activity_reset_pwd" />
         <activity
             android:name="com.cf.acg.VersionUpdate"
-            android:label="@string/title_activity_version_update" >
-        </activity>
+            android:label="@string/title_activity_version_update" />
         <activity
             android:name="com.cf.acg.NewUser"
-            android:label="@string/title_activity_new_user" >
-        </activity>
+            android:label="@string/title_activity_new_user" />
+        <activity
+            android:name="com.cf.acg.detail.MessageDetail"
+            android:label="@string/title_activity_message_detail" />
         <activity
             android:name="com.cf.acg.detail.PersonnalDetail"
-            android:label="@string/title_activity_personnal_detail" >
-        </activity>
+            android:label="@string/title_activity_personnal_detail" />
         <!-- 推送功能 -->
         <!-- Required SDK核心功能 -->
         <activity
