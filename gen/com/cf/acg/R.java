@@ -62,16 +62,17 @@ public final class R {
         public static final int log_background=0x7f02000e;
         public static final int log_button=0x7f02000f;
         public static final int log_new_user=0x7f020010;
-        public static final int menu_bg=0x7f020011;
-        public static final int my_activity=0x7f020012;
-        public static final int my_activity_grey=0x7f020013;
-        public static final int my_info=0x7f020014;
-        public static final int my_info_grey=0x7f020015;
-        public static final int my_message=0x7f020016;
-        public static final int my_message_grey=0x7f020017;
-        public static final int no_net=0x7f020018;
-        public static final int personal_info=0x7f020019;
-        public static final int setting=0x7f02001a;
+        public static final int menu=0x7f020011;
+        public static final int menu_bg=0x7f020012;
+        public static final int my_activity=0x7f020013;
+        public static final int my_activity_grey=0x7f020014;
+        public static final int my_info=0x7f020015;
+        public static final int my_info_grey=0x7f020016;
+        public static final int my_message=0x7f020017;
+        public static final int my_message_grey=0x7f020018;
+        public static final int no_net=0x7f020019;
+        public static final int personal_info=0x7f02001a;
+        public static final int setting=0x7f02001b;
     }
     public static final class id {
         public static final int act_name=0x7f0b0027;
@@ -80,21 +81,21 @@ public final class R {
         public static final int act_time=0x7f0b0024;
         public static final int act_venue=0x7f0b0025;
         public static final int act_work_time=0x7f0b0023;
-        public static final int action_settings=0x7f0b0071;
+        public static final int action_settings=0x7f0b0070;
         public static final int activity_date=0x7f0b0052;
         public static final int activity_event=0x7f0b0055;
         public static final int activity_place=0x7f0b0056;
         public static final int activity_state=0x7f0b0057;
         public static final int activity_time=0x7f0b0053;
         public static final int activity_week=0x7f0b0054;
-        public static final int arrow=0x7f0b006b;
+        public static final int arrow=0x7f0b006a;
         public static final int art_details=0x7f0b002b;
         public static final int art_title=0x7f0b002a;
         public static final int article_category=0x7f0b0058;
         public static final int article_title=0x7f0b0059;
         public static final int code=0x7f0b001d;
         public static final int content=0x7f0b000c;
-        public static final int description=0x7f0b006d;
+        public static final int description=0x7f0b006c;
         public static final int detail_mate_image=0x7f0b002d;
         public static final int detail_mate_listview=0x7f0b002c;
         public static final int detail_mate_resume=0x7f0b002e;
@@ -115,7 +116,6 @@ public final class R {
         public static final int home_bt1=0x7f0b0049;
         public static final int home_bt2=0x7f0b004b;
         public static final int home_bt3=0x7f0b004d;
-        public static final int home_page3_text=0x7f0b0067;
         public static final int iv_bt1=0x7f0b004a;
         public static final int iv_bt2=0x7f0b004c;
         public static final int iv_bt3=0x7f0b004e;
@@ -161,10 +161,10 @@ public final class R {
         public static final int person_type=0x7f0b0037;
         public static final int personal_info=0x7f0b0066;
         public static final int phone=0x7f0b0008;
-        public static final int progress_bar=0x7f0b006c;
-        public static final int pull_to_refresh_head=0x7f0b006a;
-        public static final int pull_to_refresh_load_progress=0x7f0b006f;
-        public static final int pull_to_refresh_loadmore_text=0x7f0b0070;
+        public static final int progress_bar=0x7f0b006b;
+        public static final int pull_to_refresh_head=0x7f0b0069;
+        public static final int pull_to_refresh_load_progress=0x7f0b006e;
+        public static final int pull_to_refresh_loadmore_text=0x7f0b006f;
         public static final int pwd=0x7f0b0015;
         public static final int pwd1=0x7f0b001f;
         public static final int pwd2=0x7f0b0021;
@@ -174,7 +174,7 @@ public final class R {
         public static final int reset_input_pwd=0x7f0b0020;
         public static final int reset_input_pwd1=0x7f0b0022;
         public static final int reset_input_vertification=0x7f0b001e;
-        public static final int settting=0x7f0b0068;
+        public static final int settting=0x7f0b0067;
         public static final int sliding=0x7f0b0045;
         public static final int slidingLayout=0x7f0b000a;
         public static final int staff=0x7f0b0029;
@@ -182,13 +182,13 @@ public final class R {
         public static final int staff_name=0x7f0b0001;
         public static final int staff_phone=0x7f0b0002;
         public static final int staff_state=0x7f0b0004;
-        public static final int surfaceview=0x7f0b0072;
+        public static final int surfaceview=0x7f0b0071;
         public static final int text_view=0x7f0b0051;
         public static final int try_staff=0x7f0b0000;
-        public static final int trya=0x7f0b0069;
+        public static final int trya=0x7f0b0068;
         public static final int tv_forget_pwd=0x7f0b0005;
         public static final int updata_progress=0x7f0b003e;
-        public static final int updated_at=0x7f0b006e;
+        public static final int updated_at=0x7f0b006d;
     }
     public static final class layout {
         public static final int acg_staff=0x7f030000;

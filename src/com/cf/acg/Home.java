@@ -23,6 +23,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -215,6 +216,12 @@ public class Home extends AcgActivity implements DownloadInterface
 
 		setContentView(R.layout.activity_home);
 
+		/**
+		 * 设置标题栏
+		 */
+		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setIcon(R.drawable.menu);
+
 		loadingProcess = new LoadingProcess(this);
 
 		MainActivity.activity.finish();
@@ -316,19 +323,26 @@ public class Home extends AcgActivity implements DownloadInterface
 		{
 		case 0:				// 注销函数
 
-			LoadingProcess loadingProcess = new LoadingProcess(this);
-			loadingProcess.startLoading("正在为您注销");
+			if (item.getItemId() == android.R.id.home)
+			{
+				slidingLayout.scrollToLeftLayout();
+			}
+			else
+			{
+				LoadingProcess loadingProcess = new LoadingProcess(this);
+				loadingProcess.startLoading("正在为您注销");
 
-			SharedPreferences sp = getSharedPreferences("login",
-					Context.MODE_PRIVATE);
+				SharedPreferences sp = getSharedPreferences("login",
+						Context.MODE_PRIVATE);
 
-			Editor editor = sp.edit();
-			editor.clear();
-			editor.commit();
+				Editor editor = sp.edit();
+				editor.clear();
+				editor.commit();
 
-			getLogoutMessage();			// 向服务器提交注销信息
-			startActivity(new Intent(this, MainActivity.class));
-			finish();
+				getLogoutMessage();			// 向服务器提交注销信息
+				startActivity(new Intent(this, MainActivity.class));
+				finish();
+			}
 			break;
 
 		case 1:
@@ -340,7 +354,6 @@ public class Home extends AcgActivity implements DownloadInterface
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{

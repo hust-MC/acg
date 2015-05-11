@@ -59,7 +59,7 @@ public class FragmentMinePage2 extends FragmentAbstract implements
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id)
 			{
-				Toast.makeText(activity, "功能待添加", Toast.LENGTH_SHORT).show();
+				// Toast.makeText(activity, "功能待添加", Toast.LENGTH_SHORT).show();
 				// Intent intent = new Intent(activity, MessageDetail.class);
 				// intent.putExtra("id", ((Content) list.get(position)).id);
 				// startActivity(intent);
