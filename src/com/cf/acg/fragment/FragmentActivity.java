@@ -150,6 +150,11 @@ public class FragmentActivity extends FragmentAbstract
 	@Override
 	public void addObj(List<Object> contentList, View convertView, int position)
 	{
+		class ViewHolder
+		{
+			TextView title, date, time, week, place, state;
+		}
+
 		ViewHolder viewHolder;
 		Content c = (Content) contentList.get(position);
 		TimeFormat tf = new TimeFormat(c.start_time);
@@ -217,11 +222,6 @@ public class FragmentActivity extends FragmentAbstract
 			this.venue = venue;
 			this.status = status;
 		}
-	}
-
-	class ViewHolder
-	{
-		TextView title, date, time, week, place, state;
 	}
 
 }
