@@ -38,6 +38,9 @@ import com.cf.acg.fragment.*;
 import com.cf.acg.thread.DownloadInterface;
 import com.cf.acg.thread.HttpThread;
 
+/**
+ * 软件主页类
+ * /
 public class Home extends AcgActivity implements DownloadInterface
 {
 	private static SlidingLayout slidingLayout;
